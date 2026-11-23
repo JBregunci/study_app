@@ -215,7 +215,9 @@ O comando importa catálogo, questões e materiais quando o caminho é um diret�
 
 ## Página Questões
 
-- Filtros por busca, tema, concurso, **órgão**, **edição**, banca, ano, cargo, formato, dificuldade, **área**, **assunto** e situação.
+- Filtro principal por **concurso**, agrupado por órgão/edição e com as divisões por cargo; cada organização tem um logo no seletor.
+- **Seleção avançada** para banca, ano, formato, dificuldade, área e assunto.
+- Filtros por busca, tema, situação e ordenação no fluxo principal.
 - Paginação e ordenação por mais recentes, mais erradas ou menos praticadas.
 - Bolinhas com as últimas 5 tentativas: verde para acerto, vermelho para erro ou branco, transparente para tentativa ausente.
 - Página de detalhe com contexto, enunciado, gabarito comentado, fonte, tags, histórico de tentativas e materiais relacionados.

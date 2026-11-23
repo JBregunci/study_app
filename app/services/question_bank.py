@@ -6,6 +6,7 @@ from datetime import datetime
 from sqlalchemy import and_, case, exists, func, or_, select
 from sqlalchemy.orm import Session, joinedload, selectinload
 
+from ..orgs import logo_for_agency
 from ..models import (
     Attempt,
     Difficulty,
@@ -213,7 +214,9 @@ def topic_breadcrumb(topic: Topic | None) -> list[Topic]:
 def filter_options(db: Session) -> dict:
     exams = list(
         db.scalars(
-            select(Exam).order_by(Exam.year.desc().nullslast(), Exam.name)
+            select(Exam).order_by(
+                Exam.year.desc().nullslast(), Exam.name, Exam.role
+            )
         ).all()
     )
     organizations = list(
@@ -232,16 +235,24 @@ def filter_options(db: Session) -> dict:
             .order_by(Exam.agency)
         ).all()
     )
-    contest_rows = db.execute(
-        select(Exam.contest_key, Exam.agency, Exam.year)
-        .where(Exam.contest_key != "")
-        .distinct()
-        .order_by(Exam.agency, Exam.year)
-    ).all()
-    contests = [
-        {"key": row[0], "agency": row[1], "year": row[2]}
-        for row in contest_rows
-    ]
+    contest_map: dict[str, dict] = {}
+    for exam in exams:
+        key = exam.contest_key or exam.slug
+        group = contest_map.setdefault(
+            key,
+            {
+                "key": key,
+                "agency": exam.agency or exam.name,
+                "year": exam.year,
+                "logo_url": logo_for_agency(exam.agency or exam.name),
+                "exams": [],
+            },
+        )
+        group["exams"].append(exam)
+    contests = sorted(
+        contest_map.values(),
+        key=lambda item: (item["agency"], item["year"] or 0),
+    )
     years = list(
         db.scalars(
             select(Exam.year)

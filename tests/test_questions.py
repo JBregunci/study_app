@@ -326,3 +326,17 @@ def test_bacen_agency_and_exam_filters_use_shared_links(env):
     )
     assert response.status_code == 200
     assert "bacen-2024-analista-economia-financas-q001" in response.text
+
+
+def test_contest_filter_ui_has_logos_divisions_and_advanced(env):
+    response = env.client.get("/questoes")
+    assert response.status_code == 200
+    assert "/static/img/orgs/bacen.svg" in response.text
+    assert "Seleção avançada" in response.text
+    assert "Tecnologia da Informação" in response.text
+    assert "Economia e Finanças" in response.text
+
+    response = env.client.get("/questoes?edicao=bacen-2024")
+    assert response.status_code == 200
+    assert "Todas as áreas" in response.text
+    assert "Seleção avançada" in response.text

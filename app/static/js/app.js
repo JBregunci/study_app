@@ -136,6 +136,59 @@
     });
   }
 
+
+  function setupContestDropdowns() {
+    document.querySelectorAll("[data-contest-dropdown]").forEach(function (dropdown) {
+      if (dropdown.dataset.ready) return;
+      dropdown.dataset.ready = "1";
+      var toggle = dropdown.querySelector("[data-contest-toggle]");
+      var menu = dropdown.querySelector("[data-contest-menu]");
+      var logo = dropdown.querySelector("[data-contest-logo]");
+      var label = dropdown.querySelector("[data-contest-label]");
+      var edicao = dropdown.querySelector("[data-contest-edicao]");
+      var concurso = dropdown.querySelector("[data-contest-concurso]");
+      if (!toggle || !menu || !logo || !label || !edicao || !concurso) return;
+
+      function close() {
+        menu.hidden = true;
+        toggle.setAttribute("aria-expanded", "false");
+      }
+
+      function open() {
+        menu.hidden = false;
+        toggle.setAttribute("aria-expanded", "true");
+      }
+
+      toggle.addEventListener("click", function (event) {
+        event.stopPropagation();
+        if (menu.hidden) open();
+        else close();
+      });
+
+      menu.querySelectorAll("[data-label][data-logo]").forEach(function (option) {
+        option.addEventListener("click", function (event) {
+          event.preventDefault();
+          edicao.value = option.dataset.edicao || "";
+          concurso.value = option.dataset.concurso || "";
+          label.textContent = option.dataset.label || "Todos os concursos";
+          logo.src = option.dataset.logo;
+          menu.querySelectorAll(".contest-option").forEach(function (item) {
+            item.classList.toggle("is-active", item === option);
+          });
+          close();
+        });
+      });
+
+      document.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target)) close();
+      });
+
+      dropdown.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") close();
+      });
+    });
+  }
+
   function setupBuilder() {
     var filters = document.querySelector("[data-picker-filters]");
     if (!filters || filters.dataset.ready) return;
@@ -282,6 +335,7 @@
   function init(scope) {
     setupTheme();
     setupTimers(scope || document);
+    setupContestDropdowns();
     setupBuilder();
     setupConfirms();
   }

@@ -82,6 +82,52 @@ def questions_list(
     if ordem != "recent":
         base_params["ordem"] = ordem
     base_qs = urlencode(base_params)
+
+    selected_exam = next(
+        (exam for exam in options["exams"] if exam.slug == concurso), None
+    )
+    selected_contest = next(
+        (contest for contest in options["contests"] if contest["key"] == edicao),
+        None,
+    )
+    if selected_exam is not None and selected_contest is None:
+        selected_contest = next(
+            (
+                contest
+                for contest in options["contests"]
+                if any(exam.id == selected_exam.id for exam in contest["exams"])
+            ),
+            None,
+        )
+
+    if selected_exam is not None and selected_contest is not None:
+        selected_label = (
+            f"{selected_contest['agency']} {selected_contest['year'] or ''}".strip()
+            + f" — {selected_exam.role}"
+        )
+    elif selected_contest is not None:
+        selected_label = (
+            f"{selected_contest['agency']} {selected_contest['year'] or ''}".strip()
+            + " — Todas as áreas"
+        )
+    else:
+        selected_label = "Todos os concursos"
+    selected_logo = (
+        selected_contest["logo_url"]
+        if selected_contest is not None
+        else "/static/img/orgs/all.svg"
+    )
+    advanced_active = any(
+        [
+            banca,
+            ano_value,
+            tipo,
+            dificuldade,
+            area,
+            tag,
+        ]
+    )
+
     return templates.TemplateResponse(
         request=request,
         name="questions/list.html",
@@ -90,6 +136,11 @@ def questions_list(
             "options": options,
             "selected": selected,
             "base_qs": base_qs,
+            "selected_contest": selected_contest,
+            "selected_exam": selected_exam,
+            "selected_label": selected_label,
+            "selected_logo": selected_logo,
+            "advanced_active": advanced_active,
         },
     )
 

@@ -57,6 +57,8 @@ Itens anulados:
 - 34 materiais com cobertura de todas as questões.
 - BACEN TI importado, com básicas compartilhadas.
 - Auditoria e checkpoint adicionados.
+- Filtro de concursos reorganizado por órgão/edição, com divisões por cargo, logos e seleção avançada.
+- Preservação de espaços e indentação de códigos/YAML nas questões.
 
 ## Próximos passos
 

@@ -13,120 +13,137 @@
 </section>
 
 <section class="card filter-card">
-  <form action="/questoes" method="get" class="form-grid filter-grid">
-    <div class="field field-full">
-      <label for="q">Buscar</label>
-      <input id="q" type="search" name="q" value="{{ selected.q }}" placeholder="Enunciado, contexto, ID ou tag">
+  <form action="/questoes" method="get" class="filter-form">
+    <div class="filter-main-grid">
+      <div class="field field-full">
+        <label for="q">Buscar</label>
+        <input id="q" type="search" name="q" value="{{ selected.q }}" placeholder="Enunciado, contexto, ID ou tag">
+      </div>
+
+      <div class="field contest-field">
+        <label>Concurso</label>
+        <div class="contest-dropdown" data-contest-dropdown>
+          <button type="button" class="contest-toggle" data-contest-toggle aria-haspopup="listbox" aria-expanded="false">
+            <img class="org-logo" data-contest-logo src="{{ selected_logo }}" alt="">
+            <span class="contest-selected-label" data-contest-label>{{ selected_label }}</span>
+            <span class="contest-caret" aria-hidden="true">&#9662;</span>
+          </button>
+          <div class="contest-menu" data-contest-menu hidden role="listbox">
+            <button type="button" class="contest-option {% if not selected.edicao and not selected.concurso %}is-active{% endif %}" data-edicao="" data-concurso="" data-label="Todos os concursos" data-logo="/static/img/orgs/all.svg">
+              <img class="org-logo" src="/static/img/orgs/all.svg" alt="">
+              <span>Todos os concursos</span>
+            </button>
+            {% for contest in options.contests %}
+            <div class="contest-group">
+              <button type="button" class="contest-option contest-all {% if selected.edicao == contest.key and not selected.concurso %}is-active{% endif %}" data-edicao="{{ contest.key }}" data-concurso="" data-label="{{ contest.agency }}{% if contest.year %} {{ contest.year }}{% endif %} — Todas as áreas" data-logo="{{ contest.logo_url }}">
+                <img class="org-logo" src="{{ contest.logo_url }}" alt="">
+                <span class="contest-option-main">
+                  <strong>{{ contest.agency }}{% if contest.year %} {{ contest.year }}{% endif %}</strong>
+                  <small>Todas as áreas · {% if contest.exams|length == 1 %}1 divisão{% else %}{{ contest.exams|length }} divisões{% endif %}</small>
+                </span>
+              </button>
+              {% for exam in contest.exams %}
+              <button type="button" class="contest-option contest-division {% if selected.concurso == exam.slug %}is-active{% endif %}" data-edicao="{{ contest.key }}" data-concurso="{{ exam.slug }}" data-label="{{ contest.agency }}{% if contest.year %} {{ contest.year }}{% endif %} — {{ exam.role }}" data-logo="{{ contest.logo_url }}">
+                <span class="contest-branch" aria-hidden="true">└</span>
+                <span>{{ exam.role }}</span>
+              </button>
+              {% endfor %}
+            </div>
+            {% endfor %}
+          </div>
+          <input type="hidden" name="edicao" value="{{ selected.edicao }}" data-contest-edicao>
+          <input type="hidden" name="concurso" value="{{ selected.concurso }}" data-contest-concurso>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="tema">Tema</label>
+        <select id="tema" name="tema">
+          <option value="">Todos os temas</option>
+          {% for option in options.topics %}
+          <option value="{{ option.topic.slug }}" {% if selected.tema == option.topic.slug %}selected{% endif %}>{{ '— ' * option.depth }}{{ option.topic.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="situacao">Situação</label>
+        <select id="situacao" name="situacao">
+          <option value="">Todas</option>
+          <option value="unseen" {% if selected.situacao == 'unseen' %}selected{% endif %}>Nunca feitas</option>
+          <option value="error" {% if selected.situacao == 'error' %}selected{% endif %}>Com algum erro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="ordem">Ordenar por</label>
+        <select id="ordem" name="ordem">
+          <option value="recent" {% if selected.ordem == 'recent' %}selected{% endif %}>Mais recentes</option>
+          <option value="errors" {% if selected.ordem == 'errors' %}selected{% endif %}>Mais erradas</option>
+          <option value="unseen" {% if selected.ordem == 'unseen' %}selected{% endif %}>Menos praticadas</option>
+        </select>
+      </div>
     </div>
-    <div class="field">
-      <label for="tema">Tema</label>
-      <select id="tema" name="tema">
-        <option value="">Todos os temas</option>
-        {% for option in options.topics %}
-        <option value="{{ option.topic.slug }}" {% if selected.tema == option.topic.slug %}selected{% endif %}>{{ '— ' * option.depth }}{{ option.topic.name }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="concurso">Concurso</label>
-      <select id="concurso" name="concurso">
-        <option value="">Todos os concursos</option>
-        {% for exam in options.exams %}
-        <option value="{{ exam.slug }}" {% if selected.concurso == exam.slug %}selected{% endif %}>{{ exam.name }}{% if exam.year %} ({{ exam.year }}){% endif %}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="orgao">Órgão</label>
-      <select id="orgao" name="orgao">
-        <option value="">Todos</option>
-        {% for agency in options.agencies %}
-        <option value="{{ agency }}" {% if selected.orgao == agency %}selected{% endif %}>{{ agency }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="edicao">Edição</label>
-      <select id="edicao" name="edicao">
-        <option value="">Todas</option>
-        {% for contest in options.contests %}
-        <option value="{{ contest.key }}" {% if selected.edicao == contest.key %}selected{% endif %}>{{ contest.agency }}{% if contest.year %} {{ contest.year }}{% endif %}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="banca">Banca</label>
-      <select id="banca" name="banca">
-        <option value="">Todas</option>
-        {% for organization in options.organizations %}
-        <option value="{{ organization }}" {% if selected.banca == organization %}selected{% endif %}>{{ organization }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="ano">Ano</label>
-      <select id="ano" name="ano">
-        <option value="">Todos</option>
-        {% for year in options.years %}
-        <option value="{{ year }}" {% if selected.ano == year|string %}selected{% endif %}>{{ year }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="cargo">Cargo/área</label>
-      <input id="cargo" type="text" name="cargo" value="{{ selected.cargo }}" placeholder="Ex.: Economia e Finanças">
-    </div>
-    <div class="field">
-      <label for="tipo">Formato</label>
-      <select id="tipo" name="tipo">
-        <option value="">Todos</option>
-        <option value="true_false" {% if selected.tipo == 'true_false' %}selected{% endif %}>Certo/Errado</option>
-        <option value="single_choice" {% if selected.tipo == 'single_choice' %}selected{% endif %}>Múltipla escolha</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="dificuldade">Dificuldade</label>
-      <select id="dificuldade" name="dificuldade">
-        <option value="">Todas</option>
-        <option value="facil" {% if selected.dificuldade == 'facil' %}selected{% endif %}>Fácil</option>
-        <option value="medio" {% if selected.dificuldade == 'medio' %}selected{% endif %}>Médio</option>
-        <option value="dificil" {% if selected.dificuldade == 'dificil' %}selected{% endif %}>Difícil</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="area">Área</label>
-      <select id="area" name="area">
-        <option value="">Todas</option>
-        {% for area in options.areas %}
-        <option value="{{ area }}" {% if selected.area == area %}selected{% endif %}>{{ area }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="tag">Assunto</label>
-      <select id="tag" name="tag">
-        <option value="">Todos</option>
-        {% for item in options.tags %}
-        <option value="{{ item.tag.slug }}" {% if selected.tag == item.tag.slug %}selected{% endif %}>{{ item.tag.area }} — {{ item.tag.name }} ({{ item.total }})</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div class="field">
-      <label for="situacao">Situação</label>
-      <select id="situacao" name="situacao">
-        <option value="">Todas</option>
-        <option value="unseen" {% if selected.situacao == 'unseen' %}selected{% endif %}>Nunca feitas</option>
-        <option value="error" {% if selected.situacao == 'error' %}selected{% endif %}>Com algum erro</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="ordem">Ordenar por</label>
-      <select id="ordem" name="ordem">
-        <option value="recent" {% if selected.ordem == 'recent' %}selected{% endif %}>Mais recentes</option>
-        <option value="errors" {% if selected.ordem == 'errors' %}selected{% endif %}>Mais erradas</option>
-        <option value="unseen" {% if selected.ordem == 'unseen' %}selected{% endif %}>Menos praticadas</option>
-      </select>
-    </div>
+
+    <details class="advanced-filters" {% if advanced_active %}open{% endif %}>
+      <summary class="btn btn-secondary">Seleção avançada</summary>
+      <div class="advanced-grid">
+        <div class="field">
+          <label for="banca">Banca</label>
+          <select id="banca" name="banca">
+            <option value="">Todas</option>
+            {% for organization in options.organizations %}
+            <option value="{{ organization }}" {% if selected.banca == organization %}selected{% endif %}>{{ organization }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="ano">Ano</label>
+          <select id="ano" name="ano">
+            <option value="">Todos</option>
+            {% for year in options.years %}
+            <option value="{{ year }}" {% if selected.ano == year|string %}selected{% endif %}>{{ year }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="tipo">Formato</label>
+          <select id="tipo" name="tipo">
+            <option value="">Todos</option>
+            <option value="true_false" {% if selected.tipo == 'true_false' %}selected{% endif %}>Certo/Errado</option>
+            <option value="single_choice" {% if selected.tipo == 'single_choice' %}selected{% endif %}>Múltipla escolha</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="dificuldade">Dificuldade</label>
+          <select id="dificuldade" name="dificuldade">
+            <option value="">Todas</option>
+            <option value="facil" {% if selected.dificuldade == 'facil' %}selected{% endif %}>Fácil</option>
+            <option value="medio" {% if selected.dificuldade == 'medio' %}selected{% endif %}>Médio</option>
+            <option value="dificil" {% if selected.dificuldade == 'dificil' %}selected{% endif %}>Difícil</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="area">Área</label>
+          <select id="area" name="area">
+            <option value="">Todas</option>
+            {% for area in options.areas %}
+            <option value="{{ area }}" {% if selected.area == area %}selected{% endif %}>{{ area }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="tag">Assunto</label>
+          <select id="tag" name="tag">
+            <option value="">Todos</option>
+            {% for item in options.tags %}
+            <option value="{{ item.tag.slug }}" {% if selected.tag == item.tag.slug %}selected{% endif %}>{{ item.tag.area }} — {{ item.tag.name }} ({{ item.total }})</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </details>
+
     <div class="form-actions">
       <button class="btn btn-primary" type="submit">Filtrar</button>
       <a class="btn btn-ghost" href="/questoes">Limpar filtros</a>

@@ -37,3 +37,9 @@
 - Criado `scripts/migrate_schema.py` (schema versão 2).
 - Histórico de 1 sessão/4 tentativas preservado.
 - Commit de baseline criado localmente; push pendente por ausência de credenciais do GitHub no ambiente.
+
+## 2026-11-23 — Ajustes de filtro e código
+
+- Filtro de concursos agrupado por órgão/edição, com divisões por cargo, logos e seleção avançada.
+- Corrigida a renderização de YAML/código preservando espaços e indentação.
+- Testes atualizados; 42 passando.
