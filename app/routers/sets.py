@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Form, HTTPException, Request
 from sqlalchemy import delete, select
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session, joinedload, selectinload
 
 from ..db import get_db
 from ..models import (
@@ -34,6 +34,7 @@ def _load_questions(db: Session) -> list[Question]:
             .options(
                 joinedload(Question.topic),
                 joinedload(Question.exam),
+                selectinload(Question.exams),
             )
             .where(Question.review_status == ReviewStatus.approved)
             .order_by(Question.topic_id, Question.id)

@@ -12,6 +12,9 @@
     <p class="page-subtitle">
       {% if question.exam %}{{ question.exam.name }} · {{ question.exam.organization }} · {{ question.exam.year }}{% endif %}
       {% if question.exam and question.exam.role %} · {{ question.exam.role }}{% endif %}
+      {% if question.exams|length > 1 %}
+        · também em {% for exam in question.exams %}{% if exam.id != question.exam.id %}{{ exam.role }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}
+      {% endif %}
     </p>
   </div>
   <div class="actions">

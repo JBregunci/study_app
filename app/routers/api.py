@@ -38,9 +38,23 @@ def _serialize(question: Question) -> dict:
         "exam_details": {
             "name": question.exam.name,
             "organization": question.exam.organization,
+            "agency": question.exam.agency,
+            "contest_key": question.exam.contest_key,
             "year": question.exam.year,
             "role": question.exam.role,
         } if question.exam else None,
+        "exams": [
+            {
+                "slug": exam.slug,
+                "name": exam.name,
+                "organization": exam.organization,
+                "agency": exam.agency,
+                "contest_key": exam.contest_key,
+                "year": exam.year,
+                "role": exam.role,
+            }
+            for exam in question.exams
+        ],
         "alternatives": [
             {
                 "label": alternative.label,
@@ -82,15 +96,14 @@ def list_questions(
         joinedload(Question.exam),
         selectinload(Question.alternatives),
         joinedload(Question.tag),
+        selectinload(Question.exams),
     )
     if topic:
         stmt = stmt.join(Topic, Question.topic_id == Topic.id).where(
             Topic.slug == topic
         )
     if exam:
-        stmt = stmt.join(Exam, Question.exam_id == Exam.id).where(
-            Exam.slug == exam
-        )
+        stmt = stmt.where(Question.exams.any(Exam.slug == exam))
     if status != "all":
         try:
             stmt = stmt.where(Question.review_status == ReviewStatus(status))
@@ -112,6 +125,7 @@ def get_question(external_id: str, db: Session = Depends(get_db)):
             joinedload(Question.exam),
             selectinload(Question.alternatives),
             joinedload(Question.tag),
+            selectinload(Question.exams),
         )
         .where(Question.external_id == external_id)
     )

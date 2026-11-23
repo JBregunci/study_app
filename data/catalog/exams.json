@@ -5,7 +5,9 @@
       "name": "Concurso Demonstração 2026",
       "organization": "DEMO",
       "year": 2026,
-      "role": "Analista"
+      "role": "Analista",
+      "agency": "DEMO",
+      "contest_key": "demo-2026"
     },
     {
       "slug": "bacen-2024-analista-economia-financas",
@@ -15,7 +17,21 @@
       "role": "Analista — Área: Economia e Finanças",
       "edital": "Edital 8/2024",
       "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
-      "answer_key_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_001_01.PDF"
+      "answer_key_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_001_01.PDF",
+      "agency": "BACEN",
+      "contest_key": "bacen-2024"
+    },
+    {
+      "slug": "bacen-2024-analista-tecnologia-informacao",
+      "name": "Banco Central do Brasil (BACEN)",
+      "organization": "CEBRASPE",
+      "agency": "BACEN",
+      "contest_key": "bacen-2024",
+      "year": 2024,
+      "role": "Analista — Área: Tecnologia da Informação",
+      "edital": "Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_002_01.PDF",
+      "answer_key_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_002_01.PDF"
     }
   ]
 }

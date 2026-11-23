@@ -32,6 +32,7 @@ class ImportReport:
     files: int = 0
     created: int = 0
     updated: int = 0
+    reused: int = 0
     skipped: int = 0
     errors: list[str] = field(default_factory=list)
 
@@ -39,6 +40,7 @@ class ImportReport:
         self.files += other.files
         self.created += other.created
         self.updated += other.updated
+        self.reused += other.reused
         self.skipped += other.skipped
         self.errors.extend(other.errors)
 
@@ -47,6 +49,7 @@ class ImportReport:
             "files": self.files,
             "created": self.created,
             "updated": self.updated,
+            "reused": self.reused,
             "skipped": self.skipped,
             "errors": self.errors,
         }
@@ -164,6 +167,8 @@ def upsert_exams(
             exams[data.slug] = exam
         exam.name = data.name
         exam.organization = data.organization
+        exam.agency = data.agency
+        exam.contest_key = data.contest_key
         exam.year = data.year
         exam.role = data.role
         exam.edital = data.edital
@@ -246,15 +251,24 @@ def import_payload(
                 report.skipped += 1
                 continue
 
-            exam = None
-            if question_data.exam:
-                exam = exams.get(question_data.exam)
-                if exam is None:
+            exam_slugs = list(question_data.exams)
+            if not exam_slugs and question_data.exam:
+                exam_slugs = [question_data.exam]
+            exam_objects = []
+            missing_exam = False
+            for exam_slug in exam_slugs:
+                exam_obj = exams.get(exam_slug)
+                if exam_obj is None:
                     report.errors.append(
-                        f"{source_name} [{label}]: concurso '{question_data.exam}' não encontrado"
+                        f"{source_name} [{label}]: concurso '{exam_slug}' não encontrado"
                     )
-                    report.skipped += 1
-                    continue
+                    missing_exam = True
+                    break
+                exam_objects.append(exam_obj)
+            if missing_exam:
+                report.skipped += 1
+                continue
+            primary_exam = exam_objects[0] if exam_objects else None
 
             tag = tags.get(question_data.tag)
             if tag is None:
@@ -265,13 +279,6 @@ def import_payload(
                 continue
 
             hashed = content_hash(question_data)
-            other_external_id = seen_hashes.get(hashed)
-            if other_external_id and other_external_id != label:
-                report.errors.append(
-                    f"{source_name} [{label}]: conteúdo duplicado de '{other_external_id}'"
-                )
-                report.skipped += 1
-                continue
             seen_hashes[hashed] = label
 
             existing = db.scalar(
@@ -284,10 +291,14 @@ def import_payload(
                 )
             )
             if duplicate is not None:
-                report.errors.append(
-                    f"{source_name} [{label}]: conteúdo duplicado de '{duplicate.external_id}'"
-                )
-                report.skipped += 1
+                existing_slugs = {exam.slug for exam in duplicate.exams}
+                for exam_obj in exam_objects:
+                    if exam_obj.slug not in existing_slugs:
+                        duplicate.exams.append(exam_obj)
+                if duplicate.exam_id is None and primary_exam is not None:
+                    duplicate.exam_id = primary_exam.id
+                db.flush()
+                report.reused += 1
                 continue
 
             try:
@@ -301,7 +312,8 @@ def import_payload(
                         created = False
 
                     question.topic_id = topic.id
-                    question.exam_id = exam.id if exam else None
+                    question.exam_id = primary_exam.id if primary_exam else None
+                    question.exams = exam_objects
                     question.tag_id = tag.id
                     question.type = question_data.type
                     question.statement = question_data.statement

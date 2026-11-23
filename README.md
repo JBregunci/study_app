@@ -24,18 +24,22 @@ Aplicação web local para estudar para concursos públicos com questões reais 
 ## Conteúdo atual
 
 - 12 questões autorais de demonstração.
-- **115 questões reais** do concurso **BACEN 2024 — Analista — Área: Economia e Finanças — CEBRASPE** (de 120 itens; 5 anulados ficam fora).
-- **25 guias de material**, ligados a temas, áreas, assuntos e questões.
-- Os itens anulados do BACEN (44, 52, 64, 83 e 119) não entram na prática.
+- **180 questões reais do BACEN 2024**: 115 de Analista — Economia e Finanças e 65 específicas de Analista — Tecnologia da Informação.
+- As 49 questões básicas são **compartilhadas** entre os dois cargos, sem duplicação.
+- **34 guias de material**, ligados a temas, áreas, assuntos e questões.
+- Anuladas não entram na prática: Economia (44, 52, 64, 83, 119) e TI (53, 55, 56, 61, 101).
 - As explicações das questões reais são geradas e marcadas com o selo **“Explicação gerada”**. O gabarito usado é o oficial definitivo do CEBRASPE.
 - Toda questão do banco tem um assunto amplo, uma área e pelo menos um material relevante.
+- Total atual: **192 questões** (12 autorais + 180 do BACEN), **49 assuntos** e **3 exames cadastrados**.
 
 Fontes oficiais:
 
 - Conhecimentos básicos: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF`
 - Gabarito básico: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_CB1_01.PDF`
-- Conhecimentos específicos: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF`
-- Gabarito específico: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_001_01.PDF`
+- Economia e Finanças: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF`
+- Gabarito Economia: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_001_01.PDF`
+- Tecnologia da Informação: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_002_01.PDF`
+- Gabarito TI: `https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_002_01.PDF`
 
 ## Requisitos
 
@@ -61,7 +65,7 @@ make run
 
 Abra `http://127.0.0.1:8000`.
 
-O SQLite fica em `data/study.db`. Na primeira execução, o catálogo, as questões e os materiais são importados automaticamente. As execuções seguintes atualizam o conteúdo de forma idempotente.
+O SQLite fica em `data/study.db`. Na primeira execução, o catálogo, as questões e os materiais são importados automaticamente. As execuções seguintes atualizam o conteúdo de forma idempotente. Se o banco vier de uma versão anterior com schema antigo, rode `make migrate` antes de iniciar.
 
 ## Estrutura
 
@@ -71,7 +75,7 @@ app/
   models.py               modelos SQLAlchemy
   schemas.py              validação dos JSONs e frontmatter
   routers/                painel, questões, concursos, temas, prática, conjuntos, materiais, estatísticas e API
-  services/               importação, prática, estatísticas, banco de questões e taxonomia
+  services/               importação, auditoria, prática, estatísticas, banco de questões e taxonomia
   templates/              páginas Jinja2
   static/                 CSS, JavaScript, HTMX e favicon
 data/
@@ -88,6 +92,10 @@ data/
   study.db                banco local, fora do git
 scripts/
   import_questions.py     importação manual
+  audit_library.py        auditoria de duplicidades
+  migrate_schema.py       migrações aditivas
+docs/                     estado, arquitetura, playbook, MCP e histórico
+.opencode/command/        comando /checkpoint
 tests/                    testes com pytest
 ```
 
@@ -203,11 +211,11 @@ Ou:
 .venv/bin/python -m scripts.import_questions data/questions --status draft
 ```
 
-O comando importa catálogo, questões e materiais quando o caminho é um diretório, e mostra criados, atualizados, ignorados e erros. Um arquivo inválido não derruba a aplicação.
+O comando importa catálogo, questões e materiais quando o caminho é um diretório, e mostra criadas, atualizadas, reutilizadas, ignoradas e erros. Duplicatas exatas são reaproveitadas com vínculo ao novo exame. Um arquivo inválido não derruba a aplicação.
 
 ## Página Questões
 
-- Filtros por busca, tema, concurso, banca, ano, cargo, formato, dificuldade, **área**, **assunto** e situação.
+- Filtros por busca, tema, concurso, **órgão**, **edição**, banca, ano, cargo, formato, dificuldade, **área**, **assunto** e situação.
 - Paginação e ordenação por mais recentes, mais erradas ou menos praticadas.
 - Bolinhas com as últimas 5 tentativas: verde para acerto, vermelho para erro ou branco, transparente para tentativa ausente.
 - Página de detalhe com contexto, enunciado, gabarito comentado, fonte, tags, histórico de tentativas e materiais relacionados.
@@ -284,6 +292,14 @@ curl -X POST http://127.0.0.1:8000/api/questions/import \
   --data @questoes.json
 ```
 
+## Continuidade e checkpoint
+
+- `AGENTS.md` é o ponto de entrada para novos agentes.
+- `docs/PROJECT_STATE.md` guarda o estado vivo, contagens, exames e pendências.
+- `docs/SESSION_LOG.md` registra o que foi feito em cada sessão.
+- `docs/ARCHITECTURE.md`, `docs/INGESTION_PLAYBOOK.md` e `docs/MCP_INGESTION_PLAN.md` documentam arquitetura, ingestão e o plano do MCP.
+- `/checkpoint` atualiza docs, roda testes/auditoria, commita e faz push.
+
 ## Ideias para popular novos concursos
 
 1. Catalogar o concurso e o cargo em `data/catalog/exams.json`.
@@ -327,3 +343,4 @@ Variáveis de ambiente:
 - Sem editor de questões ou materiais pelo navegador; a autoria é feita nos arquivos JSON/Markdown.
 - Sem tela de revisão de rascunhos.
 - As explicações das questões reais são geradas e devem ser conferidas com o gabarito oficial.
+- O plano do MCP está documentado, mas o servidor ainda não foi configurado.

@@ -21,7 +21,8 @@
     </div>
     {% if exam.role %}<p class="muted">{{ exam.role }}</p>{% endif %}
     <div class="set-meta">
-      <span class="badge badge-primary">{{ exam.organization }}</span>
+      {% if exam.agency %}<span class="badge badge-primary">{{ exam.agency }}</span>{% endif %}
+      <span class="badge">{{ exam.organization }}</span>
       {% if exam.year %}<span class="badge">{{ exam.year }}</span>{% endif %}
       {% if exam.edital %}<span class="badge badge-muted">{{ exam.edital }}</span>{% endif %}
     </div>

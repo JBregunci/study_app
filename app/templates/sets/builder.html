@@ -113,7 +113,7 @@
         class="picker-item"
         data-picker-item
         data-topic="{{ question.topic.slug }}"
-        data-exam="{{ question.exam.slug if question.exam else '' }}"
+        data-exams="{{ question.exams|map(attribute='slug')|join(',') if question.exams else (question.exam.slug if question.exam else '') }}"
         data-difficulty="{{ question.difficulty.value if question.difficulty else '' }}"
         data-text="{{ (question.statement ~ ' ' ~ question.external_id ~ ' ' ~ question.tag.name)|lower }}"
       >

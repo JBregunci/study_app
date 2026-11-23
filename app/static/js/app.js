@@ -188,7 +188,8 @@
       items.forEach(function (item) {
         var matchesSearch = !query || (item.dataset.text || "").includes(query);
         var matchesTopic = !topicValue || item.dataset.topic === topicValue;
-        var matchesExam = !examValue || item.dataset.exam === examValue;
+        var examSlugs = (item.dataset.exams || "").split(",");
+        var matchesExam = !examValue || examSlugs.includes(examValue);
         var matchesDifficulty =
           !difficultyValue || item.dataset.difficulty === difficultyValue;
         item.hidden = !(

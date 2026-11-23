@@ -26,8 +26,14 @@
 - Adicionadas estatísticas por área e assunto.
 - Reset do histórico anterior autorizado pelo usuário.
 
-## 2026-11-23 — Continuidade e BACEN TI
+## 2026-11-23 — BACEN TI e continuidade
 
-- Criados AGENTS.md, PROJECT_STATE, SESSION_LOG, ARCHITECTURE, INGESTION_PLAYBOOK e plano do MCP.
-- Criado comando `/checkpoint`.
-- Iniciada preparação para BACEN TI, vínculos M2M e auditoria de duplicidade.
+- Localizada e importada a prova oficial do BACEN TI (65 específicas utilizáveis).
+- Básicas compartilhadas entre Economia e TI via vínculo M2M.
+- Adicionados órgão/edição aos exames e filtro por BACEN.
+- Adicionados 9 materiais de TI; cobertura total validada.
+- Implementados `make audit` e política de reutilização de duplicatas.
+- Criados AGENTS.md, PROJECT_STATE, SESSION_LOG, ARCHITECTURE, INGESTION_PLAYBOOK, MCP plan e `/checkpoint`.
+- Criado `scripts/migrate_schema.py` (schema versão 2).
+- Histórico de 1 sessão/4 tentativas preservado.
+- Commit de baseline criado localmente; push pendente por ausência de credenciais do GitHub no ambiente.

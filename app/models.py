@@ -86,6 +86,21 @@ def enum_column(enum_type, length: int = 32):
     )
 
 
+question_exams = Table(
+    "question_exams",
+    Base.metadata,
+    Column(
+        "question_id",
+        ForeignKey("questions.id", ondelete="CASCADE"),
+        primary_key=True,
+    ),
+    Column(
+        "exam_id",
+        ForeignKey("exams.id", ondelete="CASCADE"),
+        primary_key=True,
+    ),
+)
+
 material_topics = Table(
     "material_topics",
     Base.metadata,
@@ -144,6 +159,8 @@ class Exam(Base):
     slug: Mapped[str] = mapped_column(String(180), unique=True, nullable=False, index=True)
     name: Mapped[str] = mapped_column(String(220), nullable=False)
     organization: Mapped[str] = mapped_column(String(120), default="", nullable=False, index=True)
+    agency: Mapped[str] = mapped_column(String(120), default="", nullable=False, index=True)
+    contest_key: Mapped[str] = mapped_column(String(160), default="", nullable=False, index=True)
     year: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
     role: Mapped[str] = mapped_column(String(180), default="", nullable=False)
     edital: Mapped[str] = mapped_column(String(160), default="", nullable=False)
@@ -151,6 +168,10 @@ class Exam(Base):
     answer_key_url: Mapped[str | None] = mapped_column(String(1000), nullable=True)
 
     questions: Mapped[list[Question]] = relationship(back_populates="exam")
+    linked_questions: Mapped[list[Question]] = relationship(
+        secondary=question_exams,
+        back_populates="exams",
+    )
 
 
 class Tag(Base):
@@ -223,6 +244,11 @@ class Question(Base):
 
     topic: Mapped[Topic] = relationship(back_populates="questions")
     exam: Mapped[Exam | None] = relationship(back_populates="questions")
+    exams: Mapped[list[Exam]] = relationship(
+        secondary=question_exams,
+        back_populates="linked_questions",
+        order_by="Exam.name",
+    )
     alternatives: Mapped[list[Alternative]] = relationship(
         back_populates="question",
         cascade="all, delete-orphan",

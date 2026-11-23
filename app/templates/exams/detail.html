@@ -38,6 +38,8 @@
     </div>
     <dl class="metadata-list">
       <div><dt>Concurso</dt><dd>{{ exam.name }}</dd></div>
+      <div><dt>Órgão</dt><dd>{{ exam.agency or '—' }}</dd></div>
+      <div><dt>Edição</dt><dd>{{ exam.contest_key or '—' }}</dd></div>
       <div><dt>Cargo/área</dt><dd>{{ exam.role or '—' }}</dd></div>
       <div><dt>Banca</dt><dd>{{ exam.organization or '—' }}</dd></div>
       <div><dt>Ano</dt><dd>{{ exam.year or '—' }}</dd></div>

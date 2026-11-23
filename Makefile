@@ -1,7 +1,7 @@
 PYTHON ?= python3
 VENV ?= .venv
 
-.PHONY: setup run test audit import clean-db
+.PHONY: setup run test audit migrate import clean-db
 
 setup:
 	$(PYTHON) -m venv $(VENV)
@@ -15,6 +15,9 @@ test:
 
 audit:
 	$(VENV)/bin/python -m scripts.audit_library
+
+migrate:
+	$(VENV)/bin/python -m scripts.migrate_schema
 
 import:
 	$(VENV)/bin/python -m scripts.import_questions

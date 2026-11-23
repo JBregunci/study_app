@@ -7,6 +7,7 @@ from sqlalchemy import case, func, select
 from sqlalchemy.orm import Session, joinedload, selectinload
 
 from ..models import (
+    question_exams,
     Alternative,
     Attempt,
     Question,
@@ -119,11 +120,7 @@ def stats_for_period(
 ) -> Stats:
     total, correct, blank, total_seconds = _base_counts()
     stmt = select(total, correct, blank, total_seconds).select_from(Attempt)
-    needs_question = (
-        topic_id is not None
-        or topic_ids is not None
-        or exam_id is not None
-    )
+    needs_question = topic_id is not None or topic_ids is not None
     if needs_question:
         stmt = stmt.join(Question, Attempt.question_id == Question.id)
     if topic_id is not None:
@@ -131,7 +128,13 @@ def stats_for_period(
     elif topic_ids is not None:
         stmt = stmt.where(Question.topic_id.in_(topic_ids))
     if exam_id is not None:
-        stmt = stmt.where(Question.exam_id == exam_id)
+        stmt = stmt.where(
+            Attempt.question_id.in_(
+                select(question_exams.c.question_id).where(
+                    question_exams.c.exam_id == exam_id
+                )
+            )
+        )
     if start is not None:
         stmt = stmt.where(Attempt.answered_on >= start)
     if end is not None:

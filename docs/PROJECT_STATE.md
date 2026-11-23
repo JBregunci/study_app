@@ -4,18 +4,20 @@
 
 ## Resumo
 
-Aplicação funcional local, com banco SQLite, conteúdo do BACEN 2024 (Economia e Finanças), 25 materiais e histórico de uso preservado.
+Aplicação funcional local, com banco SQLite, conteúdo do BACEN 2024 (Economia e Finanças e Tecnologia da Informação), 34 materiais e histórico de uso preservado.
 
 ## Contagens atuais
 
 | Item | Total |
 |---|---:|
-| Questões | 127 |
+| Questões | 192 |
 | Questões autorais | 12 |
 | Questões BACEN Economia e Finanças | 115 |
-| Materiais | 25 |
-| Tags controladas | 26 |
-| Temas | 49 |
+| Questões BACEN Tecnologia da Informação | 65 específicas + 49 básicas compartilhadas |
+| Materiais | 34 |
+| Tags controladas | 49 |
+| Temas | 78 |
+| Exames | 3 |
 | Sessões | 1 |
 | Tentativas | 4 |
 | Conjuntos | 0 |
@@ -24,20 +26,25 @@ Aplicação funcional local, com banco SQLite, conteúdo do BACEN 2024 (Economia
 
 | Exame | Cargo | Banca | Ano | Questões |
 |---|---|---|---|---:|
-| `bacen-2024-analista-economia-financas` | Analista — Economia e Finanças | CEBRASPE | 2024 | 115 |
+| `bacen-2024-analista-economia-financas` | Analista — Economia e Finanças | CEBRASPE | 2024 | 115 (49 básicas + 66 específicas) |
+| `bacen-2024-analista-tecnologia-informacao` | Analista — Tecnologia da Informação | CEBRASPE | 2024 | 114 (49 básicas + 65 específicas) |
 | `demo-2026` | Analista (demonstração) | DEMO | 2026 | 4 |
 
-Os itens anulados do BACEN Economia são 44, 52, 64, 83 e 119. Eles não entram na prática.
+As 49 básicas são compartilhadas entre os dois exames BACEN via vínculo muitos-para-muitos; não existem questões duplicadas.
 
-## Trabalho em andamento
+Itens anulados:
+- Economia: 44, 52, 64, 83 e 119.
+- TI: 53, 55, 56, 61 e 101.
 
-- Importar o BACEN 2024 — Analista de Tecnologia da Informação (65 questões utilizáveis).
-- Compartilhar as 49 básicas com os exames de Economia e TI via vínculo muitos-para-muitos.
-- Adicionar filtros por órgão/edição (BACEN 2024).
-- Adicionar 8–10 guias de TI.
-- Criar auditoria `make audit` e política de reutilização de duplicatas.
-- Criar documentos de continuidade/checkpoint.
-- Salvar o plano do MCP em `docs/MCP_INGESTION_PLAN.md`.
+## Trabalho concluído nesta etapa
+
+- BACEN TI importado (65 específicas utilizáveis).
+- Básicas compartilhadas entre Economia e TI.
+- Filtros por órgão (BACEN) e vínculo múltiplo de exames.
+- 9 guias de TI adicionados; cobertura de materiais validada.
+- Auditoria `make audit` e política de reutilização de duplicatas.
+- Documentos de continuidade e comando `/checkpoint`.
+- Plano do MCP em `docs/MCP_INGESTION_PLAN.md`.
 
 ## Histórico recente
 
@@ -47,20 +54,31 @@ Os itens anulados do BACEN Economia são 44, 52, 64, 83 e 119. Eles não entram 
 - Explicações geradas marcadas com selo.
 - Materiais passaram a ter múltiplos temas e vínculo preciso; sugestões saíram da tela de resposta.
 - Bolinhas das últimas tentativas corrigidas.
-- 25 materiais com cobertura de todas as questões.
+- 34 materiais com cobertura de todas as questões.
+- BACEN TI importado, com básicas compartilhadas.
+- Auditoria e checkpoint adicionados.
 
-## Próximos passos após a etapa atual
+## Próximos passos
 
-- Validar filtros por BACEN e por edição.
-- Revisar materiais de TI e cobertura.
+- Revisar uma amostra das explicações de TI.
 - Configurar o MCP do PCI em uma etapa separada.
 - Criar fila de revisão de rascunhos.
 - Avaliar normalização completa de concurso/cargo se o volume crescer.
 
 ## Armadilhas conhecidas
 
+- `data/study.db` está no schema versão 2; rode `make migrate` em bancos antigos.
 - `data/study.db` não é versionado; o histórico precisa de migração, não reset.
+- Questões básicas podem pertencer a mais de um exame; use `Question.exams`, não duplique.
 - PDFs e textos extraídos ficam em `data/sources/`, fora do git.
 - Imagens de questões ficam em `data/media/` e precisam de backup.
 - O importer deve rejeitar tags fora do catálogo.
 - A fonte de verdade editorial são os JSONs/Markdown, não o SQLite.
+
+## Git
+
+- Remote: `https://github.com/JBregunci/study_app.git`
+- Branch: `main`
+- Commit de baseline local criado.
+- Push para `origin/main` pendente: o ambiente não tinha credenciais do GitHub configuradas.
+- Use `/checkpoint` ou configure `gh auth login` / um credential helper para enviar.

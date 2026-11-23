@@ -285,7 +285,7 @@ def test_material_relevance_and_coverage(env):
         assert "portugues-gramatica-crase-concordancia" not in q006_slugs
 
         questions = list(db.scalars(select(Question)).all())
-        assert len(questions) == 127
+        assert len(questions) == 192
         for question in questions:
             assert question_bank.related_materials(db, question), question.external_id
 
@@ -314,3 +314,15 @@ def test_tag_area_stats(env):
     assert "Desempenho por assunto" in response.text
     assert "Contas Nacionais" in response.text
     assert "Economia" in response.text
+
+
+def test_bacen_agency_and_exam_filters_use_shared_links(env):
+    response = env.client.get("/questoes?orgao=BACEN&q=q051")
+    assert response.status_code == 200
+    assert "bacen-2024-analista-tecnologia-informacao-q051" in response.text
+
+    response = env.client.get(
+        "/questoes?concurso=bacen-2024-analista-tecnologia-informacao&q=q001"
+    )
+    assert response.status_code == 200
+    assert "bacen-2024-analista-economia-financas-q001" in response.text

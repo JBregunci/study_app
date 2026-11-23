@@ -36,7 +36,8 @@ def main() -> int:
 
     print(
         f"Questões — arquivos: {report.files} | criadas: {report.created} | "
-        f"atualizadas: {report.updated} | ignoradas: {report.skipped}"
+        f"atualizadas: {report.updated} | reutilizadas: {report.reused} | "
+        f"ignoradas: {report.skipped}"
     )
     if material_report is not None:
         print(

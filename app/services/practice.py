@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 from ..models import (
     Alternative,
     Attempt,
+    Exam,
     FeedbackMode,
     Question,
     QuestionSet,
@@ -141,7 +142,7 @@ def start_random_session(
     elif topic is not None:
         stmt = stmt.where(Question.topic_id == topic.id)
     if exam_id is not None:
-        stmt = stmt.where(Question.exam_id == exam_id)
+        stmt = stmt.where(Question.exams.any(Exam.id == exam_id))
     stmt = stmt.order_by(func.random()).limit(count)
     questions = list(db.scalars(stmt).all())
     if not questions:

@@ -17,8 +17,9 @@
    - cargo/área;
    - edital;
    - URLs da prova e do gabarito.
-3. Use uma chave estável de edição (`contest_key`) para agrupar cargos do mesmo concurso.
+3. Use uma chave estável de edição (`contest_key`) e o órgão (`agency`) para agrupar cargos do mesmo concurso.
 4. Se o mesmo concurso já existe, atualize em vez de criar outro.
+5. Para básicas compartilhadas, use `exams` com todos os cargos; não copie a questão.
 
 ## Adicionar temas e assuntos
 
@@ -70,6 +71,7 @@
 ## Verificação final
 
 ```bash
+make migrate
 make import
 make test
 make audit

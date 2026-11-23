@@ -27,7 +27,7 @@ app/
 ### Catálogo
 
 - `data/catalog/topics.json`: árvore de temas.
-- `data/catalog/exams.json`: concursos/cargos, banca, ano, edital e fontes.
+- `data/catalog/exams.json`: concursos/cargos, banca, órgão, chave de edição, ano, edital e fontes.
 - `data/catalog/tags.json`: assuntos amplos agrupados por área.
 
 ### Questões
@@ -35,6 +35,7 @@ app/
 - `data/questions/**/*.json`: fonte de verdade editorial.
 - Importador faz upsert por `external_id`, calcula `content_hash` e valida tags/temas.
 - Questões têm contexto opcional, mídia, proveniência, gabarito, explicação e alternativas.
+- Uma questão pode pertencer a vários exames (`question_exams`); básicas são compartilhadas sem duplicação.
 - C/E têm exatamente duas alternativas (C/E); múltipla escolha usa A–E.
 
 ### Materiais
@@ -63,7 +64,7 @@ app/
 
 - `external_id` é a identidade editorial.
 - `content_hash` exato é único no banco.
-- A política planejada reutiliza a questão existente e cria vínculo com um novo exame em vez de duplicar.
+- A política implementada reutiliza a questão existente e cria vínculo com um novo exame em vez de duplicar.
 - Quase duplicatas normalizadas são sinalizadas para revisão.
 - `make audit` verifica questões, exames, tags, materiais e mídias.
 

@@ -1,7 +1,7 @@
 from html import unescape
 
 from pydantic import ValidationError
-from sqlalchemy import select
+from sqlalchemy import func, select
 
 from app.models import (
     Alternative,
@@ -135,7 +135,7 @@ def test_approved_question_requires_complete_explanations(env):
         )
 
 
-def test_duplicate_content_is_rejected(env):
+def test_duplicate_content_is_reused(env):
     first = question_payload(external_id="dup-001")["questions"][0]
     second = dict(first)
     second["external_id"] = "dup-002"
@@ -151,8 +151,17 @@ def test_duplicate_content_is_rejected(env):
             db, payload, default_status=ReviewStatus.approved
         )
         assert report.created == 1
-        assert report.skipped == 1
-        assert any("conteúdo duplicado" in error for error in report.errors)
+        assert report.reused == 1
+        assert report.skipped == 0
+        assert not report.errors
+        assert (
+            db.scalar(
+                select(func.count(Question.id)).where(
+                    Question.external_id.in_(["dup-001", "dup-002"])
+                )
+            )
+            == 1
+        )
 
 
 def test_api_import_defaults_to_draft(env):
@@ -268,3 +277,66 @@ def test_bacen_contexts_and_media(env):
         assert q71.context_media_url.endswith('q071-072-jogo.png')
         assert q47.context
         assert q71.context
+
+
+def test_bacen_ti_answers_and_shared_basics(env):
+    rows = [
+        'E C X E X X C E C E X C C E E C E C C E',
+        'E E C E C C E C E C E C E C C C E C E C',
+        'E E E E C E C E C C X C E C C E C E E C',
+        'C E C C E E E C C C',
+    ]
+    answers = {}
+    number = 51
+    for row in rows:
+        for value in row.split():
+            answers[number] = value
+            number += 1
+
+    with env.sessions() as db:
+        for number, answer in answers.items():
+            if answer == 'X':
+                continue
+            question = db.scalar(
+                select(Question).where(
+                    Question.external_id
+                    == f'bacen-2024-analista-tecnologia-informacao-q{number:03d}'
+                )
+            )
+            assert question is not None, number
+            correct = next(
+                alternative
+                for alternative in question.alternatives
+                if alternative.is_active and alternative.is_correct
+            )
+            assert correct.label == answer, number
+
+        for annulled in (53, 55, 56, 61, 101):
+            assert (
+                db.scalar(
+                    select(Question).where(
+                        Question.external_id
+                        == f'bacen-2024-analista-tecnologia-informacao-q{annulled:03d}'
+                    )
+                )
+                is None
+            )
+
+        basic = db.scalar(
+            select(Question).where(
+                Question.external_id == 'bacen-2024-analista-economia-financas-q001'
+            )
+        )
+        exam_slugs = {exam.slug for exam in basic.exams}
+        assert 'bacen-2024-analista-economia-financas' in exam_slugs
+        assert 'bacen-2024-analista-tecnologia-informacao' in exam_slugs
+
+        from app.models import Exam
+        from app.services import question_bank
+
+        ti_exam = db.scalar(
+            select(Exam).where(
+                Exam.slug == 'bacen-2024-analista-tecnologia-informacao'
+            )
+        )
+        assert question_bank.exam_question_count(db, ti_exam.id) == 114

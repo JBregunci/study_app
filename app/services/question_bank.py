@@ -12,6 +12,7 @@ from ..models import (
     Exam,
     Material,
     Question,
+    question_exams,
     QuestionType,
     ReviewStatus,
     Tag,
@@ -223,6 +224,24 @@ def filter_options(db: Session) -> dict:
             .order_by(Exam.organization)
         ).all()
     )
+    agencies = list(
+        db.scalars(
+            select(Exam.agency)
+            .where(Exam.agency != "")
+            .distinct()
+            .order_by(Exam.agency)
+        ).all()
+    )
+    contest_rows = db.execute(
+        select(Exam.contest_key, Exam.agency, Exam.year)
+        .where(Exam.contest_key != "")
+        .distinct()
+        .order_by(Exam.agency, Exam.year)
+    ).all()
+    contests = [
+        {"key": row[0], "agency": row[1], "year": row[2]}
+        for row in contest_rows
+    ]
     years = list(
         db.scalars(
             select(Exam.year)
@@ -248,6 +267,8 @@ def filter_options(db: Session) -> dict:
         "topics": topic_options(db),
         "exams": exams,
         "organizations": organizations,
+        "agencies": agencies,
+        "contests": contests,
         "years": years,
         "areas": areas,
         "tags": [{"tag": row[0], "total": int(row[1])} for row in tag_rows],
@@ -260,6 +281,8 @@ def _filtered_questions_stmt(
     topic: str = "",
     exam: str = "",
     organization: str = "",
+    agency: str = "",
+    contest: str = "",
     year: str = "",
     role: str = "",
     question_type: str = "",
@@ -270,8 +293,6 @@ def _filtered_questions_stmt(
     order: str = "recent",
 ):
     stmt = select(Question).where(Question.review_status == ReviewStatus.approved)
-    needs_exam_join = False
-
     if q:
         like = f"%{q.strip()}%"
         stmt = stmt.where(
@@ -286,17 +307,17 @@ def _filtered_questions_stmt(
         ids = descendant_topic_ids(db, topic)
         stmt = stmt.where(Question.topic_id.in_(ids or {-1}))
     if exam:
-        needs_exam_join = True
-        stmt = stmt.where(Exam.slug == exam)
+        stmt = stmt.where(Question.exams.any(Exam.slug == exam))
     if organization:
-        needs_exam_join = True
-        stmt = stmt.where(Exam.organization == organization)
+        stmt = stmt.where(Question.exams.any(Exam.organization == organization))
+    if agency:
+        stmt = stmt.where(Question.exams.any(Exam.agency == agency))
+    if contest:
+        stmt = stmt.where(Question.exams.any(Exam.contest_key == contest))
     if year:
-        needs_exam_join = True
-        stmt = stmt.where(Exam.year == int(year))
+        stmt = stmt.where(Question.exams.any(Exam.year == int(year)))
     if role:
-        needs_exam_join = True
-        stmt = stmt.where(Exam.role.ilike(f"%{role}%"))
+        stmt = stmt.where(Question.exams.any(Exam.role.ilike(f"%{role}%")))
     if question_type:
         stmt = stmt.where(Question.type == QuestionType(question_type))
     if difficulty:
@@ -320,9 +341,6 @@ def _filtered_questions_stmt(
                 )
             )
         )
-
-    if needs_exam_join:
-        stmt = stmt.join(Exam, Question.exam_id == Exam.id)
 
     attempt_count = (
         select(func.count(Attempt.id))
@@ -391,6 +409,7 @@ def get_question(db: Session, question_id: int) -> Question | None:
             joinedload(Question.topic),
             joinedload(Question.exam),
             joinedload(Question.tag),
+            selectinload(Question.exams),
             selectinload(Question.alternatives),
         )
         .where(Question.id == question_id)
@@ -477,7 +496,9 @@ def exam_rows(db: Session) -> list[dict]:
             Exam,
             func.count(Question.id).label("total"),
         )
-        .join(Question, and_(Question.exam_id == Exam.id, Question.review_status == ReviewStatus.approved))
+        .join(question_exams, question_exams.c.exam_id == Exam.id)
+        .join(Question, Question.id == question_exams.c.question_id)
+        .where(Question.review_status == ReviewStatus.approved)
         .group_by(Exam.id)
         .order_by(Exam.year.desc().nullslast(), Exam.name)
     ).all()
@@ -543,8 +564,11 @@ def materials_for_topics(
 def exam_question_count(db: Session, exam_id: int) -> int:
     return int(
         db.scalar(
-            select(func.count(Question.id)).where(
-                Question.exam_id == exam_id,
+            select(func.count(Question.id))
+            .select_from(Question)
+            .join(question_exams, question_exams.c.question_id == Question.id)
+            .where(
+                question_exams.c.exam_id == exam_id,
                 Question.review_status == ReviewStatus.approved,
             )
         )
@@ -557,9 +581,10 @@ def exam_tag_options(db: Session, exam_id: int) -> list[dict]:
         select(Tag, func.count(Question.id).label("total"))
         .select_from(Tag)
         .join(Question, Question.tag_id == Tag.id)
+        .join(question_exams, question_exams.c.question_id == Question.id)
         .where(
             Question.review_status == ReviewStatus.approved,
-            Question.exam_id == exam_id,
+            question_exams.c.exam_id == exam_id,
         )
         .group_by(Tag.id)
         .order_by(func.count(Question.id).desc(), Tag.name)

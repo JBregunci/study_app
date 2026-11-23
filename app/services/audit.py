@@ -198,6 +198,32 @@ def audit_sources(
                 f"external_id duplicado '{external_id}': " + ", ".join(files)
             )
 
+    exams_path = catalog_dir / "exams.json"
+    if exams_path.exists():
+        try:
+            payload = json.loads(exams_path.read_text(encoding="utf-8"))
+            seen_exams: dict[str, list[str]] = {}
+            for exam in payload.get("exams", []):
+                key = "|".join(
+                    [
+                        normalize_text(exam.get("agency", "") or exam.get("name", "")),
+                        normalize_text(exam.get("organization", "")),
+                        str(exam.get("year", "")),
+                        normalize_text(exam.get("role", "")),
+                        normalize_text(exam.get("edital", "")),
+                        normalize_text(exam.get("contest_key", "")),
+                    ]
+                )
+                if key.strip("|"):
+                    seen_exams.setdefault(key, []).append(exam.get("slug", "?"))
+            for slugs in seen_exams.values():
+                if len(slugs) > 1:
+                    report.add_critical(
+                        "exames duplicados em exams.json: " + ", ".join(slugs)
+                    )
+        except Exception as exc:
+            report.add_critical(f"exams.json inválido: {exc}")
+
     tags_path = catalog_dir / "tags.json"
     if tags_path.exists():
         try:

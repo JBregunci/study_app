@@ -1,62 +1,472 @@
 {
   "topics": [
-    {"slug": "portugues", "name": "Língua Portuguesa", "description": "Interpretação de textos, gramática e norma-padrão.", "position": 10},
-    {"slug": "portugues-interpretacao", "name": "Interpretação de Textos", "parent": "portugues", "position": 11},
-    {"slug": "portugues-sintaxe", "name": "Sintaxe e Coesão", "parent": "portugues", "position": 12},
-    {"slug": "portugues-gramatica", "name": "Gramática e Norma-Padrão", "parent": "portugues", "position": 13},
-
-    {"slug": "raciocinio-logico", "name": "Raciocínio Lógico", "description": "Proposições, argumentação e quantificadores.", "position": 20},
-    {"slug": "logica-proposicional", "name": "Lógica Proposicional", "parent": "raciocinio-logico", "position": 21},
-    {"slug": "logica-argumentativa", "name": "Lógica Argumentativa", "parent": "raciocinio-logico", "position": 22},
-
-    {"slug": "estatistica", "name": "Estatística", "description": "Probabilidade, inferência, séries temporais e econometria.", "position": 30},
-    {"slug": "probabilidade-e-distribuicoes", "name": "Probabilidade e Distribuições", "parent": "estatistica", "position": 31},
-    {"slug": "inferencia-estatistica", "name": "Inferência Estatística", "parent": "estatistica", "position": 32},
-    {"slug": "series-temporais", "name": "Séries Temporais", "parent": "estatistica", "position": 33},
-    {"slug": "dados-em-painel", "name": "Dados em Painel", "parent": "estatistica", "position": 34},
-    {"slug": "processos-estocasticos", "name": "Processos Estocásticos", "parent": "estatistica", "position": 35},
-
-    {"slug": "informatica", "name": "Informática", "description": "Segurança da informação, planilhas e conceitos de backup.", "position": 40},
-
-    {"slug": "direito-constitucional", "name": "Direito Constitucional", "description": "Direitos fundamentais, organização do Estado e remédios constitucionais.", "position": 50},
-    {"slug": "direito-administrativo", "name": "Direito Administrativo", "description": "Princípios, autarquias e regime disciplinar.", "position": 60},
-    {"slug": "etica-servico-publico", "name": "Ética no Serviço Público", "parent": "direito-administrativo", "position": 61},
-    {"slug": "protecao-de-dados", "name": "Proteção de Dados e LGPD", "parent": "direito-administrativo", "position": 62},
-
-    {"slug": "economia", "name": "Economia", "description": "Fundamentos teóricos e aplicados de economia.", "position": 80},
-    {"slug": "macroeconomia", "name": "Macroeconomia", "parent": "economia", "position": 81},
-    {"slug": "macroeconomia-modelos", "name": "Modelos Macroeconômicos", "parent": "macroeconomia", "position": 82},
-    {"slug": "politica-monetaria", "name": "Política Monetária", "parent": "macroeconomia", "position": 83},
-    {"slug": "politica-fiscal", "name": "Política Fiscal", "parent": "macroeconomia", "position": 84},
-    {"slug": "setor-externo", "name": "Setor Externo e Câmbio", "parent": "macroeconomia", "position": 85},
-    {"slug": "ciclos-economicos", "name": "Ciclos Econômicos", "parent": "macroeconomia", "position": 86},
-    {"slug": "mercado-de-trabalho", "name": "Mercado de Trabalho", "parent": "macroeconomia", "position": 87},
-
-    {"slug": "microeconomia", "name": "Microeconomia", "parent": "economia", "position": 90},
-    {"slug": "teoria-do-consumidor", "name": "Teoria do Consumidor", "parent": "microeconomia", "position": 91},
-    {"slug": "teoria-da-firma", "name": "Teoria da Firma", "parent": "microeconomia", "position": 92},
-    {"slug": "teoria-dos-jogos", "name": "Teoria dos Jogos", "parent": "microeconomia", "position": 93},
-    {"slug": "falhas-de-mercado", "name": "Falhas de Mercado", "parent": "microeconomia", "position": 94},
-    {"slug": "equilibrio-geral-e-bem-estar", "name": "Equilíbrio Geral e Bem-Estar", "parent": "microeconomia", "position": 95},
-    {"slug": "economia-comportamental", "name": "Economia Comportamental", "parent": "microeconomia", "position": 96},
-    {"slug": "economia-do-setor-publico", "name": "Economia do Setor Público", "parent": "economia", "position": 100},
-
-    {"slug": "financas", "name": "Finanças", "description": "Mercado financeiro, investimentos, riscos e derivativos.", "position": 110},
-    {"slug": "mercado-de-capitais", "name": "Mercado de Capitais", "parent": "financas", "position": 111},
-    {"slug": "renda-fixa", "name": "Renda Fixa", "parent": "financas", "position": 112},
-    {"slug": "derivativos", "name": "Derivativos", "parent": "financas", "position": 113},
-    {"slug": "gestao-de-carteiras", "name": "Gestão de Carteiras", "parent": "financas", "position": 114},
-    {"slug": "gestao-de-riscos", "name": "Gestão de Riscos", "parent": "financas", "position": 115},
-    {"slug": "financas-corporativas", "name": "Finanças Corporativas", "parent": "financas", "position": 116},
-    {"slug": "fundos-de-investimento", "name": "Fundos de Investimento", "parent": "financas", "position": 117},
-
-    {"slug": "contabilidade", "name": "Contabilidade", "description": "Contabilidade societária e de instituições financeiras.", "position": 120},
-    {"slug": "contabilidade-instituicoes-financeiras", "name": "Contabilidade de Instituições Financeiras", "parent": "contabilidade", "position": 121},
-    {"slug": "normas-contabeis", "name": "Normas Contábeis e CPCs", "parent": "contabilidade", "position": 122},
-    {"slug": "auditoria", "name": "Auditoria", "parent": "contabilidade", "position": 123},
-
-    {"slug": "sistema-financeiro-nacional", "name": "Sistema Financeiro Nacional", "description": "Regulação, supervisão e infraestrutura do mercado.", "position": 130},
-    {"slug": "regulacao-prudencial", "name": "Regulação Prudencial", "parent": "sistema-financeiro-nacional", "position": 131},
-    {"slug": "sistema-de-pagamentos", "name": "Sistema de Pagamentos", "parent": "sistema-financeiro-nacional", "position": 132}
+    {
+      "slug": "portugues",
+      "name": "Língua Portuguesa",
+      "description": "Interpretação de textos, gramática e norma-padrão.",
+      "position": 10
+    },
+    {
+      "slug": "portugues-interpretacao",
+      "name": "Interpretação de Textos",
+      "parent": "portugues",
+      "position": 11
+    },
+    {
+      "slug": "portugues-sintaxe",
+      "name": "Sintaxe e Coesão",
+      "parent": "portugues",
+      "position": 12
+    },
+    {
+      "slug": "portugues-gramatica",
+      "name": "Gramática e Norma-Padrão",
+      "parent": "portugues",
+      "position": 13
+    },
+    {
+      "slug": "raciocinio-logico",
+      "name": "Raciocínio Lógico",
+      "description": "Proposições, argumentação e quantificadores.",
+      "position": 20
+    },
+    {
+      "slug": "logica-proposicional",
+      "name": "Lógica Proposicional",
+      "parent": "raciocinio-logico",
+      "position": 21
+    },
+    {
+      "slug": "logica-argumentativa",
+      "name": "Lógica Argumentativa",
+      "parent": "raciocinio-logico",
+      "position": 22
+    },
+    {
+      "slug": "estatistica",
+      "name": "Estatística",
+      "description": "Probabilidade, inferência, séries temporais e econometria.",
+      "position": 30
+    },
+    {
+      "slug": "probabilidade-e-distribuicoes",
+      "name": "Probabilidade e Distribuições",
+      "parent": "estatistica",
+      "position": 31
+    },
+    {
+      "slug": "inferencia-estatistica",
+      "name": "Inferência Estatística",
+      "parent": "estatistica",
+      "position": 32
+    },
+    {
+      "slug": "series-temporais",
+      "name": "Séries Temporais",
+      "parent": "estatistica",
+      "position": 33
+    },
+    {
+      "slug": "dados-em-painel",
+      "name": "Dados em Painel",
+      "parent": "estatistica",
+      "position": 34
+    },
+    {
+      "slug": "processos-estocasticos",
+      "name": "Processos Estocásticos",
+      "parent": "estatistica",
+      "position": 35
+    },
+    {
+      "slug": "informatica",
+      "name": "Informática",
+      "description": "Segurança da informação, planilhas e conceitos de backup.",
+      "position": 40
+    },
+    {
+      "slug": "direito-constitucional",
+      "name": "Direito Constitucional",
+      "description": "Direitos fundamentais, organização do Estado e remédios constitucionais.",
+      "position": 50
+    },
+    {
+      "slug": "direito-administrativo",
+      "name": "Direito Administrativo",
+      "description": "Princípios, autarquias e regime disciplinar.",
+      "position": 60
+    },
+    {
+      "slug": "etica-servico-publico",
+      "name": "Ética no Serviço Público",
+      "parent": "direito-administrativo",
+      "position": 61
+    },
+    {
+      "slug": "protecao-de-dados",
+      "name": "Proteção de Dados e LGPD",
+      "parent": "direito-administrativo",
+      "position": 62
+    },
+    {
+      "slug": "economia",
+      "name": "Economia",
+      "description": "Fundamentos teóricos e aplicados de economia.",
+      "position": 80
+    },
+    {
+      "slug": "macroeconomia",
+      "name": "Macroeconomia",
+      "parent": "economia",
+      "position": 81
+    },
+    {
+      "slug": "macroeconomia-modelos",
+      "name": "Modelos Macroeconômicos",
+      "parent": "macroeconomia",
+      "position": 82
+    },
+    {
+      "slug": "politica-monetaria",
+      "name": "Política Monetária",
+      "parent": "macroeconomia",
+      "position": 83
+    },
+    {
+      "slug": "politica-fiscal",
+      "name": "Política Fiscal",
+      "parent": "macroeconomia",
+      "position": 84
+    },
+    {
+      "slug": "setor-externo",
+      "name": "Setor Externo e Câmbio",
+      "parent": "macroeconomia",
+      "position": 85
+    },
+    {
+      "slug": "ciclos-economicos",
+      "name": "Ciclos Econômicos",
+      "parent": "macroeconomia",
+      "position": 86
+    },
+    {
+      "slug": "mercado-de-trabalho",
+      "name": "Mercado de Trabalho",
+      "parent": "macroeconomia",
+      "position": 87
+    },
+    {
+      "slug": "microeconomia",
+      "name": "Microeconomia",
+      "parent": "economia",
+      "position": 90
+    },
+    {
+      "slug": "teoria-do-consumidor",
+      "name": "Teoria do Consumidor",
+      "parent": "microeconomia",
+      "position": 91
+    },
+    {
+      "slug": "teoria-da-firma",
+      "name": "Teoria da Firma",
+      "parent": "microeconomia",
+      "position": 92
+    },
+    {
+      "slug": "teoria-dos-jogos",
+      "name": "Teoria dos Jogos",
+      "parent": "microeconomia",
+      "position": 93
+    },
+    {
+      "slug": "falhas-de-mercado",
+      "name": "Falhas de Mercado",
+      "parent": "microeconomia",
+      "position": 94
+    },
+    {
+      "slug": "equilibrio-geral-e-bem-estar",
+      "name": "Equilíbrio Geral e Bem-Estar",
+      "parent": "microeconomia",
+      "position": 95
+    },
+    {
+      "slug": "economia-comportamental",
+      "name": "Economia Comportamental",
+      "parent": "microeconomia",
+      "position": 96
+    },
+    {
+      "slug": "economia-do-setor-publico",
+      "name": "Economia do Setor Público",
+      "parent": "economia",
+      "position": 100
+    },
+    {
+      "slug": "financas",
+      "name": "Finanças",
+      "description": "Mercado financeiro, investimentos, riscos e derivativos.",
+      "position": 110
+    },
+    {
+      "slug": "mercado-de-capitais",
+      "name": "Mercado de Capitais",
+      "parent": "financas",
+      "position": 111
+    },
+    {
+      "slug": "renda-fixa",
+      "name": "Renda Fixa",
+      "parent": "financas",
+      "position": 112
+    },
+    {
+      "slug": "derivativos",
+      "name": "Derivativos",
+      "parent": "financas",
+      "position": 113
+    },
+    {
+      "slug": "gestao-de-carteiras",
+      "name": "Gestão de Carteiras",
+      "parent": "financas",
+      "position": 114
+    },
+    {
+      "slug": "gestao-de-riscos",
+      "name": "Gestão de Riscos",
+      "parent": "financas",
+      "position": 115
+    },
+    {
+      "slug": "financas-corporativas",
+      "name": "Finanças Corporativas",
+      "parent": "financas",
+      "position": 116
+    },
+    {
+      "slug": "fundos-de-investimento",
+      "name": "Fundos de Investimento",
+      "parent": "financas",
+      "position": 117
+    },
+    {
+      "slug": "contabilidade",
+      "name": "Contabilidade",
+      "description": "Contabilidade societária e de instituições financeiras.",
+      "position": 120
+    },
+    {
+      "slug": "contabilidade-instituicoes-financeiras",
+      "name": "Contabilidade de Instituições Financeiras",
+      "parent": "contabilidade",
+      "position": 121
+    },
+    {
+      "slug": "normas-contabeis",
+      "name": "Normas Contábeis e CPCs",
+      "parent": "contabilidade",
+      "position": 122
+    },
+    {
+      "slug": "auditoria",
+      "name": "Auditoria",
+      "parent": "contabilidade",
+      "position": 123
+    },
+    {
+      "slug": "sistema-financeiro-nacional",
+      "name": "Sistema Financeiro Nacional",
+      "description": "Regulação, supervisão e infraestrutura do mercado.",
+      "position": 130
+    },
+    {
+      "slug": "regulacao-prudencial",
+      "name": "Regulação Prudencial",
+      "parent": "sistema-financeiro-nacional",
+      "position": 131
+    },
+    {
+      "slug": "sistema-de-pagamentos",
+      "name": "Sistema de Pagamentos",
+      "parent": "sistema-financeiro-nacional",
+      "position": 132
+    },
+    {
+      "slug": "ciencia-de-dados",
+      "name": "Ciência de Dados",
+      "description": "Aprendizado de máquina, Big Data, LLMs e MLOps.",
+      "position": 140
+    },
+    {
+      "slug": "machine-learning",
+      "name": "Aprendizado de Máquina",
+      "parent": "ciencia-de-dados",
+      "position": 141
+    },
+    {
+      "slug": "big-data",
+      "name": "Big Data e Hadoop",
+      "parent": "ciencia-de-dados",
+      "position": 142
+    },
+    {
+      "slug": "llm-ia-generativa",
+      "name": "LLMs e IA Generativa",
+      "parent": "ciencia-de-dados",
+      "position": 143
+    },
+    {
+      "slug": "mlops",
+      "name": "MLOps",
+      "parent": "ciencia-de-dados",
+      "position": 144
+    },
+    {
+      "slug": "qualidade-e-etica-ia",
+      "name": "Qualidade e Ética em IA",
+      "parent": "ciencia-de-dados",
+      "position": 145
+    },
+    {
+      "slug": "seguranca-da-informacao",
+      "name": "Segurança da Informação",
+      "description": "Autenticação, ataques, MFA e NIST.",
+      "position": 150
+    },
+    {
+      "slug": "autenticacao-e-identidade",
+      "name": "Autenticação e Identidade",
+      "parent": "seguranca-da-informacao",
+      "position": 151
+    },
+    {
+      "slug": "seguranca-de-aplicacoes",
+      "name": "Segurança de Aplicações",
+      "parent": "seguranca-da-informacao",
+      "position": 152
+    },
+    {
+      "slug": "nist-csf",
+      "name": "NIST CSF",
+      "parent": "seguranca-da-informacao",
+      "position": 153
+    },
+    {
+      "slug": "engenharia-de-software",
+      "name": "Engenharia de Software",
+      "description": "Arquitetura, DevOps, testes, serverless, padrões, UX e DLT.",
+      "position": 160
+    },
+    {
+      "slug": "arquitetura-web-apis",
+      "name": "Arquitetura Web e APIs",
+      "parent": "engenharia-de-software",
+      "position": 161
+    },
+    {
+      "slug": "devops-testes",
+      "name": "DevOps e Testes",
+      "parent": "engenharia-de-software",
+      "position": 162
+    },
+    {
+      "slug": "microsservicos-serverless",
+      "name": "Microsserviços e Serverless",
+      "parent": "engenharia-de-software",
+      "position": 163
+    },
+    {
+      "slug": "padroes-e-linguagens",
+      "name": "Padrões e Linguagens",
+      "parent": "engenharia-de-software",
+      "position": 164
+    },
+    {
+      "slug": "ux-ui",
+      "name": "UX/UI",
+      "parent": "engenharia-de-software",
+      "position": 165
+    },
+    {
+      "slug": "dlt-blockchain",
+      "name": "DLT e Blockchain",
+      "parent": "engenharia-de-software",
+      "position": 166
+    },
+    {
+      "slug": "infraestrutura-ti",
+      "name": "Infraestrutura em TI",
+      "description": "Kubernetes, IaC, observabilidade, redes, cloud e sistemas operacionais.",
+      "position": 170
+    },
+    {
+      "slug": "kubernetes-containers",
+      "name": "Kubernetes e Containers",
+      "parent": "infraestrutura-ti",
+      "position": 171
+    },
+    {
+      "slug": "infraestrutura-como-codigo",
+      "name": "Infraestrutura como Código",
+      "parent": "infraestrutura-ti",
+      "position": 172
+    },
+    {
+      "slug": "observabilidade",
+      "name": "Monitoramento e Observabilidade",
+      "parent": "infraestrutura-ti",
+      "position": 173
+    },
+    {
+      "slug": "protocolos-redes",
+      "name": "Protocolos e Redes",
+      "parent": "infraestrutura-ti",
+      "position": 174
+    },
+    {
+      "slug": "cloud-virtualizacao-so",
+      "name": "Cloud, Virtualização e SO",
+      "parent": "infraestrutura-ti",
+      "position": 175
+    },
+    {
+      "slug": "bancos-de-dados",
+      "name": "Bancos de Dados",
+      "description": "SQL, modelagem, NoSQL, sharding e data warehouse.",
+      "position": 180
+    },
+    {
+      "slug": "modelagem-sql",
+      "name": "SQL e Modelagem",
+      "parent": "bancos-de-dados",
+      "position": 181
+    },
+    {
+      "slug": "nosql-data-warehouse",
+      "name": "NoSQL e Data Warehouse",
+      "parent": "bancos-de-dados",
+      "position": 182
+    },
+    {
+      "slug": "gestao-ti",
+      "name": "Gestão em TI",
+      "description": "Scrum, Kanban, governança de dados e ITIL.",
+      "position": 190
+    },
+    {
+      "slug": "agil-scrum-kanban",
+      "name": "Scrum e Kanban",
+      "parent": "gestao-ti",
+      "position": 191
+    },
+    {
+      "slug": "governanca-dados-itil",
+      "name": "Governança de Dados e ITIL",
+      "parent": "gestao-ti",
+      "position": 192
+    }
   ]
 }

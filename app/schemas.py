@@ -41,6 +41,8 @@ class ExamIn(BaseModel):
     slug: str = Field(min_length=1, max_length=180)
     name: str = Field(min_length=1, max_length=220)
     organization: str = ""
+    agency: str = ""
+    contest_key: str = ""
     year: int | None = None
     role: str = ""
     edital: str = ""
@@ -91,6 +93,7 @@ class QuestionIn(BaseModel):
     external_id: str = Field(min_length=1, max_length=180)
     topic: str = Field(min_length=1, max_length=140)
     exam: str | None = Field(default=None, max_length=180)
+    exams: list[str] = Field(default_factory=list)
     type: QuestionType
     statement: str = Field(min_length=1)
     context: str = ""
@@ -110,6 +113,12 @@ class QuestionIn(BaseModel):
 
     @model_validator(mode="after")
     def validate_shape(self) -> QuestionIn:
+        if self.exam:
+            if self.exam not in self.exams:
+                self.exams = [self.exam, *self.exams]
+        if len(self.exams) != len(set(self.exams)):
+            raise ValueError("exames duplicados na questão")
+
         labels = [alt.label for alt in self.alternatives]
         if len(labels) != len(set(labels)):
             raise ValueError("as alternativas devem ter rótulos únicos")

@@ -37,6 +37,24 @@
       </select>
     </div>
     <div class="field">
+      <label for="orgao">Órgão</label>
+      <select id="orgao" name="orgao">
+        <option value="">Todos</option>
+        {% for agency in options.agencies %}
+        <option value="{{ agency }}" {% if selected.orgao == agency %}selected{% endif %}>{{ agency }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="edicao">Edição</label>
+      <select id="edicao" name="edicao">
+        <option value="">Todas</option>
+        {% for contest in options.contests %}
+        <option value="{{ contest.key }}" {% if selected.edicao == contest.key %}selected{% endif %}>{{ contest.agency }}{% if contest.year %} {{ contest.year }}{% endif %}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
       <label for="banca">Banca</label>
       <select id="banca" name="banca">
         <option value="">Todas</option>
@@ -143,6 +161,9 @@
           <span class="badge badge-muted">{{ question.exam.organization }}</span>
           {% if question.exam.year %}<span class="badge badge-muted">{{ question.exam.year }}</span>{% endif %}
           {% if question.exam.role %}<span class="badge badge-muted">{{ question.exam.role }}</span>{% endif %}
+          {% if question.exams|length > 1 %}
+          <span class="badge badge-muted">Também em: {% for exam in question.exams %}{% if exam.id != question.exam.id %}{{ exam.role }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %}</span>
+          {% endif %}
           {% endif %}
           <span class="badge">{{ 'Certo/Errado' if question.type.value == 'true_false' else 'Múltipla escolha' }}</span>
           {% if question.difficulty %}<span class="badge">{{ question.difficulty.value }}</span>{% endif %}

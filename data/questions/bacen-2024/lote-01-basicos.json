@@ -28,7 +28,11 @@
           "is_correct": false
         }
       ],
-      "tag": "port-interpretacao"
+      "tag": "port-interpretacao",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q006",
@@ -58,7 +62,11 @@
           "is_correct": false
         }
       ],
-      "tag": "port-sintaxe-coesao"
+      "tag": "port-sintaxe-coesao",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q009",
@@ -88,7 +96,11 @@
           "is_correct": true
         }
       ],
-      "tag": "port-sintaxe-coesao"
+      "tag": "port-sintaxe-coesao",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q014",
@@ -118,7 +130,11 @@
           "is_correct": false
         }
       ],
-      "tag": "port-interpretacao"
+      "tag": "port-interpretacao",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q026",
@@ -148,7 +164,11 @@
           "is_correct": true
         }
       ],
-      "tag": "estatistica-probabilidade"
+      "tag": "estatistica-probabilidade",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q029",
@@ -178,7 +198,11 @@
           "is_correct": false
         }
       ],
-      "tag": "estatistica-probabilidade"
+      "tag": "estatistica-probabilidade",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q033",
@@ -208,7 +232,11 @@
           "is_correct": false
         }
       ],
-      "tag": "estatistica-probabilidade"
+      "tag": "estatistica-probabilidade",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q036",
@@ -238,7 +266,11 @@
           "is_correct": true
         }
       ],
-      "tag": "direito-administrativo"
+      "tag": "direito-administrativo",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q039",
@@ -268,7 +300,11 @@
           "is_correct": false
         }
       ],
-      "tag": "lgpd"
+      "tag": "lgpd",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q041",
@@ -298,7 +334,11 @@
           "is_correct": false
         }
       ],
-      "tag": "macro-contas-nacionais"
+      "tag": "macro-contas-nacionais",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q043",
@@ -328,7 +368,11 @@
           "is_correct": true
         }
       ],
-      "tag": "macro-contas-nacionais"
+      "tag": "macro-contas-nacionais",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     },
     {
       "external_id": "bacen-2024-analista-economia-financas-q050",
@@ -359,7 +403,11 @@
           "is_correct": true
         }
       ],
-      "tag": "micro-teoria"
+      "tag": "micro-teoria",
+      "exams": [
+        "bacen-2024-analista-economia-financas",
+        "bacen-2024-analista-tecnologia-informacao"
+      ]
     }
   ]
 }

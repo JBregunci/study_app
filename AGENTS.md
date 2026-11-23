@@ -19,6 +19,7 @@ Aplicação local de estudos para concursos públicos, em PT-BR, com:
 make run       # inicia o servidor local
 make test      # roda a suíte
 make audit     # auditoria de duplicidades e integridade
+make migrate   # aplica migrações aditivas no SQLite
 make import    # importa catálogo, questões e materiais
 ```
 
@@ -41,6 +42,7 @@ make import    # importa catálogo, questões e materiais
 - Antes de qualquer mudança de schema, faça backup do banco e prefira migrações aditivas.
 - Os JSONs de questões e os Markdown de materiais são a fonte de verdade editorial.
 - Questões usam **uma área e um assunto** no catálogo controlado; não crie tags livres ou sinônimos.
+- Uma questão pode pertencer a vários exames (`exams`); básicas compartilhadas não devem ser duplicadas.
 - Sempre consulte `data/catalog/tags.json` e `data/catalog/topics.json` antes de classificar algo novo.
 - Questões aprovadas de múltipla escolha precisam de justificativa em todas as alternativas; C/E exigem explicação geral.
 - O vínculo de material é preciso: tema compatível e, quando o material tiver tags, assunto compartilhado.
