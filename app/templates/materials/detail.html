@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}{{ material.title }} — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">
+      {% for item in breadcrumb %}
+        {% if not loop.first %} / {% endif %}{{ item.name }}
+      {% endfor %}
+    </p>
+    <h1>{{ material.title }}</h1>
+    {% if material.summary %}<p class="page-subtitle">{{ material.summary }}</p>{% endif %}
+  </div>
+  <div class="actions">
+    {% if primary_topic %}
+    <a class="btn btn-secondary" href="/questoes?tema={{ primary_topic.slug }}">Questões do tema</a>
+    {% endif %}
+    <a class="btn btn-ghost" href="/materiais">Materiais</a>
+  </div>
+</section>
+
+<div class="material-layout">
+  <article class="card material-content">
+    <div class="material-meta">
+      {% if material.source_kind.value == 'generated' %}<span class="badge badge-warning">Material gerado</span>{% endif %}
+      {% for tag in material.tags %}<span class="badge badge-muted">{{ tag.area }} · {{ tag.name }}</span>{% endfor %}
+      <span class="muted">Atualizado em {{ material.updated_at|datetime }}</span>
+    </div>
+    <div class="prose">{{ material_html|safe }}</div>
+    {% if material.source %}
+    <p class="source">Fonte: {% if material.source_url %}<a href="{{ material.source_url }}" target="_blank" rel="noreferrer">{{ material.source }}</a>{% else %}{{ material.source }}{% endif %}</p>
+    {% endif %}
+  </article>
+
+  <aside class="card material-sidebar">
+    <div class="card-header">
+      <div>
+        <h2>Questões relacionadas</h2>
+        <p class="card-subtitle">{{ related|length }} questões ligadas a este material.</p>
+      </div>
+    </div>
+    {% if related %}
+    <div class="material-question-list">
+      {% for row in related[:15] %}
+      <a class="material-question" href="/questoes/{{ row.question.id }}">
+        <span class="picker-statement">{{ row.question.statement|truncate(110) }}</span>
+        <span class="picker-meta">
+          <span class="badge">{{ row.question.topic.name }}</span>
+          <span class="badge badge-muted">{{ row.question.tag.name }}</span>
+          {% set performance = row.performance %}
+          {% include "partials/performance_dots.html" with context %}
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+    {% if related|length > 15 %}
+    <p class="hint">Mostrando 15 de {{ related|length }}. Use os filtros para ver todas.</p>
+    {% endif %}
+    {% else %}
+    <p class="muted">Ainda não há questões relacionadas a este material.</p>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

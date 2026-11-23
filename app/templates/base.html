@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <script>
+    (function () {
+      var saved = localStorage.getItem("study-theme");
+      var system = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.dataset.theme = saved || system;
+    })();
+  </script>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark">E</span>
+        <span>{{ app_name }}</span>
+      </a>
+      {% set path = request.url.path %}
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="/" class="{% if path == '/' %}active{% endif %}">Painel</a>
+        <a href="/questoes" class="{% if path.startswith('/questoes') %}active{% endif %}">Questões</a>
+        <a href="/temas" class="{% if path.startswith('/temas') %}active{% endif %}">Temas</a>
+        <a href="/concursos" class="{% if path.startswith('/concursos') %}active{% endif %}">Concursos</a>
+        <a href="/simulados/aleatorios" class="{% if path.startswith('/simulados/aleatorios') %}active{% endif %}">Aleatório</a>
+        <a href="/conjuntos" class="{% if path.startswith('/conjuntos') %}active{% endif %}">Conjuntos</a>
+        <a href="/materiais" class="{% if path.startswith('/materiais') %}active{% endif %}">Materiais</a>
+        <a href="/estatisticas" class="{% if path.startswith('/estatisticas') %}active{% endif %}">Estatísticas</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Alternar tema">
+        Tema escuro
+      </button>
+    </div>
+  </header>
+
+  <main class="container main">
+    {% set flash_message = request.query_params.get('msg') %}
+    {% set flash_error = request.query_params.get('erro') %}
+    {% if flash_message %}
+      <div class="alert alert-success" role="status">{{ flash_message }}</div>
+    {% endif %}
+    {% if flash_error %}
+      <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>{{ app_name }}</span>
+      <span>Dados salvos localmente no seu computador.</span>
+    </div>
+  </footer>
+
+  <script src="/static/vendor/htmx.min.js" defer></script>
+  <script src="/static/js/app.js" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

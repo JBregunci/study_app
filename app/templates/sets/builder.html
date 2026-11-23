@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% block title %}{% if is_edit %}Editar conjunto{% else %}Novo conjunto{% endif %} — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Simulado personalizado</p>
+    <h1>{% if is_edit %}Editar conjunto{% else %}Novo conjunto{% endif %}</h1>
+    <p class="page-subtitle">Escolha os metadados e selecione as questões que farão parte do simulado.</p>
+  </div>
+  <a class="btn btn-ghost" href="/conjuntos">Voltar</a>
+</section>
+
+<form action="{{ action }}" method="post" class="builder-form">
+  {% if error %}
+  <div class="alert alert-danger" role="alert">{{ error }}</div>
+  {% endif %}
+
+  <section class="card">
+    <div class="card-header">
+      <h2>Dados do conjunto</h2>
+    </div>
+    <div class="form-grid form-wide">
+      <div class="field">
+        <label for="name">Nome</label>
+        <input id="name" type="text" name="name" value="{{ form.name }}" required placeholder="Ex.: Simulado TRF 1 — Bloco 1">
+      </div>
+      <div class="field">
+        <label for="target_title">Concurso ou cargo alvo</label>
+        <input id="target_title" type="text" name="target_title" value="{{ form.target_title }}" placeholder="Ex.: Analista Judiciário — TRF 1">
+      </div>
+      <div class="field">
+        <label for="exam_id">Concurso cadastrado</label>
+        <select id="exam_id" name="exam_id">
+          <option value="">Nenhum</option>
+          {% for exam in exams %}
+          <option value="{{ exam.id }}" {% if form.exam_id == exam.id|string %}selected{% endif %}>
+            {{ exam.name }}{% if exam.organization %} — {{ exam.organization }}{% endif %}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="default_feedback_mode">Correção padrão</label>
+        <select id="default_feedback_mode" name="default_feedback_mode">
+          <option value="end" {% if form.default_feedback_mode == 'end' %}selected{% endif %}>Ao final</option>
+          <option value="immediate" {% if form.default_feedback_mode == 'immediate' %}selected{% endif %}>Imediata</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="default_limit_minutes">Limite por questão (min)</label>
+        <input id="default_limit_minutes" type="number" name="default_limit_minutes" min="1" step="1" value="{{ form.default_limit_minutes }}" placeholder="Sem limite">
+      </div>
+      <div class="field field-full">
+        <label for="description">Descrição</label>
+        <textarea id="description" name="description" rows="2" placeholder="Observações sobre este conjunto.">{{ form.description }}</textarea>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <div>
+        <h2>Questões</h2>
+        <p class="card-subtitle">
+          <span data-selected-count>0</span> selecionadas · <span data-visible-count>{{ questions|length }}</span> visíveis
+        </p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-sm btn-secondary" type="button" data-random-select="10">Sortear 10</button>
+        <button class="btn btn-sm btn-secondary" type="button" data-random-select="20">Sortear 20</button>
+        <button class="btn btn-sm btn-ghost" type="button" data-clear-selection>Limpar seleção</button>
+      </div>
+    </div>
+
+    <div class="filter-bar" data-picker-filters>
+      <div class="field">
+        <label for="picker-search">Buscar</label>
+        <input id="picker-search" type="search" data-picker-filter="search" placeholder="Enunciado, ID ou tag">
+      </div>
+      <div class="field">
+        <label for="picker-topic">Tema</label>
+        <select id="picker-topic" data-picker-filter="topic">
+          <option value="">Todos</option>
+          {% for topic in topics %}
+          <option value="{{ topic.slug }}">{{ topic.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="picker-exam">Concurso</label>
+        <select id="picker-exam" data-picker-filter="exam">
+          <option value="">Todos</option>
+          {% for exam in exams %}
+          <option value="{{ exam.slug }}">{{ exam.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label for="picker-difficulty">Dificuldade</label>
+        <select id="picker-difficulty" data-picker-filter="difficulty">
+          <option value="">Todas</option>
+          <option value="facil">Fácil</option>
+          <option value="medio">Médio</option>
+          <option value="dificil">Difícil</option>
+        </select>
+      </div>
+    </div>
+
+    {% if questions %}
+    <div class="picker-list">
+      {% for question in questions %}
+      <label
+        class="picker-item"
+        data-picker-item
+        data-topic="{{ question.topic.slug }}"
+        data-exam="{{ question.exam.slug if question.exam else '' }}"
+        data-difficulty="{{ question.difficulty.value if question.difficulty else '' }}"
+        data-text="{{ (question.statement ~ ' ' ~ question.external_id ~ ' ' ~ question.tag.name)|lower }}"
+      >
+        <input type="checkbox" name="question_ids" value="{{ question.id }}" data-picker-checkbox {% if question.id in selected_ids %}checked{% endif %}>
+        <span class="picker-main">
+          <span class="picker-meta">
+            <span class="badge badge-primary">{{ question.topic.name }}</span>
+            {% if question.exam %}<span class="badge">{{ question.exam.name }}</span>{% endif %}
+            {% if question.difficulty %}<span class="badge badge-muted">{{ question.difficulty.value }}</span>{% endif %}
+            <span class="picker-id">{{ question.external_id }}</span>
+          </span>
+          <span class="picker-statement">{{ question.statement }}</span>
+        </span>
+      </label>
+      {% endfor %}
+    </div>
+    <p class="hint" data-picker-empty hidden>Nenhuma questão corresponde aos filtros.</p>
+    {% else %}
+    <div class="empty-inline">
+      <p>Não há questões aprovadas para montar um conjunto.</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <div class="sticky-actions">
+    <a class="btn btn-ghost" href="{% if is_edit %}/conjuntos/{{ question_set.id }}{% else %}/conjuntos{% endif %}">Cancelar</a>
+    <button class="btn btn-primary" type="submit">{% if is_edit %}Salvar alterações{% else %}Criar conjunto{% endif %}</button>
+  </div>
+</form>
+
+{% if is_edit %}
+<form action="/conjuntos/{{ question_set.id }}/excluir" method="post" class="danger-zone" data-confirm="Excluir este conjunto? O histórico das sessões será preservado.">
+  <button class="btn btn-danger" type="submit">Excluir conjunto</button>
+</form>
+{% endif %}
+{% endblock %}

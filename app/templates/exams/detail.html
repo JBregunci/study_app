@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}{{ exam.name }} — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Concurso</p>
+    <h1>{{ exam.name }}</h1>
+    <p class="page-subtitle">{{ exam.role }}{% if exam.year %} · {{ exam.year }}{% endif %}{% if exam.organization %} · {{ exam.organization }}{% endif %}</p>
+  </div>
+  <div class="actions">
+    <a class="btn btn-secondary" href="/questoes?concurso={{ exam.slug }}">Ver questões</a>
+    <a class="btn btn-ghost" href="/concursos">Voltar</a>
+  </div>
+</section>
+
+<div class="grid grid-3">
+  <article class="card stat-card">
+    <span class="stat-label">Questões aprovadas</span>
+    <strong class="stat-value">{{ total }}</strong>
+    <span class="stat-meta">neste concurso</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Feitas</span>
+    <strong class="stat-value">{{ stats.total }}</strong>
+    <span class="stat-meta">{{ stats.correct }} acertos · {{ stats.incorrect }} erros</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Aproveitamento</span>
+    <strong class="stat-value">{% if stats.accuracy is not none %}{{ stats.accuracy|round|int }}%{% else %}—{% endif %}</strong>
+    <span class="stat-meta">tempo médio {{ stats.avg_seconds|duration }}</span>
+  </article>
+</div>
+
+<div class="grid grid-2">
+  <section class="card">
+    <div class="card-header">
+      <h2>Metadados</h2>
+    </div>
+    <dl class="metadata-list">
+      <div><dt>Concurso</dt><dd>{{ exam.name }}</dd></div>
+      <div><dt>Cargo/área</dt><dd>{{ exam.role or '—' }}</dd></div>
+      <div><dt>Banca</dt><dd>{{ exam.organization or '—' }}</dd></div>
+      <div><dt>Ano</dt><dd>{{ exam.year or '—' }}</dd></div>
+      <div><dt>Edital</dt><dd>{{ exam.edital or '—' }}</dd></div>
+      {% if exam.source_url %}<div><dt>Prova</dt><dd><a href="{{ exam.source_url }}" target="_blank" rel="noreferrer">PDF oficial</a></dd></div>{% endif %}
+      {% if exam.answer_key_url %}<div><dt>Gabarito</dt><dd><a href="{{ exam.answer_key_url }}" target="_blank" rel="noreferrer">Gabarito oficial</a></dd></div>{% endif %}
+    </dl>
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <div>
+        <h2>Praticar pelo concurso</h2>
+        <p class="card-subtitle">Sorteia questões apenas desta prova.</p>
+      </div>
+    </div>
+    <form action="/simulados/aleatorios" method="post" class="form-grid">
+      <input type="hidden" name="exam_id" value="{{ exam.id }}">
+      <div class="field">
+        <label for="count">Questões</label>
+        <select id="count" name="count">
+          <option value="10">10 questões</option>
+          <option value="15">15 questões</option>
+          <option value="20">20 questões</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="feedback">Correção</label>
+        <select id="feedback" name="feedback_mode">
+          <option value="end">Ao final</option>
+          <option value="immediate">Imediata</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="limit">Limite por questão (min)</label>
+        <input id="limit" type="number" name="limit_minutes" min="1" step="1" placeholder="Sem limite">
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Iniciar simulado</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+{% if tags %}
+<section class="card">
+  <div class="card-header">
+    <h2>Temas e tags frequentes</h2>
+  </div>
+  <div class="tag-cloud">
+    {% for item in tags %}
+    <a class="tag-chip" href="/questoes?concurso={{ exam.slug }}&tag={{ item.tag.slug }}">{{ item.tag.name }} <span class="muted">{{ item.total }}</span></a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

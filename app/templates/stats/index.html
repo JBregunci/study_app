@@ -1,0 +1,327 @@
+{% extends "base.html" %}
+{% block title %}Estatísticas — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Desempenho</p>
+    <h1>Estatísticas</h1>
+    <p class="page-subtitle">{{ period_label }} · dados até {{ today|date }}</p>
+  </div>
+  <div class="period-tabs" role="navigation" aria-label="Filtrar período">
+    {% for days, label in periods.items() %}
+    <a class="period-tab {% if days == selected_period %}active{% endif %}" href="/estatisticas?dias={{ days }}">{{ label }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="grid grid-4">
+  <article class="card stat-card">
+    <span class="stat-label">Questões feitas</span>
+    <strong class="stat-value">{{ overview.total }}</strong>
+    <span class="stat-meta">{{ overview.correct }} acertos · {{ overview.incorrect }} erros · {{ overview.blank }} em branco</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Aproveitamento</span>
+    <strong class="stat-value">{{ pct(overview.correct, overview.total) }}%</strong>
+    <span class="stat-meta">{{ period_label|lower }}</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Tempo médio</span>
+    <strong class="stat-value">{{ overview.avg_seconds|duration }}</strong>
+    <span class="stat-meta">por questão</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Sequência atual</span>
+    <strong class="stat-value">{{ streak }}</strong>
+    <span class="stat-meta">dia{% if streak != 1 %}s{% endif %} seguido{% if streak != 1 %}s{% endif %}</span>
+  </article>
+</div>
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Atividade diária</h2>
+      <p class="card-subtitle">Últimos {{ chart_days }} dias.</p>
+    </div>
+    <span class="badge badge-primary">{{ overview.total }} questões no período</span>
+  </div>
+  <div class="chart" role="img" aria-label="Questões respondidas por dia">
+    {% for day in series %}
+    <div class="chart-col" title="{{ day.day|date }}: {{ day.total }} questões, {{ day.correct }} acertos">
+      <span class="chart-value">{{ day.total }}</span>
+      <div class="chart-track">
+        <div class="chart-bar {% if day.total == 0 %}is-empty{% endif %}" style="height: {{ (day.total * 100 / chart_max)|round|int }}%"></div>
+      </div>
+      <span class="chart-label">{{ day.day.strftime('%d/%m') }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Desempenho por tema</h2>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tema</th>
+          <th class="num">Feitas</th>
+          <th class="num">Acertos</th>
+          <th class="num">Erros</th>
+          <th class="num">Aproveitamento</th>
+          <th class="num">Tempo médio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in topic_stats %}
+        <tr>
+          <td><a href="/temas/{{ item.topic.slug }}">{{ item.topic.name }}</a></td>
+          <td class="num">{{ item.stats.total }}</td>
+          <td class="num">{{ item.stats.correct }}</td>
+          <td class="num">{{ item.stats.incorrect + item.stats.blank }}</td>
+          <td class="num">
+            {% if item.stats.total %}
+              <span class="inline-meter"><span style="width: {{ pct(item.stats.correct, item.stats.total) }}%"></span></span>
+              {{ pct(item.stats.correct, item.stats.total) }}%
+            {% else %}
+              <span class="muted">—</span>
+            {% endif %}
+          </td>
+          <td class="num">{{ item.stats.avg_seconds|duration }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="grid grid-2">
+  <section class="card">
+    <div class="card-header">
+      <div>
+        <h2>Desempenho por área</h2>
+        <p class="card-subtitle">Agrupamento amplo dos assuntos.</p>
+      </div>
+    </div>
+    {% if area_stats %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Área</th>
+            <th class="num">Feitas</th>
+            <th class="num">Acertos</th>
+            <th class="num">Aproveitamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in area_stats %}
+          <tr>
+            <td>{{ item.area }}</td>
+            <td class="num">{{ item.stats.total }}</td>
+            <td class="num">{{ item.stats.correct }}</td>
+            <td class="num">
+              <span class="inline-meter"><span style="width: {{ item.stats.accuracy|round|int }}%"></span></span>
+              {{ item.stats.accuracy|round|int }}%
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="muted">Nenhuma tentativa no período.</p>
+    {% endif %}
+  </section>
+
+  <section class="card">
+    <div class="card-header">
+      <div>
+        <h2>Desempenho por assunto</h2>
+        <p class="card-subtitle">Assuntos amplos que agrupam as tags.</p>
+      </div>
+    </div>
+    {% if tag_stats %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Assunto</th>
+            <th class="num">Feitas</th>
+            <th class="num">Acertos</th>
+            <th class="num">Aproveitamento</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in tag_stats %}
+          <tr>
+            <td>{{ item.tag.name }} <span class="muted">· {{ item.tag.area }}</span></td>
+            <td class="num">{{ item.stats.total }}</td>
+            <td class="num">{{ item.stats.correct }}</td>
+            <td class="num">
+              <span class="inline-meter"><span style="width: {{ item.stats.accuracy|round|int }}%"></span></span>
+              {{ item.stats.accuracy|round|int }}%
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="muted">Nenhuma tentativa no período.</p>
+    {% endif %}
+  </section>
+</div>
+
+<section class="card" id="erros-recentes">
+  <div class="card-header">
+    <div>
+      <h2>Erros recentes</h2>
+      <p class="card-subtitle">Revise as justificativas e refaça as questões pendentes.</p>
+    </div>
+    <div class="actions">
+      <span class="badge">{{ wrong_attempts|length }} revisões</span>
+      <a class="btn btn-sm btn-secondary" href="/estatisticas?dias={{ selected_period }}&resolvidos={{ 0 if show_resolved else 1 }}">{{ 'Ocultar resolvidas' if show_resolved else 'Mostrar resolvidas' }}</a>
+    </div>
+  </div>
+  {% if wrong_attempts %}
+  <div class="review-list">
+    {% for row in wrong_attempts %}
+    <details class="review-item">
+      <summary>
+        <span class="review-title">
+          <span class="review-number">{{ row.question.external_id }}</span>
+          <span>{{ row.question.statement|truncate(110) }}</span>
+        </span>
+        <span class="review-badges">
+          {% if row.attempt.timed_out and row.attempt.selected_alternative_id is none %}
+          <span class="badge badge-warning">Em branco</span>
+          {% else %}
+          <span class="badge badge-danger">Incorreta</span>
+          {% endif %}
+          {% if row.retry_status == 'resolved' %}
+          <span class="badge badge-success">Refeita e acertada</span>
+          {% elif row.retry_status == 'still_wrong' %}
+          <span class="badge badge-warning">Refeita, ainda incorreta</span>
+          {% else %}
+          <span class="badge badge-muted">Não refeita</span>
+          {% endif %}
+          <span class="badge badge-muted">{{ row.topic.name }}</span>
+          <span class="badge">{{ row.attempt.answered_on|date }}</span>
+        </span>
+      </summary>
+      <div class="review-body">
+        <div class="review-actions">
+          <a class="btn btn-sm btn-ghost" href="/questoes/{{ row.question.id }}">Abrir questão</a>
+          <form action="/questoes/{{ row.question.id }}/refazer" method="post">
+            <button class="btn btn-sm btn-primary" type="submit">Tentar novamente</button>
+          </form>
+          {% if row.resolved_at %}
+          <span class="muted">Resolvida em {{ row.resolved_at|datetime }}</span>
+          {% endif %}
+        </div>
+        {% if row.question.context %}
+        <div class="context-panel">
+          <h3>Contexto</h3>
+          <div class="statement">{{ row.question.context }}</div>
+          {% if row.question.context_media_url %}<img class="question-media" src="{{ row.question.context_media_url }}" alt="Imagem de apoio do contexto">{% endif %}
+        </div>
+        {% endif %}
+        <p class="statement">{{ row.question.statement }}</p>
+        {% if row.question.media_url %}
+        <img class="question-media" src="{{ row.question.media_url }}" alt="Imagem de apoio da questão">
+        {% endif %}
+        <div class="feedback-list">
+          {% for alternative in row.alternatives %}
+          {% set selected = row.selected and row.selected.id == alternative.id %}
+          <div class="alt-card {% if alternative.is_correct %}alt-correct{% elif selected %}alt-wrong{% else %}alt-neutral{% endif %}">
+            <div class="alt-card-head">
+              <span class="alt-label">{{ alternative.label }}</span>
+              <span class="alt-text">{{ alternative.text }}</span>
+              <span class="badge {% if alternative.is_correct %}badge-success{% elif selected %}badge-danger{% else %}badge-muted{% endif %}">
+                {% if alternative.is_correct and selected %}
+                  Sua resposta — correta
+                {% elif alternative.is_correct %}
+                  Correta
+                {% elif selected %}
+                  Sua resposta — incorreta
+                {% else %}
+                  Incorreta
+                {% endif %}
+              </span>
+            </div>
+            {% if alternative.explanation %}
+            <p class="alt-explanation">{{ alternative.explanation }}</p>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="explanation-panel">
+          <h3>Resolução</h3>
+          <p>{{ row.question.general_explanation }}</p>
+          {% if row.question.source %}<p class="source">Fonte: {{ row.question.source }}</p>{% endif %}
+        </div>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-inline">
+    <p>Nenhum erro registrado neste período.</p>
+  </div>
+  {% endif %}
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Sessões recentes</h2>
+  </div>
+  {% if recent_sessions %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Sessão</th>
+          <th>Início</th>
+          <th class="num">Respondidas</th>
+          <th class="num">Acertos</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for summary in recent_sessions %}
+        {% set session = summary.session %}
+        <tr>
+          <td>{{ session.title }}</td>
+          <td>{{ session.started_at|datetime }}</td>
+          <td class="num">{{ summary.answered }}</td>
+          <td class="num">{{ summary.correct }}</td>
+          <td>
+            {% if session.status.value == 'completed' %}
+              <span class="badge badge-success">Concluída</span>
+            {% elif session.status.value == 'in_progress' %}
+              <span class="badge badge-warning">Em andamento</span>
+            {% else %}
+              <span class="badge">Abandonada</span>
+            {% endif %}
+          </td>
+          <td class="actions-cell">
+            {% if session.status.value == 'completed' %}
+            <a class="btn btn-sm btn-secondary" href="/sessoes/{{ session.id }}/resultado">Resultado</a>
+            {% elif session.status.value == 'in_progress' %}
+            <a class="btn btn-sm btn-primary" href="/sessoes/{{ session.id }}">Continuar</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">Nenhuma sessão registrada ainda.</p>
+  {% endif %}
+</section>
+{% endblock %}

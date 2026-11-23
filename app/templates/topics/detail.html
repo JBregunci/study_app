@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.name }} — {{ app_name }}{% if materials %}
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Material de estudo</h2>
+      <p class="card-subtitle">Resumos ligados a este tema.</p>
+    </div>
+  </div>
+  <div class="material-link-list">
+    {% for material in materials %}
+    <a class="material-link" href="/materiais/{{ material.slug }}">
+      <strong>{{ material.title }}</strong>
+      {% if material.summary %}<span class="muted">{{ material.summary|truncate(140) }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Tema</p>
+    <h1>{{ topic.name }}</h1>
+    {% if topic.description %}<p class="page-subtitle">{{ topic.description }}</p>{% endif %}
+  </div>
+  <div class="actions">
+    <a class="btn btn-secondary" href="/simulados/aleatorios?tema={{ topic.slug }}">Simulado do tema</a>
+    <a class="btn btn-ghost" href="/temas">Voltar</a>
+  </div>
+</section>
+
+<div class="grid grid-3">
+  <article class="card stat-card">
+    <span class="stat-label">Questões aprovadas</span>
+    <strong class="stat-value">{{ question_count }}</strong>
+    <span class="stat-meta">disponíveis para praticar</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Feitas neste tema</span>
+    <strong class="stat-value">{{ topic_stats.total }}</strong>
+    <span class="stat-meta">{{ topic_stats.correct }} acertos · {{ topic_stats.incorrect }} erros</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Aproveitamento</span>
+    <strong class="stat-value">{{ pct(topic_stats.correct, topic_stats.total) }}%</strong>
+    <span class="stat-meta">tempo médio {{ topic_stats.avg_seconds|duration }}</span>
+  </article>
+</div>
+
+{% if in_progress %}
+<section class="card continue-card">
+  <div class="card-header">
+    <div>
+      <h2>Prática em andamento</h2>
+      <p class="card-subtitle">Questão {{ in_progress.total_planned }} planejadas nesta sequência.</p>
+    </div>
+    <span class="badge badge-warning">Em andamento</span>
+  </div>
+  <div class="inline-actions">
+    <a class="btn btn-primary" href="/sessoes/{{ in_progress.id }}">Continuar prática</a>
+    <form action="/temas/{{ topic.slug }}/sessoes" method="post" class="inline-form">
+      <input type="hidden" name="restart" value="1">
+      <select name="feedback_mode">
+        <option value="immediate">Correção imediata</option>
+        <option value="end">Correção ao final</option>
+      </select>
+      <input type="number" name="limit_minutes" min="1" step="1" placeholder="Limite por questão (min)">
+      <button class="btn btn-secondary" type="submit">Encerrar e começar nova</button>
+    </form>
+  </div>
+</section>
+{% endif %}
+
+{% if child_rows %}
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Subtemas</h2>
+      <p class="card-subtitle">Os números incluem os subtemas abaixo de cada item.</p>
+    </div>
+  </div>
+  <div class="subtopic-list">
+    {% for row in child_rows %}
+    <a class="subtopic-row" href="/temas/{{ row.topic.slug }}">
+      <span class="subtopic-name" style="padding-left: {{ row.depth * 18 }}px">{% if row.depth %}<span class="subtopic-branch">└</span>{% endif %}{{ row.topic.name }}</span>
+      <span class="subtopic-meta">
+        <span class="badge">{{ row.count }} questões</span>
+        <span class="muted">{% if row.stats.total %}{{ row.stats.correct }}/{{ row.stats.total }} · {{ row.stats.accuracy|round|int }}%{% else %}sem tentativas{% endif %}</span>
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>{% if in_progress %}Nova prática sequencial{% else %}Praticar em sequência{% endif %}</h2>
+      <p class="card-subtitle">As questões aparecem uma por vez, incluindo as dos subtemas deste tema.</p>
+    </div>
+  </div>
+  {% if question_count %}
+  <form action="/temas/{{ topic.slug }}/sessoes" method="post" class="form-grid">
+    <input type="hidden" name="restart" value="{{ '1' if in_progress else '0' }}">
+    <div class="field">
+      <label for="feedback-mode">Correção</label>
+      <select id="feedback-mode" name="feedback_mode">
+        <option value="immediate">Imediata, após cada resposta</option>
+        <option value="end">Ao final da sessão</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="limit-minutes">Limite por questão (min)</label>
+      <input id="limit-minutes" type="number" name="limit_minutes" min="1" step="1" placeholder="Sem limite">
+      <span class="hint">Ao esgotar o tempo, a questão é registrada como incorreta.</span>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Começar prática</button>
+    </div>
+  </form>
+  {% else %}
+  <div class="empty-inline">
+    <p>Ainda não há questões aprovadas neste tema.</p>
+    <p class="hint">Adicione questões em JSON e reinicie a aplicação.</p>
+  </div>
+  {% endif %}
+</section>
+{% if materials %}
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Material de estudo</h2>
+      <p class="card-subtitle">Resumos ligados a este tema.</p>
+    </div>
+  </div>
+  <div class="material-link-list">
+    {% for material in materials %}
+    <a class="material-link" href="/materiais/{{ material.slug }}">
+      <strong>{{ material.title }}</strong>
+      {% if material.summary %}<span class="muted">{{ material.summary|truncate(140) }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+{% endblock %}

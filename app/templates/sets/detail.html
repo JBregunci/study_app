@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}{{ question_set.name }} — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Conjunto personalizado</p>
+    <h1>{{ question_set.name }}</h1>
+    {% if question_set.description %}<p class="page-subtitle">{{ question_set.description }}</p>{% endif %}
+  </div>
+  <div class="actions">
+    <a class="btn btn-secondary" href="/conjuntos/{{ question_set.id }}/editar">Editar</a>
+    <a class="btn btn-ghost" href="/conjuntos">Voltar</a>
+  </div>
+</section>
+
+<div class="grid grid-3">
+  <article class="card stat-card">
+    <span class="stat-label">Questões</span>
+    <strong class="stat-value">{{ question_set.items|length }}</strong>
+    <span class="stat-meta">neste conjunto</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Correção padrão</span>
+    <strong class="stat-value stat-value-sm">
+      {% if question_set.default_feedback_mode.value == 'end' %}Ao final{% else %}Imediata{% endif %}
+    </strong>
+    <span class="stat-meta">{{ question_set.default_limit_seconds|minutes }} por questão</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Alvo</span>
+    <strong class="stat-value stat-value-sm">{{ question_set.target_title or 'Livre' }}</strong>
+    <span class="stat-meta">{{ question_set.exam.name if question_set.exam else 'Sem concurso vinculado' }}</span>
+  </article>
+</div>
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Iniciar simulado</h2>
+      <p class="card-subtitle">Você pode ajustar a correção e o limite apenas nesta sessão.</p>
+    </div>
+  </div>
+  {% if question_set.items %}
+  <form action="/conjuntos/{{ question_set.id }}/sessoes" method="post" class="form-grid">
+    <div class="field">
+      <label for="feedback-mode">Correção</label>
+      <select id="feedback-mode" name="feedback_mode">
+        <option value="end" {% if question_set.default_feedback_mode.value == 'end' %}selected{% endif %}>Ao final</option>
+        <option value="immediate" {% if question_set.default_feedback_mode.value == 'immediate' %}selected{% endif %}>Imediata</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="limit-minutes">Limite por questão (min)</label>
+      <input
+        id="limit-minutes"
+        type="number"
+        name="limit_minutes"
+        min="1"
+        step="1"
+        value="{% if question_set.default_limit_seconds %}{{ (question_set.default_limit_seconds / 60)|round(2) }}{% endif %}"
+        placeholder="Sem limite"
+      >
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Começar simulado</button>
+    </div>
+  </form>
+  {% else %}
+  <div class="empty-inline">
+    <p>Este conjunto está vazio.</p>
+    <a class="btn btn-primary" href="/conjuntos/{{ question_set.id }}/editar">Adicionar questões</a>
+  </div>
+  {% endif %}
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Questões do conjunto</h2>
+    <span class="badge badge-primary">{{ question_set.items|length }}</span>
+  </div>
+  {% if question_set.items %}
+  <ol class="set-question-list">
+    {% for item in question_set.items %}
+    <li>
+      <div class="set-question-main">
+        <span class="picker-statement">{{ item.question.statement }}</span>
+        <span class="picker-meta">
+          <span class="badge">{{ item.question.topic.name }}</span>
+          <span class="picker-id">{{ item.question.external_id }}</span>
+        </span>
+      </div>
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p class="muted">Nenhuma questão adicionada.</p>
+  {% endif %}
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <h2>Sessões deste conjunto</h2>
+  </div>
+  {% if sessions %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Sessão</th>
+          <th>Início</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for session in sessions %}
+        <tr>
+          <td>{{ session.title }}</td>
+          <td>{{ session.started_at|datetime }}</td>
+          <td>
+            {% if session.status.value == 'completed' %}
+              <span class="badge badge-success">Concluída</span>
+            {% elif session.status.value == 'in_progress' %}
+              <span class="badge badge-warning">Em andamento</span>
+            {% else %}
+              <span class="badge">Abandonada</span>
+            {% endif %}
+          </td>
+          <td class="actions-cell">
+            {% if session.status.value == 'completed' %}
+            <a class="btn btn-sm btn-secondary" href="/sessoes/{{ session.id }}/resultado">Resultado</a>
+            {% elif session.status.value == 'in_progress' %}
+            <a class="btn btn-sm btn-primary" href="/sessoes/{{ session.id }}">Continuar</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">Este conjunto ainda não foi praticado.</p>
+  {% endif %}
+</section>
+
+<form action="/conjuntos/{{ question_set.id }}/excluir" method="post" class="danger-zone" data-confirm="Excluir este conjunto? O histórico das sessões será preservado.">
+  <button class="btn btn-danger" type="submit">Excluir conjunto</button>
+</form>
+{% endblock %}

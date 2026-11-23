@@ -1,0 +1,24 @@
+{% if performance %}
+<div class="perf-wrap" title="Últimas 5 tentativas, da mais antiga para a mais recente">
+  <div class="perf-dots" aria-label="Últimas 5 tentativas">
+    {% for dot in performance.dots %}
+      {% if dot %}
+      <span
+        class="perf-dot {% if dot.is_correct %}is-correct{% else %}is-wrong{% endif %}"
+        title="{{ dot.answered_at|datetime }} · {% if dot.is_correct %}acerto{% elif dot.timed_out %}tempo esgotado{% else %}erro{% endif %} · {{ dot.time_spent_seconds|duration }}"
+      ></span>
+      {% else %}
+      <span class="perf-dot is-empty" title="Sem tentativa"></span>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+<div class="perf-dots" aria-label="Sem tentativas">
+  <span class="perf-dot is-empty"></span>
+  <span class="perf-dot is-empty"></span>
+  <span class="perf-dot is-empty"></span>
+  <span class="perf-dot is-empty"></span>
+  <span class="perf-dot is-empty"></span>
+</div>
+{% endif %}

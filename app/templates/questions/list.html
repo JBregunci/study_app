@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% block title %}Questões — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Banco de questões</p>
+    <h1>Questões</h1>
+    <p class="page-subtitle">{{ result.total }} questões aprovadas encontradas. Use os filtros para montar seu recorte de estudo.</p>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="/simulados/aleatorios">Novo simulado</a>
+  </div>
+</section>
+
+<section class="card filter-card">
+  <form action="/questoes" method="get" class="form-grid filter-grid">
+    <div class="field field-full">
+      <label for="q">Buscar</label>
+      <input id="q" type="search" name="q" value="{{ selected.q }}" placeholder="Enunciado, contexto, ID ou tag">
+    </div>
+    <div class="field">
+      <label for="tema">Tema</label>
+      <select id="tema" name="tema">
+        <option value="">Todos os temas</option>
+        {% for option in options.topics %}
+        <option value="{{ option.topic.slug }}" {% if selected.tema == option.topic.slug %}selected{% endif %}>{{ '— ' * option.depth }}{{ option.topic.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="concurso">Concurso</label>
+      <select id="concurso" name="concurso">
+        <option value="">Todos os concursos</option>
+        {% for exam in options.exams %}
+        <option value="{{ exam.slug }}" {% if selected.concurso == exam.slug %}selected{% endif %}>{{ exam.name }}{% if exam.year %} ({{ exam.year }}){% endif %}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="banca">Banca</label>
+      <select id="banca" name="banca">
+        <option value="">Todas</option>
+        {% for organization in options.organizations %}
+        <option value="{{ organization }}" {% if selected.banca == organization %}selected{% endif %}>{{ organization }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="ano">Ano</label>
+      <select id="ano" name="ano">
+        <option value="">Todos</option>
+        {% for year in options.years %}
+        <option value="{{ year }}" {% if selected.ano == year|string %}selected{% endif %}>{{ year }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="cargo">Cargo/área</label>
+      <input id="cargo" type="text" name="cargo" value="{{ selected.cargo }}" placeholder="Ex.: Economia e Finanças">
+    </div>
+    <div class="field">
+      <label for="tipo">Formato</label>
+      <select id="tipo" name="tipo">
+        <option value="">Todos</option>
+        <option value="true_false" {% if selected.tipo == 'true_false' %}selected{% endif %}>Certo/Errado</option>
+        <option value="single_choice" {% if selected.tipo == 'single_choice' %}selected{% endif %}>Múltipla escolha</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="dificuldade">Dificuldade</label>
+      <select id="dificuldade" name="dificuldade">
+        <option value="">Todas</option>
+        <option value="facil" {% if selected.dificuldade == 'facil' %}selected{% endif %}>Fácil</option>
+        <option value="medio" {% if selected.dificuldade == 'medio' %}selected{% endif %}>Médio</option>
+        <option value="dificil" {% if selected.dificuldade == 'dificil' %}selected{% endif %}>Difícil</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="area">Área</label>
+      <select id="area" name="area">
+        <option value="">Todas</option>
+        {% for area in options.areas %}
+        <option value="{{ area }}" {% if selected.area == area %}selected{% endif %}>{{ area }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="tag">Assunto</label>
+      <select id="tag" name="tag">
+        <option value="">Todos</option>
+        {% for item in options.tags %}
+        <option value="{{ item.tag.slug }}" {% if selected.tag == item.tag.slug %}selected{% endif %}>{{ item.tag.area }} — {{ item.tag.name }} ({{ item.total }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="situacao">Situação</label>
+      <select id="situacao" name="situacao">
+        <option value="">Todas</option>
+        <option value="unseen" {% if selected.situacao == 'unseen' %}selected{% endif %}>Nunca feitas</option>
+        <option value="error" {% if selected.situacao == 'error' %}selected{% endif %}>Com algum erro</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="ordem">Ordenar por</label>
+      <select id="ordem" name="ordem">
+        <option value="recent" {% if selected.ordem == 'recent' %}selected{% endif %}>Mais recentes</option>
+        <option value="errors" {% if selected.ordem == 'errors' %}selected{% endif %}>Mais erradas</option>
+        <option value="unseen" {% if selected.ordem == 'unseen' %}selected{% endif %}>Menos praticadas</option>
+      </select>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Filtrar</button>
+      <a class="btn btn-ghost" href="/questoes">Limpar filtros</a>
+    </div>
+  </form>
+</section>
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Resultados</h2>
+      <p class="card-subtitle">
+        {% if result.total %}
+          Exibindo {{ (result.page - 1) * result.per_page + 1 }}–{{ [result.page * result.per_page, result.total]|min }} de {{ result.total }}
+        {% else %}
+          Nenhuma questão encontrada
+        {% endif %}
+      </p>
+    </div>
+  </div>
+
+  {% if result.rows %}
+  <div class="question-bank-list">
+    {% for row in result.rows %}
+    {% set question = row.question %}
+    <article class="question-bank-row">
+      <div class="question-bank-main">
+        <div class="picker-meta">
+          <span class="badge badge-primary">{{ question.topic.name }}</span>
+          {% if question.exam %}
+          <span class="badge">{{ question.exam.name }}</span>
+          <span class="badge badge-muted">{{ question.exam.organization }}</span>
+          {% if question.exam.year %}<span class="badge badge-muted">{{ question.exam.year }}</span>{% endif %}
+          {% if question.exam.role %}<span class="badge badge-muted">{{ question.exam.role }}</span>{% endif %}
+          {% endif %}
+          <span class="badge">{{ 'Certo/Errado' if question.type.value == 'true_false' else 'Múltipla escolha' }}</span>
+          {% if question.difficulty %}<span class="badge">{{ question.difficulty.value }}</span>{% endif %}
+          {% if question.explanation_source.value == 'generated' %}<span class="badge badge-warning">Explicação gerada</span>{% endif %}
+        </div>
+        <a class="question-bank-statement" href="/questoes/{{ question.id }}">{{ question.statement }}</a>
+        <div class="question-bank-tags">
+          <span class="picker-id">{{ question.external_id }}</span>
+          <a class="tag-chip" href="/questoes?tag={{ question.tag.slug }}">{{ question.tag.area }} · {{ question.tag.name }}</a>
+        </div>
+      </div>
+      <div class="question-bank-side">
+        {% set performance = row.performance %}
+        {% include "partials/performance_dots.html" with context %}
+        <div class="question-bank-stats">
+          <span><strong>{{ row.performance.total }}</strong> tentativas</span>
+          <span>{% if row.performance.accuracy is not none %}<strong>{{ row.performance.accuracy|round|int }}%</strong> de acerto{% else %}<span class="muted">sem tentativas</span>{% endif %}</span>
+          <span class="muted">{% if row.performance.last_attempt_at %}Última: {{ row.performance.last_attempt_at|datetime }}{% endif %}</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-sm btn-secondary" href="/questoes/{{ question.id }}">Abrir</a>
+          <form action="/questoes/{{ question.id }}/refazer" method="post">
+            <button class="btn btn-sm btn-primary" type="submit">{{ 'Refazer' if row.performance.total else 'Praticar' }}</button>
+          </form>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  {% if result.total_pages > 1 %}
+  {% set sep = '&' if base_qs else '' %}
+  <nav class="pagination" aria-label="Paginação de questões">
+    {% if result.has_prev %}
+    <a class="btn btn-sm btn-secondary" href="/questoes?{{ base_qs }}{{ sep }}pagina={{ result.page - 1 }}">Anterior</a>
+    {% endif %}
+    <span class="muted">Página {{ result.page }} de {{ result.total_pages }}</span>
+    {% if result.has_next %}
+    <a class="btn btn-sm btn-secondary" href="/questoes?{{ base_qs }}{{ sep }}pagina={{ result.page + 1 }}">Próxima</a>
+    {% endif %}
+  </nav>
+  {% endif %}
+  {% else %}
+  <div class="empty-inline">
+    <p>Nenhuma questão corresponde aos filtros escolhidos.</p>
+    <a class="btn btn-primary" href="/questoes">Limpar filtros</a>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

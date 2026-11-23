@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Simulado aleatório — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Simulado</p>
+    <h1>Questões aleatórias</h1>
+    <p class="page-subtitle">Selecione de 10 a 20 questões diferentes e teste seu desempenho.</p>
+  </div>
+  <a class="btn btn-ghost" href="/temas">Estudar por tema</a>
+</section>
+
+<section class="card">
+  <form action="/simulados/aleatorios" method="post" class="form-grid form-wide">
+    <div class="field">
+      <label for="count">Quantidade de questões</label>
+      <select id="count" name="count">
+        <option value="10">10 questões</option>
+        <option value="15">15 questões</option>
+        <option value="20">20 questões</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="topic">Tema</label>
+      <select id="topic" name="topic_slug">
+        <option value="">Todos os temas</option>
+        {% for topic in topics %}
+        <option value="{{ topic.slug }}" {% if topic.slug == selected_topic %}selected{% endif %}>{{ topic.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="exam">Concurso</label>
+      <select id="exam" name="exam_id">
+        <option value="">Todos os concursos</option>
+        {% for exam in exams %}
+        <option value="{{ exam.id }}">{{ exam.name }}{% if exam.organization %} — {{ exam.organization }}{% endif %}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="feedback">Correção</label>
+      <select id="feedback" name="feedback_mode">
+        <option value="end">Ao final do simulado</option>
+        <option value="immediate">Imediata, após cada questão</option>
+      </select>
+      <span class="hint">No modo ao final, as explicações aparecem na revisão final.</span>
+    </div>
+    <div class="field">
+      <label for="limit">Limite por questão (min)</label>
+      <input id="limit" type="number" name="limit_minutes" min="1" step="1" placeholder="Sem limite">
+      <span class="hint">Opcional. Ao esgotar, a questão fica em branco.</span>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Começar simulado</button>
+    </div>
+  </form>
+</section>
+{% endblock %}

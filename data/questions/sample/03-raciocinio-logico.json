@@ -1,0 +1,118 @@
+{
+  "topics": [],
+  "exams": [],
+  "questions": [
+    {
+      "external_id": "rl-001",
+      "topic": "raciocinio-logico",
+      "exam": "demo-2026",
+      "type": "single_choice",
+      "difficulty": "facil",
+      "statement": "Considere a proposição 'Se chove, então a rua fica molhada'. Sabendo que choveu, pode-se concluir corretamente que:",
+      "source": "Autoral — demonstração",
+      "general_explanation": "A regra de inferência conhecida como modus ponens permite concluir o consequente quando o antecedente de uma condicional é verdadeiro. Se 'chove' implica 'a rua fica molhada' e ocorre 'chove', então 'a rua fica molhada'.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "a rua fica molhada.",
+          "is_correct": true,
+          "explanation": "Correta. Aplicação direta do modus ponens: antecedente verdadeiro leva ao consequente verdadeiro."
+        },
+        {
+          "label": "B",
+          "text": "a rua não fica molhada.",
+          "is_correct": false,
+          "explanation": "Incorreta. O consequente não pode ser negado quando o antecedente é verdadeiro."
+        },
+        {
+          "label": "C",
+          "text": "não chove.",
+          "is_correct": false,
+          "explanation": "Incorreta. A premissa afirma justamente que choveu."
+        },
+        {
+          "label": "D",
+          "text": "a rua pode ou não ficar molhada.",
+          "is_correct": false,
+          "explanation": "Incorreta. A condicional e o antecedente verdadeiro determinam o consequente."
+        },
+        {
+          "label": "E",
+          "text": "chove, mas a rua não fica molhada.",
+          "is_correct": false,
+          "explanation": "Incorreta. Essa conclusão contraria a condicional apresentada."
+        }
+      ],
+      "tag": "logica"
+    },
+    {
+      "external_id": "rl-002",
+      "topic": "raciocinio-logico",
+      "type": "single_choice",
+      "difficulty": "medio",
+      "statement": "Observe a sequência: 2, 6, 12, 20, 30. O próximo termo é:",
+      "source": "Autoral — demonstração",
+      "general_explanation": "As diferenças entre termos consecutivos são 4, 6, 8 e 10. A próxima diferença é 12, portanto 30 + 12 = 42.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "36",
+          "is_correct": false,
+          "explanation": "Incorreta. 36 corresponderia a somar 6, mas a diferença segue aumentando de dois em dois."
+        },
+        {
+          "label": "B",
+          "text": "40",
+          "is_correct": false,
+          "explanation": "Incorreta. A diferença esperada é 12, e não 10."
+        },
+        {
+          "label": "C",
+          "text": "42",
+          "is_correct": true,
+          "explanation": "Correta. A diferença aumenta em 2 unidades: 4, 6, 8, 10 e, por fim, 12. Assim, 30 + 12 = 42."
+        },
+        {
+          "label": "D",
+          "text": "44",
+          "is_correct": false,
+          "explanation": "Incorreta. Essa alternativa somaria 14, pulando a diferença 12."
+        },
+        {
+          "label": "E",
+          "text": "48",
+          "is_correct": false,
+          "explanation": "Incorreta. Essa alternativa somaria 18, sem seguir o padrão das diferenças."
+        }
+      ],
+      "tag": "logica"
+    },
+    {
+      "external_id": "rl-003",
+      "topic": "raciocinio-logico",
+      "type": "true_false",
+      "difficulty": "medio",
+      "statement": "Julgue o item: a negação da proposição 'Todos os servidores são honestos' é 'Nenhum servidor é honesto'.",
+      "source": "Autoral — demonstração",
+      "general_explanation": "A negação de uma proposição universal afirmativa ('todo A é B') é uma particular negativa ('algum A não é B'). Basta que exista ao menos um servidor que não seja honesto para negar que todos sejam.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false,
+          "explanation": "Incorreta. 'Nenhum servidor é honesto' é uma afirmação universal negativa, mais forte do que a negação pedida."
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true,
+          "explanation": "Correta. A negação correta é 'Algum servidor não é honesto'."
+        }
+      ],
+      "tag": "logica"
+    }
+  ]
+}

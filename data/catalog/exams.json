@@ -1,0 +1,21 @@
+{
+  "exams": [
+    {
+      "slug": "demo-2026",
+      "name": "Concurso Demonstração 2026",
+      "organization": "DEMO",
+      "year": 2026,
+      "role": "Analista"
+    },
+    {
+      "slug": "bacen-2024-analista-economia-financas",
+      "name": "Banco Central do Brasil (BACEN)",
+      "organization": "CEBRASPE",
+      "year": 2024,
+      "role": "Analista — Área: Economia e Finanças",
+      "edital": "Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "answer_key_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/GAB_DEFINITIVO_959_BCB_001_01.PDF"
+    }
+  ]
+}

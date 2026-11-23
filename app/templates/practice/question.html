@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Questão {{ item.position }} — {{ session.title }}{% endblock %}
+{% block content %}
+<section class="page-header session-header">
+  <div>
+    <p class="eyebrow">{{ session.title }}</p>
+    <h1>Questão {{ item.position }} de {{ session.total_planned }}</h1>
+    <p class="page-subtitle">
+      {% if session.feedback_mode.value == 'immediate' %}
+        Correção imediata
+      {% else %}
+        Correção ao final
+      {% endif %}
+      {% if session.per_question_limit_seconds %}
+        · limite de {{ session.per_question_limit_seconds|minutes }} por questão
+      {% endif %}
+    </p>
+  </div>
+  <form action="/sessoes/{{ session.id }}/encerrar" method="post" data-confirm="Encerrar a sessão agora? As questões restantes ficarão em branco.">
+    <button class="btn btn-ghost" type="submit">Encerrar sessão</button>
+  </form>
+</section>
+
+<div class="session-progress-block">
+  <div class="progress"><div class="progress-bar" style="width: {{ progress.percent }}%"></div></div>
+  <span class="muted">{{ progress.answered }} de {{ progress.total }} respondidas</span>
+</div>
+
+{% include "partials/question_body.html" %}
+{% endblock %}

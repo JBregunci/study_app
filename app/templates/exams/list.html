@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Concursos — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Provas e editais</p>
+    <h1>Concursos</h1>
+    <p class="page-subtitle">Filtre por prova, banca, cargo e ano para montar seu recorte.</p>
+  </div>
+  <a class="btn btn-primary" href="/questoes">Ver todas as questões</a>
+</section>
+
+{% if rows %}
+<div class="grid grid-2">
+  {% for row in rows %}
+  {% set exam = row.exam %}
+  <article class="card set-card">
+    <div class="topic-head">
+      <h2>{{ exam.name }}</h2>
+      <span class="badge">{{ row.total }} questões</span>
+    </div>
+    {% if exam.role %}<p class="muted">{{ exam.role }}</p>{% endif %}
+    <div class="set-meta">
+      <span class="badge badge-primary">{{ exam.organization }}</span>
+      {% if exam.year %}<span class="badge">{{ exam.year }}</span>{% endif %}
+      {% if exam.edital %}<span class="badge badge-muted">{{ exam.edital }}</span>{% endif %}
+    </div>
+    <div class="topic-metrics">
+      <span><strong>{{ row.stats.total }}</strong> feitas</span>
+      <span><strong>{% if row.stats.accuracy is not none %}{{ row.stats.accuracy|round|int }}%{% else %}—{% endif %}</strong> de acerto</span>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="/concursos/{{ exam.slug }}">Abrir concurso</a>
+      <a class="btn btn-secondary" href="/questoes?concurso={{ exam.slug }}">Questões</a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state card">
+  <h2>Nenhum concurso cadastrado</h2>
+  <p>Importe questões e o catálogo do concurso para começar.</p>
+</div>
+{% endif %}
+{% endblock %}

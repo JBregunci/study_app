@@ -1,0 +1,365 @@
+{
+  "questions": [
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q001",
+      "topic": "portugues-interpretacao",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "1",
+      "context": "Texto CB1A1-I\n\nA emergência de uma grande variedade de plataformas digitais, desde o final da década de 1990, provocou uma mudança econômica radical e uma reorganização de mercados e arranjos de trabalho. A economia de plataforma não está apenas mudando a forma como o trabalho é realizado e remunerado. Os mercados de trabalho também estão se transformando drasticamente, levando a uma situação em que o “emprego padrão” é cada vez mais suplementado ou substituído por trabalho temporário “fora do padrão”, mediado por plataformas. Em um contexto de crescente instabilidade macroeconômica, de desregulamentação das relações de trabalho — em função do impacto disruptivo de tecnologias digitais na intermediação dessas relações —, verifica-se a emergência de novas formas de emprego “fora do padrão”, que reforçam diversos tipos de “flexibilidade” — temporal, espacial, gerencial e funcional, entre outras. Grande parte dessas novas formas de emprego está vinculada à mediação de plataformas digitais, que conectam ofertantes e demandantes de trabalho.\n\nAs plataformas digitais facilitam a articulação entre ofertantes e demandantes de trabalho que, de outra forma, poderiam ter dificuldades para interagir entre si, tornando a realização de transações mais eficiente do que seria possível em relacionamentos bilaterais entre as partes, fornecendo infraestrutura e regras para sua realização. No âmbito dessas plataformas, a correspondência (matching) entre ofertantes e demandantes de trabalho pode ser feita de forma eficaz, por exemplo, por meio de algoritmos que diminuem a quantidade de tempo utilizado para encontrar trabalhadores adequados para tarefas específicas, além de oferecer a base para o controle e gerenciamento dessas tarefas.\n\nNo entanto, a força de trabalho torna-se mais vulnerável, pois as leis trabalhistas ainda se baseiam em um antigo sistema “binário”, segundo o qual quem é empregado recebe direitos — por exemplo, aviso de demissão ou férias pagas —, mas para quem é contratado o acesso a esses direitos tende a ser restringido. Assim, se o modelo de plataformas de trabalho com a interveniência de uma gestão algorítmica oferece vantagens no que se refere à flexibilidade sobre formas convencionais de organização e gestão do trabalho, esse mesmo modelo suscita questões relevantes como a distribuição desigual de oportunidades, benefícios e riscos entre os agentes envolvidos, bem como os possíveis custos sociais advindos de uma eventual precarização das relações de trabalho.\n\nHerbert P. S. de Oliveira e Jorge N. de P. Britto. Gerenciamento e disciplina algorítmica: uma análise focalizada em plataformas de emprego de elevada qualificação. Economia e Sociedade, Campinas, v. 32, n.º 3 (79), 2023 (com adaptações).",
+      "statement": "Conclui-se da leitura do último parágrafo que, segundo as leis trabalhistas, empregado e contratado são categorias distintas de trabalhadores.",
+      "general_explanation": "O último parágrafo afirma que as leis trabalhistas se baseiam em um sistema “binário”: quem é empregado recebe direitos, enquanto quem é contratado tem acesso restrito a esses direitos. Portanto, o texto trata empregado e contratado como categorias distintas. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "port-interpretacao"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q006",
+      "topic": "portugues-sintaxe",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "6",
+      "context": "Texto CB1A1-I\n\nA emergência de uma grande variedade de plataformas digitais, desde o final da década de 1990, provocou uma mudança econômica radical e uma reorganização de mercados e arranjos de trabalho. A economia de plataforma não está apenas mudando a forma como o trabalho é realizado e remunerado. Os mercados de trabalho também estão se transformando drasticamente, levando a uma situação em que o “emprego padrão” é cada vez mais suplementado ou substituído por trabalho temporário “fora do padrão”, mediado por plataformas. Em um contexto de crescente instabilidade macroeconômica, de desregulamentação das relações de trabalho — em função do impacto disruptivo de tecnologias digitais na intermediação dessas relações —, verifica-se a emergência de novas formas de emprego “fora do padrão”, que reforçam diversos tipos de “flexibilidade” — temporal, espacial, gerencial e funcional, entre outras. Grande parte dessas novas formas de emprego está vinculada à mediação de plataformas digitais, que conectam ofertantes e demandantes de trabalho.\n\nAs plataformas digitais facilitam a articulação entre ofertantes e demandantes de trabalho que, de outra forma, poderiam ter dificuldades para interagir entre si, tornando a realização de transações mais eficiente do que seria possível em relacionamentos bilaterais entre as partes, fornecendo infraestrutura e regras para sua realização. No âmbito dessas plataformas, a correspondência (matching) entre ofertantes e demandantes de trabalho pode ser feita de forma eficaz, por exemplo, por meio de algoritmos que diminuem a quantidade de tempo utilizado para encontrar trabalhadores adequados para tarefas específicas, além de oferecer a base para o controle e gerenciamento dessas tarefas.\n\nNo entanto, a força de trabalho torna-se mais vulnerável, pois as leis trabalhistas ainda se baseiam em um antigo sistema “binário”, segundo o qual quem é empregado recebe direitos — por exemplo, aviso de demissão ou férias pagas —, mas para quem é contratado o acesso a esses direitos tende a ser restringido. Assim, se o modelo de plataformas de trabalho com a interveniência de uma gestão algorítmica oferece vantagens no que se refere à flexibilidade sobre formas convencionais de organização e gestão do trabalho, esse mesmo modelo suscita questões relevantes como a distribuição desigual de oportunidades, benefícios e riscos entre os agentes envolvidos, bem como os possíveis custos sociais advindos de uma eventual precarização das relações de trabalho.\n\nHerbert P. S. de Oliveira e Jorge N. de P. Britto. Gerenciamento e disciplina algorítmica: uma análise focalizada em plataformas de emprego de elevada qualificação. Economia e Sociedade, Campinas, v. 32, n.º 3 (79), 2023 (com adaptações).",
+      "statement": "No primeiro período do terceiro parágrafo, a oração introduzida pelo vocábulo “pois” consiste em uma explicação para o que se afirma na oração imediatamente antecedente.",
+      "general_explanation": "No trecho “a força de trabalho torna-se mais vulnerável, pois as leis trabalhistas ainda se baseiam em um antigo sistema ‘binário’”, o “pois” introduz a causa/explicação da vulnerabilidade afirmada na oração anterior. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "port-sintaxe-coesao"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q009",
+      "topic": "portugues-sintaxe",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "9",
+      "context": "Texto CB1A1-I\n\nA emergência de uma grande variedade de plataformas digitais, desde o final da década de 1990, provocou uma mudança econômica radical e uma reorganização de mercados e arranjos de trabalho. A economia de plataforma não está apenas mudando a forma como o trabalho é realizado e remunerado. Os mercados de trabalho também estão se transformando drasticamente, levando a uma situação em que o “emprego padrão” é cada vez mais suplementado ou substituído por trabalho temporário “fora do padrão”, mediado por plataformas. Em um contexto de crescente instabilidade macroeconômica, de desregulamentação das relações de trabalho — em função do impacto disruptivo de tecnologias digitais na intermediação dessas relações —, verifica-se a emergência de novas formas de emprego “fora do padrão”, que reforçam diversos tipos de “flexibilidade” — temporal, espacial, gerencial e funcional, entre outras. Grande parte dessas novas formas de emprego está vinculada à mediação de plataformas digitais, que conectam ofertantes e demandantes de trabalho.\n\nAs plataformas digitais facilitam a articulação entre ofertantes e demandantes de trabalho que, de outra forma, poderiam ter dificuldades para interagir entre si, tornando a realização de transações mais eficiente do que seria possível em relacionamentos bilaterais entre as partes, fornecendo infraestrutura e regras para sua realização. No âmbito dessas plataformas, a correspondência (matching) entre ofertantes e demandantes de trabalho pode ser feita de forma eficaz, por exemplo, por meio de algoritmos que diminuem a quantidade de tempo utilizado para encontrar trabalhadores adequados para tarefas específicas, além de oferecer a base para o controle e gerenciamento dessas tarefas.\n\nNo entanto, a força de trabalho torna-se mais vulnerável, pois as leis trabalhistas ainda se baseiam em um antigo sistema “binário”, segundo o qual quem é empregado recebe direitos — por exemplo, aviso de demissão ou férias pagas —, mas para quem é contratado o acesso a esses direitos tende a ser restringido. Assim, se o modelo de plataformas de trabalho com a interveniência de uma gestão algorítmica oferece vantagens no que se refere à flexibilidade sobre formas convencionais de organização e gestão do trabalho, esse mesmo modelo suscita questões relevantes como a distribuição desigual de oportunidades, benefícios e riscos entre os agentes envolvidos, bem como os possíveis custos sociais advindos de uma eventual precarização das relações de trabalho.\n\nHerbert P. S. de Oliveira e Jorge N. de P. Britto. Gerenciamento e disciplina algorítmica: uma análise focalizada em plataformas de emprego de elevada qualificação. Economia e Sociedade, Campinas, v. 32, n.º 3 (79), 2023 (com adaptações).",
+      "statement": "No último período do primeiro parágrafo, a oração “que conectam ofertantes e demandantes de trabalho” restringe o sentido do segmento “plataformas digitais”.",
+      "general_explanation": "A oração está isolada por vírgula e tem valor explicativo, acrescentando uma informação sobre as plataformas digitais em geral. Não se trata de oração restritiva, que individualizaria um subconjunto de plataformas. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "port-sintaxe-coesao"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q014",
+      "topic": "portugues-interpretacao",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "facil",
+      "source_question_number": "14",
+      "context": "Texto CB1A2-I\n\nA Conferência Geral da Organização das Nações Unidas para a Educação, a Ciência e a Cultura (UNESCO), em sua 41.ª sessão, reconhece os impactos profundos e dinâmicos, positivos e negativos da inteligência artificial (IA) nas sociedades, no meio ambiente, nos ecossistemas e nas vidas humanas, inclusive na mente humana, em parte devido às novas formas como seu uso influencia o pensamento, a interação e a tomada de decisões e afeta a educação, as ciências humanas, sociais e naturais, a cultura, a comunicação e a informação.\n\nA Conferência considera que as tecnologias de IA podem ser de grande utilidade para a humanidade e podem beneficiar todos os países, mas também suscitam questões éticas fundamentais, por exemplo, em relação às distorções que podem incorporar e exacerbar, o que resultaria potencialmente em discriminação, desigualdade, exclusão digital, exclusão em geral e ameaça à diversidade cultural, social e biológica, além de divisões sociais ou econômicas. Suscitam, ainda, questões relativas à necessidade de transparência e compreensibilidade do funcionamento dos algoritmos e dos dados com que eles foram alimentados, além de seu potencial impacto sobre, entre outros aspectos, a dignidade humana; os direitos humanos e as liberdades fundamentais; a igualdade de gênero; a democracia; os processos sociais, econômicos, políticos e culturais; as práticas científicas e de engenharia; o bem-estar dos animais; o meio ambiente e os ecossistemas.\n\nA Conferência reconhece, ainda, que as tecnologias de IA podem aprofundar as divisões e as desigualdades existentes no mundo, dentro dos países e entre eles, e que a justiça, a confiança e a equidade devem ser defendidas para que nenhum país e nenhum indivíduo sejam deixados para trás, seja em razão do acesso justo às tecnologias de IA e de seus benefícios, seja em razão de medidas de proteção contra suas implicações negativas. Reconhecem-se as diferentes circunstâncias de diferentes países e respeita-se o desejo de algumas pessoas de não participar de todos os desenvolvimentos tecnológicos.\n\nCom base nas considerações acima, entre outras, a UNESCO aprova a presente Recomendação sobre a Ética da Inteligência Artificial.\n\nUNESCO. Recomendação sobre a Ética da Inteligência Artificial (com adaptações).",
+      "statement": "Conclui-se da leitura do texto que a Conferência Geral da UNESCO mostra-se favorável à defesa da justiça, da confiança e da equidade como forma de evitar o aprofundamento das divisões e das desigualdades existentes no mundo.",
+      "general_explanation": "O terceiro parágrafo afirma que justiça, confiança e equidade devem ser defendidas para que nenhum país ou indivíduo seja deixado para trás, diante do risco de aprofundamento de divisões e desigualdades. A conclusão está de acordo com o texto. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "port-interpretacao"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q026",
+      "topic": "probabilidade-e-distribuicoes",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "26",
+      "context": "Considere que X é uma variável aleatória com suporte x ∈ {−2, −1, 0, +1, +2}, cuja função de distribuição de probabilidade é dada por: P(X = −2) = 5k, P(X = −1) = k, P(X = 0) = 2k, P(X = +1) = 3k e P(X = +2) = 4k, em que k é uma constante real positiva.",
+      "statement": "A moda de X é igual a zero.",
+      "general_explanation": "A moda é o valor com maior probabilidade. Na distribuição, P(X = −2) = 5k é a maior probabilidade, e não P(X = 0) = 2k. Logo, a moda é −2, não zero. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "estatistica-probabilidade"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q029",
+      "topic": "probabilidade-e-distribuicoes",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "29",
+      "context": "Considere que X é uma variável aleatória com suporte x ∈ {−2, −1, 0, +1, +2}, cuja função de distribuição de probabilidade é dada por: P(X = −2) = 5k, P(X = −1) = k, P(X = 0) = 2k, P(X = +1) = 3k e P(X = +2) = 4k, em que k é uma constante real positiva.",
+      "statement": "A média de X é igual a zero.",
+      "general_explanation": "E[X] = (−2)(5k) + (−1)(k) + 0(2k) + 1(3k) + 2(4k) = (−10 − 1 + 0 + 3 + 8)k = 0. Portanto, a média é zero. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "estatistica-probabilidade"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q033",
+      "topic": "probabilidade-e-distribuicoes",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "33",
+      "context": "Suponha que X e Y sejam duas variáveis contínuas e mutuamente independentes, tais que P(X > 0) = 0,3 e P(Y > 0) = 0,7.",
+      "statement": "A probabilidade de ocorrência simultânea dos eventos X > 0 e Y > 0 é igual a 0,21.",
+      "general_explanation": "Como X e Y são independentes, P(X > 0 e Y > 0) = P(X > 0) × P(Y > 0) = 0,3 × 0,7 = 0,21. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "estatistica-probabilidade"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q036",
+      "topic": "direito-administrativo",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "36",
+      "context": "Considerando os princípios básicos da administração pública, das autarquias e do regime disciplinar aplicável aos servidores públicos civis federais (Lei n.º 8.112/1990), julgue os itens que se seguem.",
+      "statement": "Os bens das autarquias são, invariavelmente, de natureza pública, bem como impenhoráveis e inalienáveis.",
+      "general_explanation": "Os bens das autarquias são bens públicos e, em regra, impenhoráveis. Contudo, a inalienabilidade não é absoluta: bens dominicais ou desafetados podem ser alienados nos termos da lei. A palavra “invariavelmente” torna a afirmação errada. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "direito-administrativo"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q039",
+      "topic": "protecao-de-dados",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "39",
+      "context": "Com base no disposto no Código de Ética Profissional do servidor público civil do Poder Executivo federal e na Lei Geral de Proteção de Dados Pessoais (LGPD), julgue os itens a seguir.",
+      "statement": "Nos termos da LGPD, dados pessoais sensíveis, como os relativos à saúde e à vida sexual do titular, podem ser tratados para fins sanitários.",
+      "general_explanation": "A LGPD autoriza o tratamento de dados pessoais sensíveis, independentemente de consentimento, quando for indispensável para a tutela da saúde, exclusivamente em procedimento realizado por profissionais de saúde, serviços de saúde ou autoridade sanitária (art. 11, II, f). Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "lgpd"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q041",
+      "topic": "macroeconomia",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "41",
+      "context": "Em determinada economia, o produto interno bruto (PIB) a preço de mercado foi mensurado no valor de $ 250, as rendas dos residentes e das firmas domésticas auferidas no exterior foram de $ 35, as rendas obtidas no país pelos não residentes e firmas estrangeiras foram de $ 60, a depreciação foi estimada em $ 30, os impostos indiretos totalizaram $ 80, enquanto as transferências indiretas (ou subsídios) foram de $ 20. Considerando a situação hipotética precedente e aspectos gerais a ela relacionados, julgue os itens a seguir.",
+      "statement": "A renda nacional mensurada para o país seria de $ 135.",
+      "general_explanation": "PNBpm = PIBpm + rendas recebidas do exterior − rendas enviadas ao exterior = 250 + 35 − 60 = 225. A renda nacional a custo de fatores = PNBpm − depreciação − impostos indiretos + subsídios = 225 − 30 − 80 + 20 = 135. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "macro-contas-nacionais"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q043",
+      "topic": "macroeconomia",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "facil",
+      "source_question_number": "43",
+      "context": "Em determinada economia, o produto interno bruto (PIB) a preço de mercado foi mensurado no valor de $ 250, as rendas dos residentes e das firmas domésticas auferidas no exterior foram de $ 35, as rendas obtidas no país pelos não residentes e firmas estrangeiras foram de $ 60, a depreciação foi estimada em $ 30, os impostos indiretos totalizaram $ 80, enquanto as transferências indiretas (ou subsídios) foram de $ 20. Considerando a situação hipotética precedente e aspectos gerais a ela relacionados, julgue os itens a seguir.",
+      "statement": "O PIB é uma medida de bem-estar, ou seja, o bem-estar de uma nação aumenta quanto maior for o PIB.",
+      "general_explanation": "O PIB mede a produção a preços de mercado e não captura distribuição de renda, externalidades, trabalho não remunerado, qualidade de vida ou sustentabilidade. Um PIB maior não implica, por si só, maior bem-estar. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "macro-contas-nacionais"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q050",
+      "topic": "microeconomia",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "50",
+      "context": "Com base na curva ou fronteira de possibilidades de produção em uma economia de dois produtos (alimento e vestuário), representada no gráfico, julgue o próximo item.",
+      "statement": "O deslocamento do ponto c para o ponto b é explicado pelo avanço tecnológico.",
+      "media_url": "/media/bacen-2024/bacen-2024-q050-ppf.png",
+      "general_explanation": "O ponto c está no interior da fronteira, enquanto b está sobre a curva. Ir de c para b representa melhor uso dos recursos disponíveis, aproximando a economia da eficiência produtiva, e não um deslocamento da fronteira. O avanço tecnológico deslocaria a fronteira para fora. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_CB1_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "micro-teoria"
+    }
+  ]
+}

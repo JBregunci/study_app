@@ -1,0 +1,6 @@
+-r requirements.txt
+pytest==9.2.0
+httpx==0.28.1
+pypdf==7.1.1
+fonttools==4.68.0
+pillow==13.0.0

@@ -1,0 +1,167 @@
+<div id="question-area" class="question-area">
+  {% if error %}
+  <div class="alert alert-danger" role="alert">{{ error }}</div>
+  {% endif %}
+
+  <section class="card question-card">
+    <div class="question-top">
+      <div class="question-tags">
+        <span class="badge badge-primary">{{ question.topic.name }}</span>
+        {% if question.exam %}
+        <span class="badge">{{ question.exam.name }}</span>
+        <span class="badge badge-muted">Banca: {{ question.exam.organization }}</span>
+        {% if question.exam.year %}<span class="badge badge-muted">{{ question.exam.year }}</span>{% endif %}
+        {% if question.exam.role %}<span class="badge badge-muted">{{ question.exam.role }}</span>{% endif %}
+        {% endif %}
+        {% if question.difficulty %}
+        <span class="badge">
+          {{ {'facil': 'Fácil', 'medio': 'Médio', 'dificil': 'Difícil'}[question.difficulty.value] }}
+        </span>
+        {% endif %}
+        {% if question.type.value == 'true_false' %}
+        <span class="badge">Certo/Errado</span>
+        {% endif %}
+        {% if question.explanation_source.value == 'generated' %}
+        <span class="badge badge-warning">Explicação gerada</span>
+        {% endif %}
+      </div>
+
+      {% if attempt %}
+      <div class="timer-block">
+        <span class="timer static">{{ attempt.time_spent_seconds|duration }}</span>
+        <span class="timer-label">Tempo nesta questão</span>
+      </div>
+      {% else %}
+      <div class="timer-block">
+        <span class="timer" data-timer data-form="question-form" data-elapsed="{{ elapsed }}" data-limit="{{ session.per_question_limit_seconds or '' }}">{{ elapsed|clock }}</span>
+        <span class="timer-label">
+          {% if session.per_question_limit_seconds %}Limite {{ session.per_question_limit_seconds|clock }}{% else %}Sem limite{% endif %}
+        </span>
+      </div>
+      {% endif %}
+    </div>
+
+    {% if question.context %}
+    <div class="context-panel">
+      <h3>Contexto</h3>
+      <div class="statement">{{ question.context }}</div>
+      {% if question.context_media_url %}<img class="question-media" src="{{ question.context_media_url }}" alt="Imagem de apoio do contexto">{% endif %}
+    </div>
+    {% endif %}
+    <div class="statement">{{ question.statement }}</div>
+    {% if question.media_url %}
+    <img class="question-media" src="{{ question.media_url }}" alt="Imagem de apoio da questão">
+    {% endif %}
+
+    {% if not attempt %}
+    <form
+      id="question-form"
+      class="question-form"
+      method="post"
+      action="/sessoes/{{ session.id }}/questoes/{{ item.position }}/resposta"
+      hx-post="/sessoes/{{ session.id }}/questoes/{{ item.position }}/resposta"
+      hx-target="#question-area"
+      hx-swap="outerHTML"
+    >
+      <input type="hidden" name="timed_out" value="0">
+      <fieldset class="alternatives">
+        <legend class="visually-hidden">Escolha uma alternativa</legend>
+        {% for alternative in alternatives %}
+        <label class="alt-option" for="alt-{{ alternative.id }}">
+          <input
+            id="alt-{{ alternative.id }}"
+            type="radio"
+            name="alternative_id"
+            value="{{ alternative.id }}"
+            data-key="{{ alternative.label|lower }}"
+            data-index="{{ loop.index }}"
+          >
+          <span class="alt-label">{{ alternative.label }}</span>
+          <span class="alt-text">{{ alternative.text }}</span>
+        </label>
+        {% endfor %}
+      </fieldset>
+      <div class="question-actions">
+        <button class="btn btn-primary" type="submit">Responder</button>
+        <span class="hint">Atalhos: A–E selecionam, Enter confirma.</span>
+      </div>
+    </form>
+    {% else %}
+      {% if show_feedback %}
+      <div class="feedback-banner {% if attempt.timed_out and attempt.selected_alternative_id is none %}feedback-warning{% elif attempt.is_correct %}feedback-success{% else %}feedback-danger{% endif %}">
+        <strong>
+          {% if attempt.timed_out and attempt.selected_alternative_id is none %}
+            Tempo esgotado
+          {% elif attempt.is_correct %}
+            Resposta correta
+          {% else %}
+            Resposta incorreta
+          {% endif %}
+        </strong>
+        <span>
+          {% if attempt.timed_out and attempt.selected_alternative_id is none %}
+            A questão foi registrada em branco.
+          {% elif attempt.is_correct %}
+            Você marcou a alternativa correta.
+          {% else %}
+            Veja abaixo por que a sua escolha não é a correta.
+          {% endif %}
+        </span>
+      </div>
+
+      <div class="feedback-list">
+        {% for alternative in alternatives %}
+        {% set selected = attempt.selected_alternative_id == alternative.id %}
+        <div class="alt-card {% if alternative.is_correct %}alt-correct{% elif selected %}alt-wrong{% else %}alt-neutral{% endif %}">
+          <div class="alt-card-head">
+            <span class="alt-label">{{ alternative.label }}</span>
+            <span class="alt-text">{{ alternative.text }}</span>
+            <span class="badge {% if alternative.is_correct %}badge-success{% elif selected %}badge-danger{% else %}badge-muted{% endif %}">
+              {% if alternative.is_correct and selected %}
+                Sua resposta — correta
+              {% elif alternative.is_correct %}
+                Correta
+              {% elif selected %}
+                Sua resposta — incorreta
+              {% else %}
+                Incorreta
+              {% endif %}
+            </span>
+          </div>
+          {% if alternative.media_url %}
+          <img class="question-media" src="{{ alternative.media_url }}" alt="Imagem da alternativa">
+          {% endif %}
+          {% if alternative.explanation %}
+          <p class="alt-explanation">{{ alternative.explanation }}</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="explanation-panel">
+        <h3>Resolução</h3>
+        <p>{{ question.general_explanation }}</p>
+        {% if question.source %}
+        <p class="source">
+          Fonte: {% if question.source_url %}<a href="{{ question.source_url }}" target="_blank" rel="noreferrer">{{ question.source }}</a>{% else %}{{ question.source }}{% endif %}
+          {% if question.source_question_number %} · item {{ question.source_question_number }}{% endif %}
+        </p>
+        {% endif %}
+      </div>
+      {% else %}
+      <div class="feedback-banner feedback-neutral">
+        <strong>Resposta registrada</strong>
+        <span>A correção e as explicações serão exibidas ao final da sessão.</span>
+      </div>
+      {% endif %}
+
+      <div class="question-actions">
+        {% if next_pos %}
+        <a class="btn btn-primary" href="/sessoes/{{ session.id }}/questoes/{{ next_pos }}" data-next>Próxima questão</a>
+        {% else %}
+        <a class="btn btn-primary" href="/sessoes/{{ session.id }}/resultado" data-next>Ver resultado</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </section>
+</div>

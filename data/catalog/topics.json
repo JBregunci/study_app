@@ -1,0 +1,62 @@
+{
+  "topics": [
+    {"slug": "portugues", "name": "Língua Portuguesa", "description": "Interpretação de textos, gramática e norma-padrão.", "position": 10},
+    {"slug": "portugues-interpretacao", "name": "Interpretação de Textos", "parent": "portugues", "position": 11},
+    {"slug": "portugues-sintaxe", "name": "Sintaxe e Coesão", "parent": "portugues", "position": 12},
+    {"slug": "portugues-gramatica", "name": "Gramática e Norma-Padrão", "parent": "portugues", "position": 13},
+
+    {"slug": "raciocinio-logico", "name": "Raciocínio Lógico", "description": "Proposições, argumentação e quantificadores.", "position": 20},
+    {"slug": "logica-proposicional", "name": "Lógica Proposicional", "parent": "raciocinio-logico", "position": 21},
+    {"slug": "logica-argumentativa", "name": "Lógica Argumentativa", "parent": "raciocinio-logico", "position": 22},
+
+    {"slug": "estatistica", "name": "Estatística", "description": "Probabilidade, inferência, séries temporais e econometria.", "position": 30},
+    {"slug": "probabilidade-e-distribuicoes", "name": "Probabilidade e Distribuições", "parent": "estatistica", "position": 31},
+    {"slug": "inferencia-estatistica", "name": "Inferência Estatística", "parent": "estatistica", "position": 32},
+    {"slug": "series-temporais", "name": "Séries Temporais", "parent": "estatistica", "position": 33},
+    {"slug": "dados-em-painel", "name": "Dados em Painel", "parent": "estatistica", "position": 34},
+    {"slug": "processos-estocasticos", "name": "Processos Estocásticos", "parent": "estatistica", "position": 35},
+
+    {"slug": "informatica", "name": "Informática", "description": "Segurança da informação, planilhas e conceitos de backup.", "position": 40},
+
+    {"slug": "direito-constitucional", "name": "Direito Constitucional", "description": "Direitos fundamentais, organização do Estado e remédios constitucionais.", "position": 50},
+    {"slug": "direito-administrativo", "name": "Direito Administrativo", "description": "Princípios, autarquias e regime disciplinar.", "position": 60},
+    {"slug": "etica-servico-publico", "name": "Ética no Serviço Público", "parent": "direito-administrativo", "position": 61},
+    {"slug": "protecao-de-dados", "name": "Proteção de Dados e LGPD", "parent": "direito-administrativo", "position": 62},
+
+    {"slug": "economia", "name": "Economia", "description": "Fundamentos teóricos e aplicados de economia.", "position": 80},
+    {"slug": "macroeconomia", "name": "Macroeconomia", "parent": "economia", "position": 81},
+    {"slug": "macroeconomia-modelos", "name": "Modelos Macroeconômicos", "parent": "macroeconomia", "position": 82},
+    {"slug": "politica-monetaria", "name": "Política Monetária", "parent": "macroeconomia", "position": 83},
+    {"slug": "politica-fiscal", "name": "Política Fiscal", "parent": "macroeconomia", "position": 84},
+    {"slug": "setor-externo", "name": "Setor Externo e Câmbio", "parent": "macroeconomia", "position": 85},
+    {"slug": "ciclos-economicos", "name": "Ciclos Econômicos", "parent": "macroeconomia", "position": 86},
+    {"slug": "mercado-de-trabalho", "name": "Mercado de Trabalho", "parent": "macroeconomia", "position": 87},
+
+    {"slug": "microeconomia", "name": "Microeconomia", "parent": "economia", "position": 90},
+    {"slug": "teoria-do-consumidor", "name": "Teoria do Consumidor", "parent": "microeconomia", "position": 91},
+    {"slug": "teoria-da-firma", "name": "Teoria da Firma", "parent": "microeconomia", "position": 92},
+    {"slug": "teoria-dos-jogos", "name": "Teoria dos Jogos", "parent": "microeconomia", "position": 93},
+    {"slug": "falhas-de-mercado", "name": "Falhas de Mercado", "parent": "microeconomia", "position": 94},
+    {"slug": "equilibrio-geral-e-bem-estar", "name": "Equilíbrio Geral e Bem-Estar", "parent": "microeconomia", "position": 95},
+    {"slug": "economia-comportamental", "name": "Economia Comportamental", "parent": "microeconomia", "position": 96},
+    {"slug": "economia-do-setor-publico", "name": "Economia do Setor Público", "parent": "economia", "position": 100},
+
+    {"slug": "financas", "name": "Finanças", "description": "Mercado financeiro, investimentos, riscos e derivativos.", "position": 110},
+    {"slug": "mercado-de-capitais", "name": "Mercado de Capitais", "parent": "financas", "position": 111},
+    {"slug": "renda-fixa", "name": "Renda Fixa", "parent": "financas", "position": 112},
+    {"slug": "derivativos", "name": "Derivativos", "parent": "financas", "position": 113},
+    {"slug": "gestao-de-carteiras", "name": "Gestão de Carteiras", "parent": "financas", "position": 114},
+    {"slug": "gestao-de-riscos", "name": "Gestão de Riscos", "parent": "financas", "position": 115},
+    {"slug": "financas-corporativas", "name": "Finanças Corporativas", "parent": "financas", "position": 116},
+    {"slug": "fundos-de-investimento", "name": "Fundos de Investimento", "parent": "financas", "position": 117},
+
+    {"slug": "contabilidade", "name": "Contabilidade", "description": "Contabilidade societária e de instituições financeiras.", "position": 120},
+    {"slug": "contabilidade-instituicoes-financeiras", "name": "Contabilidade de Instituições Financeiras", "parent": "contabilidade", "position": 121},
+    {"slug": "normas-contabeis", "name": "Normas Contábeis e CPCs", "parent": "contabilidade", "position": 122},
+    {"slug": "auditoria", "name": "Auditoria", "parent": "contabilidade", "position": 123},
+
+    {"slug": "sistema-financeiro-nacional", "name": "Sistema Financeiro Nacional", "description": "Regulação, supervisão e infraestrutura do mercado.", "position": 130},
+    {"slug": "regulacao-prudencial", "name": "Regulação Prudencial", "parent": "sistema-financeiro-nacional", "position": 131},
+    {"slug": "sistema-de-pagamentos", "name": "Sistema de Pagamentos", "parent": "sistema-financeiro-nacional", "position": 132}
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "topics": [],
+  "exams": [],
+  "questions": [
+    {
+      "external_id": "pt-001",
+      "topic": "portugues-gramatica",
+      "exam": "demo-2026",
+      "type": "single_choice",
+      "difficulty": "medio",
+      "statement": "Assinale a alternativa em que o emprego da crase está correto.",
+      "source": "Autoral — demonstração",
+      "general_explanation": "A crase corresponde à fusão da preposição 'a' com o artigo definido feminino 'a'. Ela não ocorre antes de palavras masculinas, verbos no infinitivo, nomes próprios que não admitem artigo ou substantivos plurais usados de forma genérica.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Entreguei o relatório à diretora.",
+          "is_correct": true,
+          "explanation": "Correta. Há a preposição 'a' exigida por 'entregar' fundida ao artigo definido 'a' antes do substantivo feminino 'diretora'."
+        },
+        {
+          "label": "B",
+          "text": "Vou à pé até o trabalho.",
+          "is_correct": false,
+          "explanation": "Incorreta. 'A pé' é uma locução adverbial formada por palavra masculina; não há artigo feminino, portanto não há crase."
+        },
+        {
+          "label": "C",
+          "text": "Ele começou à estudar cedo.",
+          "is_correct": false,
+          "explanation": "Incorreta. Não se usa crase antes de verbo no infinitivo, como 'estudar'."
+        },
+        {
+          "label": "D",
+          "text": "Refiro-me à clientes antigos.",
+          "is_correct": false,
+          "explanation": "Incorreta. 'Clientes' está no plural e é usado de forma genérica, sem artigo definido; o correto seria 'a clientes antigos'."
+        },
+        {
+          "label": "E",
+          "text": "Cheguei à Brasília ontem.",
+          "is_correct": false,
+          "explanation": "Incorreta. O topônimo 'Brasília' não admite artigo definido nesse contexto; escreve-se 'Cheguei a Brasília'."
+        }
+      ],
+      "tag": "port-gramatica-norma"
+    },
+    {
+      "external_id": "pt-002",
+      "topic": "portugues-gramatica",
+      "type": "single_choice",
+      "difficulty": "medio",
+      "statement": "Assinale a alternativa em que a concordância verbal está de acordo com a norma-padrão.",
+      "source": "Autoral — demonstração",
+      "general_explanation": "O verbo deve concordar com o sujeito. Nos casos de verbos impessoais, como 'haver' e 'fazer' indicando tempo, a forma permanece na terceira pessoa do singular.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Fazem dois anos que ele estuda para o concurso.",
+          "is_correct": false,
+          "explanation": "Incorreta. O verbo 'fazer' indicando tempo decorrido é impessoal e deve ficar na terceira pessoa do singular: 'Faz dois anos'."
+        },
+        {
+          "label": "B",
+          "text": "Havia muitos candidatos na sala.",
+          "is_correct": true,
+          "explanation": "Correta. O verbo 'haver' no sentido de existir é impessoal e não concorda com o termo seguinte, permanecendo no singular."
+        },
+        {
+          "label": "C",
+          "text": "Existe várias vagas disponíveis.",
+          "is_correct": false,
+          "explanation": "Incorreta. O verbo 'existir' é pessoal e concorda com o sujeito 'várias vagas': 'Existem várias vagas disponíveis'."
+        },
+        {
+          "label": "D",
+          "text": "Chegaram o momento de começar a prova.",
+          "is_correct": false,
+          "explanation": "Incorreta. O sujeito é 'o momento', singular; o verbo deve ser 'Chegou'."
+        },
+        {
+          "label": "E",
+          "text": "Mais de um aluno foram aprovados.",
+          "is_correct": false,
+          "explanation": "Incorreta. A expressão 'mais de um' seguida de substantivo singular pede verbo no singular: 'Mais de um aluno foi aprovado'."
+        }
+      ],
+      "tag": "port-gramatica-norma"
+    },
+    {
+      "external_id": "pt-003",
+      "topic": "portugues-gramatica",
+      "type": "single_choice",
+      "difficulty": "facil",
+      "statement": "Assinale a alternativa em que a pontuação está correta.",
+      "source": "Autoral — demonstração",
+      "general_explanation": "A oração subordinada adjetiva explicativa deve ficar entre vírgulas. Quando a oração é restritiva, não se separam o sujeito e o predicado por vírgula.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "O candidato, que estudou com dedicação foi aprovado.",
+          "is_correct": false,
+          "explanation": "Incorreta. Falta a vírgula de fechamento da oração explicativa depois de 'dedicação'."
+        },
+        {
+          "label": "B",
+          "text": "O candidato que estudou com dedicação, foi aprovado.",
+          "is_correct": false,
+          "explanation": "Incorreta. A vírgula antes de 'foi aprovado' separa indevidamente o sujeito do predicado."
+        },
+        {
+          "label": "C",
+          "text": "O candidato, que estudou com dedicação, foi aprovado.",
+          "is_correct": true,
+          "explanation": "Correta. A oração 'que estudou com dedicação' é explicativa e está corretamente isolada por vírgulas."
+        },
+        {
+          "label": "D",
+          "text": "O candidato que, estudou com dedicação, foi aprovado.",
+          "is_correct": false,
+          "explanation": "Incorreta. A vírgula após 'que' quebra indevidamente a estrutura da oração subordinada."
+        },
+        {
+          "label": "E",
+          "text": "O candidato que estudou, com dedicação foi aprovado.",
+          "is_correct": false,
+          "explanation": "Incorreta. A vírgula isola de forma inadequada o complemento 'com dedicação' e ainda falta a vírgula de fechamento."
+        }
+      ],
+      "tag": "port-gramatica-norma"
+    }
+  ]
+}

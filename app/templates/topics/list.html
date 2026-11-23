@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Temas — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Biblioteca</p>
+    <h1>Temas de estudo</h1>
+    <p class="page-subtitle">Pratique questões em sequência ou monte um simulado com filtros.</p>
+  </div>
+  <a class="btn btn-primary" href="/simulados/aleatorios">Simulado aleatório</a>
+</section>
+
+<div class="grid grid-2">
+  {% for topic in topics %}
+  {% set topic_stat = stats_by_topic[topic.id] %}
+  <article class="card topic-card">
+    <div class="topic-head">
+      <h2>{{ topic.name }}</h2>
+      <span class="badge">{{ counts[topic.id] }} questões</span>
+    </div>
+    {% if topic.description %}
+    <p class="muted">{{ topic.description }}</p>
+    {% endif %}
+    <div class="topic-metrics">
+      <span><strong>{{ topic_stat.total }}</strong> feitas</span>
+      <span><strong>{{ pct(topic_stat.correct, topic_stat.total) }}%</strong> de acerto</span>
+      <span><strong>{{ topic_stat.avg_seconds|duration }}</strong> por questão</span>
+    </div>
+    <div class="actions">
+      {% if in_progress[topic.id] %}
+      <a class="btn btn-primary" href="/sessoes/{{ in_progress[topic.id].id }}">Continuar prática</a>
+      {% endif %}
+      <a class="btn {% if not in_progress[topic.id] %}btn-primary{% else %}btn-secondary{% endif %}" href="/temas/{{ topic.slug }}">
+        Abrir tema
+      </a>
+      <a class="btn btn-ghost" href="/simulados/aleatorios?tema={{ topic.slug }}">Aleatório do tema</a>
+    </div>
+    {% if counts[topic.id] == 0 %}
+    <p class="hint">Ainda não há questões aprovadas neste tema.</p>
+    {% endif %}
+  </article>
+  {% else %}
+  <div class="empty-state card">
+    <h2>Nenhum tema cadastrado</h2>
+    <p>Importe o banco de questões em <code>data/questions/</code> e reinicie a aplicação.</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

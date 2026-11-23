@@ -1,0 +1,395 @@
+{
+  "questions": [
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q051",
+      "topic": "macroeconomia-modelos",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "51",
+      "context": "No que diz respeito aos principais modelos macroeconômicos, julgue os itens a seguir.",
+      "statement": "De acordo com o modelo keynesiano, o aumento do salário mínimo acarreta aumento da renda de equilíbrio.",
+      "general_explanation": "O modelo keynesiano não assegura, por si só, que elevar o salário mínimo aumente a renda de equilíbrio. O efeito depende de como o aumento afeta custos, emprego, preços e propensão a consumir; a relação não é automática. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "macro-modelos"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q055",
+      "topic": "setor-externo",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "55",
+      "context": "Considerando a operacionalização da política monetária executada pelo Banco Central do Brasil (BCB) e as principais medidas macroprudenciais, julgue os itens subsequentes.",
+      "statement": "Se o câmbio é fixo e há plena mobilidade de capitais, então a política monetária é passiva.",
+      "general_explanation": "Com câmbio fixo e perfeita mobilidade de capitais, o país não controla a taxa de juros: qualquer tentativa de política monetária gera fluxos de capital e intervenção cambial que anulam o efeito. A política monetária fica passiva/endógena. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "macro-setor-externo"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q058",
+      "topic": "economia-do-setor-publico",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "dificil",
+      "source_question_number": "58",
+      "context": "Considerando a operacionalização da política monetária executada pelo Banco Central do Brasil (BCB) e as principais medidas macroprudenciais, julgue os itens subsequentes.",
+      "statement": "As operações compromissadas realizadas pelo BCB entram no cálculo da dívida bruta do governo geral (DBGG).",
+      "general_explanation": "Pela metodologia do BCB, a DBGG inclui as operações compromissadas realizadas pelo Banco Central com títulos públicos, dada a estreita relação dessas operações com a dívida do Tesouro Nacional. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "macro-politica-fiscal"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q060",
+      "topic": "macroeconomia",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "60",
+      "context": "A macroeconomia é uma área do conhecimento que engloba o estudo de diversos conceitos-chave para entender as dinâmicas econômicas globais. Considerando conceitos relacionados à macroeconomia, julgue os itens a seguir.",
+      "statement": "A curva de Phillips, conceito econômico que estabelece uma relação inversa de curto prazo entre desemprego e inflação, mostra-se mais complexa a longo prazo, particularmente ao levar em conta as expectativas de inflação.",
+      "general_explanation": "A curva de Phillips de curto prazo descreve um trade-off entre desemprego e inflação. No longo prazo, com expectativas ajustadas e a taxa natural de desemprego, não há trade-off estável; a relação é mais complexa. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "macro-politica-monetaria"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q069",
+      "topic": "teoria-do-consumidor",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "69",
+      "context": "Considerando um consumidor com preferências quase-lineares em relação aos bens X e Y, consumidos em x unidades e y unidades, respectivamente, sendo a função utilidade dada por U(x, y) = x + ln y, em que ln indica o logaritmo natural, julgue o item seguinte.",
+      "statement": "Mantidos fixos os preços, um aumento na renda do consumidor implica o consumo adicional do bem X.",
+      "general_explanation": "Com preferências quase-lineares em X, a utilidade marginal de X é constante e a de Y é decrescente. Com preços fixos e solução interior, a quantidade demandada de Y não depende da renda; o acréscimo de renda é absorvido pelo bem X. Portanto, o consumo de X aumenta. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "micro-teoria"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q072",
+      "topic": "teoria-dos-jogos",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "72",
+      "context": "Em um pequeno país, há dois bancos que ofertam serviço de crédito. Um deles, B1, é o líder. O outro, B2, é seguidor, tomando decisões sempre após B1 publicar as próprias decisões. Ao analisarem a possibilidade de reduzir a taxa de juros que cobram de seus clientes, B1 e B2 chegaram ao jogo sequencial representado a seguir, em que os pay-offs representam o ganho anual esperado, em milhões de unidades monetárias do país, após ambos tomarem suas decisões, sendo a primeira coordenada o ganho de B1, e a segunda coordenada, o ganho de B2.",
+      "context_media_url": "/media/bacen-2024/bacen-2024-q071-072-jogo.png",
+      "statement": "A redução da taxa de juros é uma estratégia dominante para B2.",
+      "general_explanation": "Se B1 mantém os juros, B2 ganha 20 mantendo e 30 reduzindo. Se B1 reduz, B2 ganha 8 mantendo e 25 reduzindo. Em ambos os cenários, reduzir produz o maior payoff para B2; logo, reduzir é estratégia dominante. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "micro-jogos-bem-estar"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q076",
+      "topic": "equilibrio-geral-e-bem-estar",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "dificil",
+      "source_question_number": "76",
+      "context": "Considerando a situação de um mercado de dois bens e dois agentes em que cada um destes tenha a dotação inicial desses bens, e assumindo que as preferências sejam racionais, convexas, contínuas e monotônicas, julgue os itens que se seguem, com base na teoria do equilíbrio geral.",
+      "statement": "O primeiro teorema do bem-estar econômico garante que qualquer dotação inicial possibilita uma troca de bens que implica uma melhoria de Pareto.",
+      "general_explanation": "O primeiro teorema do bem-estar afirma que um equilíbrio competitivo completo é Pareto eficiente. Ele não garante que, a partir de qualquer dotação inicial, exista uma troca que melhore a situação de todos os agentes em relação à dotação; o equilíbrio pode ser eficiente sem ser uma melhoria de Pareto em relação ao ponto inicial. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "micro-jogos-bem-estar"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q078",
+      "topic": "economia-comportamental",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "78",
+      "context": "Em artigo publicado em conjunto com Amos Tversky em 1979, Daniel Kahneman descreve vários padrões de comportamento que se afastam do pressuposto racional da microeconomia clássica. No primeiro experimento, os sujeitos deveriam escolher entre: opção A: ganhar $ 2.500 com probabilidade de 33%, $ 2.400 com probabilidade de 66%, ou $ 0 com probabilidade de 1%; opção B: ganhar $ 2.400 com certeza. No segundo experimento, deveriam escolher entre: opção C: ganhar $ 2.500 com probabilidade de 33%, $ 0 com probabilidade de 67%; opção D: ganhar $ 2.400 com probabilidade de 34%, $ 0 com probabilidade de 66%. No primeiro experimento, 82% dos participantes escolheram B. No segundo, 83% escolheram C; além disso, 61% escolheram B e C em conjunto.",
+      "statement": "A inadequação do conjunto das respostas ao que se espera de agentes racionais é conhecida como efeito da certeza (certainty effect).",
+      "general_explanation": "Os experimentos mostram violações da utilidade esperada: os agentes sobrevalorizam resultados certos (B no primeiro experimento) e mudam a escolha quando as probabilidades são reduzidas de forma comum (C no segundo). Esse padrão é associado ao efeito da certeza. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "micro-comportamental-falhas"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q080",
+      "topic": "renda-fixa",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "facil",
+      "source_question_number": "80",
+      "context": "Acerca dos títulos emitidos pelo Tesouro Nacional, julgue os itens seguintes.",
+      "statement": "O rendimento dos títulos Tesouro IPCA corresponde a uma taxa prefixada de juros somada à variação do índice nacional de preços ao consumidor amplo (IPCA) no período.",
+      "general_explanation": "O Tesouro IPCA+ remunera o investidor com uma taxa real prefixada acrescida da variação do IPCA no período. O rendimento nominal, portanto, combina a taxa contratada e a inflação medida pelo IPCA. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "fin-renda-fixa"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q085",
+      "topic": "fundos-de-investimento",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "85",
+      "context": "A respeito de fundos de investimento e eficiência dos mercados, julgue os itens subsecutivos.",
+      "statement": "Um fundo com investimento de pelo menos uma parte de seu patrimônio em ativos atrelados à variação cambial é um fundo cambial, de acordo com a Comissão de Valores Mobiliários (CVM).",
+      "general_explanation": "Pela regulamentação da CVM, o fundo cambial deve aplicar pelo menos 80% da carteira em ativos atrelados à variação cambial, e não apenas “uma parte”. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "fin-fundos"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q101",
+      "topic": "inferencia-estatistica",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "dificil",
+      "source_question_number": "101",
+      "context": "Suponha que os valores 3, 0, 0, 1, 4 constituam uma realização de uma amostra aleatória simples de tamanho n = 5 retirada de uma população com função de probabilidade P(X = x) = e^(−λ) λ^x / x!, em que λ > 0 é o parâmetro a ser estimado e x ∈ {0, 1, 2, ...}.",
+      "statement": "A estimativa de λ pelo método dos momentos é igual a 1,6.",
+      "general_explanation": "A média amostral é (3 + 0 + 0 + 1 + 4) / 5 = 8 / 5 = 1,6. Na distribuição de Poisson, E[X] = λ; igualando o momento populacional ao amostral, obtém-se λ̂ = 1,6. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "estatistica-inferencia-econometria"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q109",
+      "topic": "contabilidade-instituicoes-financeiras",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "facil",
+      "source_question_number": "109",
+      "context": "Julgue os itens a seguir, relativos aos princípios gerais da contabilidade das instituições reguladas pelo BCB, instrumentos financeiros e operações de crédito.",
+      "statement": "Os empréstimos são operações de crédito realizadas sem destinação específica ou vínculo à comprovação da aplicação dos recursos, ao passo que os financiamentos são realizados com destinação específica, vinculados à comprovação da aplicação dos recursos.",
+      "general_explanation": "Na classificação contábil das operações de crédito, os empréstimos são concedidos sem destinação específica, enquanto os financiamentos têm destinação definida e exigem comprovação da aplicação dos recursos. Item certo.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false
+        }
+      ],
+      "tag": "cont-if"
+    },
+    {
+      "external_id": "bacen-2024-analista-economia-financas-q115",
+      "topic": "normas-contabeis",
+      "exam": "bacen-2024-analista-economia-financas",
+      "type": "true_false",
+      "difficulty": "medio",
+      "source_question_number": "115",
+      "context": "Em relação a ativos não financeiros mantidos para venda pelas instituições financeiras, ativo intangível, provisões, contingências e patrimônio, julgue os itens seguintes.",
+      "statement": "Um passivo contingente é uma espécie de provisão de prazo ou de valor incertos.",
+      "general_explanation": "A definição de provisão é a de um passivo de prazo ou valor incertos. O passivo contingente, por sua vez, é uma obrigação possível, dependente de evento futuro incerto, ou uma obrigação presente não reconhecida por não ser provável ou mensurável com confiabilidade. O item confunde os conceitos. Item errado.",
+      "source": "CEBRASPE — BCB — Edital 8/2024",
+      "source_url": "https://cdn.cebraspe.org.br/concursos/bcb_24/arquivos/959_BCB_001_01.PDF",
+      "origin": "official",
+      "answer_source": "official_key",
+      "explanation_source": "generated",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true
+        }
+      ],
+      "tag": "cont-normas"
+    }
+  ]
+}

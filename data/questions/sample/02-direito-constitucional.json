@@ -1,0 +1,118 @@
+{
+  "topics": [],
+  "exams": [],
+  "questions": [
+    {
+      "external_id": "dc-001",
+      "topic": "direito-constitucional",
+      "type": "true_false",
+      "difficulty": "facil",
+      "statement": "Julgue o item: o voto é obrigatório para os maiores de dezoito anos, sendo facultativo para os analfabetos.",
+      "source": "Autoral — demonstração",
+      "general_explanation": "O art. 14, § 1º, da Constituição Federal estabelece o alistamento eleitoral e o voto obrigatórios para os maiores de dezoito anos e facultativos para os analfabetos, para os maiores de setenta anos e para os maiores de dezesseis e menores de dezoito anos.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": true,
+          "explanation": "Correta. A Constituição prevê o voto obrigatório para maiores de dezoito anos e o exercício facultativo para os analfabetos, entre outras hipóteses."
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": false,
+          "explanation": "Incorreta. A afirmação está de acordo com o art. 14, § 1º, da Constituição Federal."
+        }
+      ],
+      "tag": "direito-constitucional"
+    },
+    {
+      "external_id": "dc-002",
+      "topic": "direito-constitucional",
+      "exam": "demo-2026",
+      "type": "single_choice",
+      "difficulty": "medio",
+      "statement": "Segundo a Constituição Federal, a casa é asilo inviolável do indivíduo, e nela ninguém pode penetrar sem consentimento do morador, salvo em caso de:",
+      "source": "Autoral — demonstração",
+      "general_explanation": "O art. 5º, XI, da Constituição autoriza a entrada na casa sem consentimento do morador em caso de flagrante delito, desastre, para prestar socorro ou, durante o dia, por determinação judicial.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "flagrante delito, desastre, para prestar socorro ou, durante o dia, por determinação judicial.",
+          "is_correct": true,
+          "explanation": "Correta. Reproduz as exceções previstas no art. 5º, XI, da Constituição Federal."
+        },
+        {
+          "label": "B",
+          "text": "flagrante delito, desastre ou para prestar socorro, a qualquer hora, sendo vedada a entrada por determinação judicial.",
+          "is_correct": false,
+          "explanation": "Incorreta. A determinação judicial é uma das hipóteses autorizadas pela Constituição, desde que durante o dia."
+        },
+        {
+          "label": "C",
+          "text": "flagrante delito, desastre, para prestar socorro ou, durante a noite, por determinação judicial.",
+          "is_correct": false,
+          "explanation": "Incorreta. A entrada por determinação judicial somente é permitida durante o dia."
+        },
+        {
+          "label": "D",
+          "text": "somente flagrante delito ou desastre, vedadas as demais hipóteses.",
+          "is_correct": false,
+          "explanation": "Incorreta. A Constituição também admite a entrada para prestar socorro e, durante o dia, por determinação judicial."
+        },
+        {
+          "label": "E",
+          "text": "flagrante delito ou, a qualquer tempo, por determinação judicial, independentemente de consentimento.",
+          "is_correct": false,
+          "explanation": "Incorreta. A determinação judicial autoriza a entrada apenas durante o dia."
+        }
+      ],
+      "tag": "direito-constitucional"
+    },
+    {
+      "external_id": "dc-003",
+      "topic": "direito-constitucional",
+      "type": "single_choice",
+      "difficulty": "facil",
+      "statement": "O remédio constitucional adequado para assegurar o conhecimento de informações relativas à pessoa do impetrante, constantes de registros de entidades governamentais ou de caráter público, é:",
+      "source": "Autoral — demonstração",
+      "general_explanation": "O habeas data está previsto no art. 5º, LXXII, da Constituição e serve para assegurar o conhecimento de informações pessoais constantes de registros públicos ou governamentais e para a retificação de dados.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "habeas corpus.",
+          "is_correct": false,
+          "explanation": "Incorreta. O habeas corpus protege a liberdade de locomoção, não o acesso a informações pessoais."
+        },
+        {
+          "label": "B",
+          "text": "habeas data.",
+          "is_correct": true,
+          "explanation": "Correta. O habeas data é o remédio próprio para conhecer ou retificar informações relativas à pessoa do impetrante."
+        },
+        {
+          "label": "C",
+          "text": "mandado de segurança.",
+          "is_correct": false,
+          "explanation": "Incorreta. O mandado de segurança protege direito líquido e certo não amparado por habeas corpus ou habeas data."
+        },
+        {
+          "label": "D",
+          "text": "mandado de injunção.",
+          "is_correct": false,
+          "explanation": "Incorreta. O mandado de injunção visa suprir omissão normativa que inviabilize o exercício de direitos constitucionais."
+        },
+        {
+          "label": "E",
+          "text": "ação popular.",
+          "is_correct": false,
+          "explanation": "Incorreta. A ação popular tem por finalidade anular ato lesivo ao patrimônio público, à moralidade administrativa, ao meio ambiente e ao patrimônio histórico e cultural."
+        }
+      ],
+      "tag": "direito-constitucional"
+    }
+  ]
+}

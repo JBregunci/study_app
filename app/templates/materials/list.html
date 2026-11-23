@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Materiais — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Material expositivo</p>
+    <h1>Materiais de estudo</h1>
+    <p class="page-subtitle">Resumos curtos ligados aos temas e às questões do seu banco.</p>
+  </div>
+</section>
+
+<section class="card filter-card">
+  <form action="/materiais" method="get" class="form-grid form-wide">
+    <div class="field field-full">
+      <label for="q">Buscar</label>
+      <input id="q" type="search" name="q" value="{{ selected.q }}" placeholder="Título, resumo ou conteúdo">
+    </div>
+    <div class="field">
+      <label for="tema">Tema</label>
+      <select id="tema" name="tema">
+        <option value="">Todos os temas</option>
+        {% for option in options.topics %}
+        <option value="{{ option.topic.slug }}" {% if selected.tema == option.topic.slug %}selected{% endif %}>{{ '— ' * option.depth }}{{ option.topic.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="field">
+      <label for="tag">Tag</label>
+      <select id="tag" name="tag">
+        <option value="">Todas</option>
+        {% for item in options.tags %}
+        <option value="{{ item.tag.slug }}" {% if selected.tag == item.tag.slug %}selected{% endif %}>{{ item.tag.name }} ({{ item.total }})</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" type="submit">Filtrar</button>
+      <a class="btn btn-ghost" href="/materiais">Limpar filtros</a>
+    </div>
+  </form>
+</section>
+
+{% if materials %}
+<div class="grid grid-2">
+  {% for material in materials %}
+  <article class="card set-card">
+    <div class="topic-head">
+      <h2><a href="/materiais/{{ material.slug }}">{{ material.title }}</a></h2>
+      {% if material.source_kind.value == 'generated' %}<span class="badge badge-warning">Gerado</span>{% endif %}
+    </div>
+    {% if material.summary %}<p class="muted">{{ material.summary }}</p>{% endif %}
+    <div class="set-meta">
+      {% for topic in material.topics[:2] %}<span class="badge badge-primary">{{ topic.name }}</span>{% endfor %}
+      {% for tag in material.tags[:4] %}<span class="badge badge-muted">{{ tag.area }} · {{ tag.name }}</span>{% endfor %}
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="/materiais/{{ material.slug }}">Ler material</a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state card">
+  <h2>Nenhum material encontrado</h2>
+  <p>Adicione arquivos Markdown em <code>data/materials/</code> ou ajuste os filtros.</p>
+</div>
+{% endif %}
+{% endblock %}

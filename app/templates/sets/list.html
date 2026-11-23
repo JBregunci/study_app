@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Conjuntos — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Simulados personalizados</p>
+    <h1>Meus conjuntos</h1>
+    <p class="page-subtitle">Monte listas fixas de questões para um concurso, cargo ou objetivo específico.</p>
+  </div>
+  <a class="btn btn-primary" href="/conjuntos/novo">Novo conjunto</a>
+</section>
+
+{% if sets %}
+<div class="grid grid-2">
+  {% for item in sets %}
+  <article class="card set-card">
+    <div class="topic-head">
+      <h2>{{ item.name }}</h2>
+      <span class="badge">{{ counts[item.id] }} questões</span>
+    </div>
+    {% if item.description %}<p class="muted">{{ item.description }}</p>{% endif %}
+    <div class="set-meta">
+      {% if item.exam %}
+      <span class="badge badge-primary">{{ item.exam.name }}</span>
+      {% endif %}
+      {% if item.target_title %}
+      <span class="badge">{{ item.target_title }}</span>
+      {% endif %}
+      <span class="badge badge-muted">
+        {% if item.default_feedback_mode.value == 'end' %}Correção ao final{% else %}Correção imediata{% endif %}
+      </span>
+      <span class="badge badge-muted">{{ item.default_limit_seconds|minutes }}</span>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="/conjuntos/{{ item.id }}">Abrir</a>
+      <a class="btn btn-secondary" href="/conjuntos/{{ item.id }}/editar">Editar</a>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty-state card">
+  <span class="empty-kicker">Ainda vazio</span>
+  <h2>Nenhum conjunto criado</h2>
+  <p>Crie um simulado com as questões que você quer revisar para um concurso específico.</p>
+  <a class="btn btn-primary" href="/conjuntos/novo">Criar primeiro conjunto</a>
+</div>
+{% endif %}
+{% endblock %}

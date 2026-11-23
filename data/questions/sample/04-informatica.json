@@ -1,0 +1,118 @@
+{
+  "topics": [],
+  "exams": [],
+  "questions": [
+    {
+      "external_id": "inf-001",
+      "topic": "informatica",
+      "type": "single_choice",
+      "difficulty": "facil",
+      "statement": "Assinale a alternativa que descreve corretamente o golpe conhecido como phishing.",
+      "source": "Autoral — demonstração",
+      "general_explanation": "Phishing é uma forma de engenharia social em que o criminoso imita comunicações legítimas, como e-mails ou páginas de bancos, para induzir a vítima a revelar dados sensíveis ou clicar em links maliciosos.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "Envio de mensagens que imitam comunicações legítimas para induzir a vítima a fornecer dados ou clicar em links maliciosos.",
+          "is_correct": true,
+          "explanation": "Correta. Essa é a definição de phishing, que explora a confiança da vítima por meio de mensagens falsas."
+        },
+        {
+          "label": "B",
+          "text": "Criptografia de arquivos da vítima com pedido de resgate para liberá-los.",
+          "is_correct": false,
+          "explanation": "Incorreta. Esse comportamento descreve ransomware."
+        },
+        {
+          "label": "C",
+          "text": "Interceptação de tráfego de rede para alterar dados em trânsito.",
+          "is_correct": false,
+          "explanation": "Incorreta. A descrição se aproxima de um ataque man-in-the-middle."
+        },
+        {
+          "label": "D",
+          "text": "Tentativa repetida de adivinhar senhas até encontrar a combinação correta.",
+          "is_correct": false,
+          "explanation": "Incorreta. Esse é um ataque de força bruta."
+        },
+        {
+          "label": "E",
+          "text": "Inundação de um servidor com requisições para torná-lo indisponível.",
+          "is_correct": false,
+          "explanation": "Incorreta. Essa é a descrição de um ataque de negação de serviço (DoS)."
+        }
+      ],
+      "tag": "informatica"
+    },
+    {
+      "external_id": "inf-002",
+      "topic": "informatica",
+      "exam": "demo-2026",
+      "type": "single_choice",
+      "difficulty": "facil",
+      "statement": "Considere que, no Microsoft Excel, as células A1, A2 e A3 contenham, respectivamente, os valores 10, 20 e 30. A fórmula =SOMA(A1:A3) retorna:",
+      "source": "Autoral — demonstração",
+      "general_explanation": "O operador dois-pontos (:) define um intervalo de células. A função SOMA adiciona todos os valores do intervalo, portanto 10 + 20 + 30 = 60.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "A",
+          "text": "10",
+          "is_correct": false,
+          "explanation": "Incorreta. A fórmula considera o intervalo completo, e não apenas a primeira célula."
+        },
+        {
+          "label": "B",
+          "text": "20",
+          "is_correct": false,
+          "explanation": "Incorreta. O resultado corresponde à soma dos três valores, não apenas de A2."
+        },
+        {
+          "label": "C",
+          "text": "30",
+          "is_correct": false,
+          "explanation": "Incorreta. O valor de A3 é apenas uma das parcelas da soma."
+        },
+        {
+          "label": "D",
+          "text": "60",
+          "is_correct": true,
+          "explanation": "Correta. A função soma 10 + 20 + 30, resultando em 60."
+        },
+        {
+          "label": "E",
+          "text": "600",
+          "is_correct": false,
+          "explanation": "Incorreta. A função SOMA adiciona os valores, não os multiplica."
+        }
+      ],
+      "tag": "informatica"
+    },
+    {
+      "external_id": "inf-003",
+      "topic": "informatica",
+      "type": "true_false",
+      "difficulty": "facil",
+      "statement": "Julgue o item: um backup completo copia apenas os arquivos que foram modificados desde o último backup.",
+      "source": "Autoral — demonstração",
+      "general_explanation": "O backup completo copia todos os arquivos selecionados, independentemente de alterações. O backup que copia apenas arquivos modificados desde o último backup é o incremental ou o diferencial, conforme o critério utilizado.",
+      "review_status": "approved",
+      "alternatives": [
+        {
+          "label": "C",
+          "text": "Certo",
+          "is_correct": false,
+          "explanation": "Incorreta. Copiar apenas arquivos modificados não é característica do backup completo."
+        },
+        {
+          "label": "E",
+          "text": "Errado",
+          "is_correct": true,
+          "explanation": "Correta. O backup completo copia todos os arquivos; o incremental copia os alterados desde o último backup."
+        }
+      ],
+      "tag": "informatica"
+    }
+  ]
+}

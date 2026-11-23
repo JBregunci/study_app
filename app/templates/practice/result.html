@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+{% block title %}Resultado — {{ session.title }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Resultado da sessão</p>
+    <h1>{{ session.title }}</h1>
+    <p class="page-subtitle">
+      Iniciada em {{ session.started_at|datetime }}
+      {% if session.finished_at %}· encerrada em {{ session.finished_at|datetime }}{% endif %}
+    </p>
+  </div>
+  <div class="actions">
+    {% if session.mode.value == 'sequential' and session.topic %}
+    <a class="btn btn-secondary" href="/temas/{{ session.topic.slug }}">Voltar ao tema</a>
+    {% elif session.mode.value == 'set' and session.question_set %}
+    <a class="btn btn-secondary" href="/conjuntos/{{ session.question_set.id }}">Voltar ao conjunto</a>
+    {% elif session.mode.value == 'retry' %}
+    <a class="btn btn-secondary" href="/estatisticas#erros-recentes">Erros recentes</a>
+    {% else %}
+    <a class="btn btn-secondary" href="/simulados/aleatorios">Novo simulado</a>
+    {% endif %}
+    <a class="btn btn-ghost" href="/">Painel</a>
+  </div>
+</section>
+
+<div class="grid grid-4">
+  <article class="card stat-card">
+    <span class="stat-label">Aproveitamento</span>
+    <strong class="stat-value">{{ result.accuracy if result.accuracy is not none else '—' }}{% if result.accuracy is not none %}%{% endif %}</strong>
+    <span class="stat-meta">{{ result.correct }} acertos em {{ result.answered }} respondidas</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Acertos</span>
+    <strong class="stat-value">{{ result.correct }}</strong>
+    <span class="stat-meta">de {{ result.total }} questões</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Erros e brancos</span>
+    <strong class="stat-value">{{ result.incorrect + result.blank }}</strong>
+    <span class="stat-meta">{{ result.incorrect }} erros · {{ result.blank }} em branco</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Tempo total</span>
+    <strong class="stat-value">{{ result.total_time|duration }}</strong>
+    <span class="stat-meta">média de {{ result.average_time|duration }} por questão</span>
+  </article>
+</div>
+
+{% if breakdown and breakdown.topics %}
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Desempenho por tema nesta sessão</h2>
+      <p class="card-subtitle">Onde você foi melhor e onde vale reforçar.</p>
+    </div>
+  </div>
+  <div class="grid grid-2">
+    <article class="card stat-card breakdown-best">
+      <span class="stat-label">Melhor tema</span>
+      {% if breakdown.best %}
+      <strong class="stat-value stat-value-sm">{{ breakdown.best.topic.name }}</strong>
+      <span class="stat-meta">{{ breakdown.best.stats.correct }} de {{ breakdown.best.stats.total }} · {{ breakdown.best.stats.accuracy|round|int }}% de acerto</span>
+      {% else %}
+      <strong class="stat-value">—</strong>
+      {% endif %}
+    </article>
+    <article class="card stat-card breakdown-worst">
+      <span class="stat-label">Tema a reforçar</span>
+      {% if breakdown.worst %}
+      <strong class="stat-value stat-value-sm">{{ breakdown.worst.topic.name }}</strong>
+      <span class="stat-meta">{{ breakdown.worst.stats.correct }} de {{ breakdown.worst.stats.total }} · {{ breakdown.worst.stats.accuracy|round|int }}% de acerto</span>
+      {% else %}
+      <strong class="stat-value">—</strong>
+      {% endif %}
+    </article>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Tema</th>
+          <th class="num">Feitas</th>
+          <th class="num">Acertos</th>
+          <th class="num">Erros/brancos</th>
+          <th class="num">Aproveitamento</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in breakdown.topics %}
+        <tr>
+          <td>{{ item.topic.name }}</td>
+          <td class="num">{{ item.stats.total }}</td>
+          <td class="num">{{ item.stats.correct }}</td>
+          <td class="num">{{ item.stats.incorrect + item.stats.blank }}</td>
+          <td class="num">{{ item.stats.accuracy|round|int }}%</td>
+          <td class="actions-cell">
+            <a class="btn btn-sm btn-ghost" href="/questoes?tema={{ item.topic.slug }}">Ver questões</a>
+            <a class="btn btn-sm btn-secondary" href="/materiais?tema={{ item.topic.slug }}">Material</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if breakdown.types %}
+  <div class="type-summary">
+    {% for item in breakdown.types %}
+    <span class="badge">{{ item.label }}: {{ item.stats.correct }}/{{ item.stats.total }} · {{ item.stats.accuracy|round|int }}%</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if materials %}
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Materiais para reforçar</h2>
+      <p class="card-subtitle">Sugestões ligadas aos temas desta sessão.</p>
+    </div>
+  </div>
+  <div class="material-link-list">
+    {% for material in materials %}
+    <a class="material-link" href="/materiais/{{ material.slug }}">
+      <strong>{{ material.title }}</strong>
+      {% if material.summary %}<span class="muted">{{ material.summary|truncate(150) }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="card">
+  <div class="card-header">
+    <div>
+      <h2>Revisão das questões</h2>
+      <p class="card-subtitle">Abra cada questão para ver a resposta, o erro e a justificativa de cada alternativa.</p>
+    </div>
+    <span class="badge badge-primary">{{ result.total }} questões</span>
+  </div>
+
+  <div class="review-list">
+    {% for row in result.rows %}
+    <details class="review-item" {% if loop.first %}open{% endif %}>
+      <summary>
+        <span class="review-title">
+          <span class="review-number">{{ row.item.position }}</span>
+          <span>{{ row.item.question.statement|truncate(110) }}</span>
+        </span>
+        <span class="review-badges">
+          {% if row.attempt is none %}
+            <span class="badge badge-warning">Em branco</span>
+          {% elif row.attempt.timed_out and row.attempt.selected_alternative_id is none %}
+            <span class="badge badge-warning">Tempo esgotado</span>
+          {% elif row.attempt.is_correct %}
+            <span class="badge badge-success">Correta</span>
+          {% else %}
+            <span class="badge badge-danger">Incorreta</span>
+          {% endif %}
+          <span class="badge badge-muted">{{ row.item.question.topic.name }}</span>
+        </span>
+      </summary>
+      <div class="review-body">
+        <div class="review-actions">
+          <a class="btn btn-sm btn-ghost" href="/questoes/{{ row.item.question.id }}">Abrir questão</a>
+          {% if row.attempt is none or not row.attempt.is_correct %}
+          <form action="/questoes/{{ row.item.question.id }}/refazer" method="post">
+            <button class="btn btn-sm btn-primary" type="submit">Tentar novamente</button>
+          </form>
+          {% endif %}
+        </div>
+        {% if row.item.question.context %}
+        <div class="context-panel">
+          <h3>Contexto</h3>
+          <div class="statement">{{ row.item.question.context }}</div>
+          {% if row.item.question.context_media_url %}<img class="question-media" src="{{ row.item.question.context_media_url }}" alt="Imagem de apoio do contexto">{% endif %}
+        </div>
+        {% endif %}
+        <p class="statement">{{ row.item.question.statement }}</p>
+        {% if row.item.question.media_url %}
+        <img class="question-media" src="{{ row.item.question.media_url }}" alt="Imagem de apoio da questão">
+        {% endif %}
+        <div class="feedback-list">
+          {% for alternative in row.alternatives %}
+          {% set selected = row.selected and row.selected.id == alternative.id %}
+          <div class="alt-card {% if alternative.is_correct %}alt-correct{% elif selected %}alt-wrong{% else %}alt-neutral{% endif %}">
+            <div class="alt-card-head">
+              <span class="alt-label">{{ alternative.label }}</span>
+              <span class="alt-text">{{ alternative.text }}</span>
+              <span class="badge {% if alternative.is_correct %}badge-success{% elif selected %}badge-danger{% else %}badge-muted{% endif %}">
+                {% if alternative.is_correct and selected %}
+                  Sua resposta — correta
+                {% elif alternative.is_correct %}
+                  Correta
+                {% elif selected %}
+                  Sua resposta — incorreta
+                {% else %}
+                  Incorreta
+                {% endif %}
+              </span>
+            </div>
+            {% if alternative.explanation %}
+            <p class="alt-explanation">{{ alternative.explanation }}</p>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="explanation-panel">
+          <h3>Resolução</h3>
+          <p>{{ row.item.question.general_explanation }}</p>
+          {% if row.item.question.source %}
+          <p class="source">Fonte: {{ row.item.question.source }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

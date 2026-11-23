@@ -1,0 +1,37 @@
+{
+  "tags": [
+    {"slug": "port-interpretacao", "name": "Interpretação de Texto", "area": "Língua Portuguesa", "position": 10},
+    {"slug": "port-sintaxe-coesao", "name": "Sintaxe e Coesão", "area": "Língua Portuguesa", "position": 11},
+    {"slug": "port-gramatica-norma", "name": "Gramática e Norma-Padrão", "area": "Língua Portuguesa", "position": 12},
+
+    {"slug": "estatistica-probabilidade", "name": "Probabilidade", "area": "Estatística", "position": 20},
+    {"slug": "estatistica-inferencia-econometria", "name": "Inferência e Econometria", "area": "Estatística", "position": 21},
+
+    {"slug": "direito-administrativo", "name": "Direito Administrativo", "area": "Direito", "position": 30},
+    {"slug": "lgpd", "name": "LGPD", "area": "Direito", "position": 31},
+    {"slug": "direito-constitucional", "name": "Direito Constitucional", "area": "Direito", "position": 32},
+
+    {"slug": "macro-contas-nacionais", "name": "Contas Nacionais", "area": "Economia", "position": 40},
+    {"slug": "macro-modelos", "name": "Modelos Macroeconômicos", "area": "Economia", "position": 41},
+    {"slug": "macro-politica-monetaria", "name": "Política Monetária", "area": "Economia", "position": 42},
+    {"slug": "macro-politica-fiscal", "name": "Política Fiscal", "area": "Economia", "position": 43},
+    {"slug": "macro-setor-externo", "name": "Setor Externo", "area": "Economia", "position": 44},
+
+    {"slug": "micro-teoria", "name": "Consumidor e Firma", "area": "Microeconomia", "position": 50},
+    {"slug": "micro-jogos-bem-estar", "name": "Jogos e Bem-Estar", "area": "Microeconomia", "position": 51},
+    {"slug": "micro-comportamental-falhas", "name": "Comportamental e Falhas de Mercado", "area": "Microeconomia", "position": 52},
+
+    {"slug": "fin-renda-fixa", "name": "Renda Fixa", "area": "Finanças", "position": 60},
+    {"slug": "fin-mercado-capitais", "name": "Mercado de Capitais", "area": "Finanças", "position": 61},
+    {"slug": "fin-fundos", "name": "Fundos de Investimento", "area": "Finanças", "position": 62},
+    {"slug": "fin-riscos-derivativos", "name": "Riscos e Derivativos", "area": "Finanças", "position": 63},
+
+    {"slug": "cont-if", "name": "Contabilidade de Instituições Financeiras", "area": "Contabilidade", "position": 70},
+    {"slug": "cont-normas", "name": "Normas Contábeis", "area": "Contabilidade", "position": 71},
+    {"slug": "cont-auditoria", "name": "Auditoria", "area": "Contabilidade", "position": 72},
+
+    {"slug": "logica", "name": "Proposições e Argumentação", "area": "Raciocínio Lógico", "position": 80},
+    {"slug": "informatica", "name": "Segurança da Informação", "area": "Informática", "position": 90},
+    {"slug": "sfn", "name": "Regulação e SFN", "area": "Sistema Financeiro", "position": 100}
+  ]
+}

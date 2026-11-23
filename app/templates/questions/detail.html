@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}{{ question.external_id }} — {{ app_name }}{% endblock %}
+{% block content %}
+<section class="page-header">
+  <div>
+    <p class="eyebrow">
+      {% for item in breadcrumb %}
+        {% if not loop.first %} / {% endif %}{{ item.name }}
+      {% endfor %}
+    </p>
+    <h1>{{ question.external_id }}</h1>
+    <p class="page-subtitle">
+      {% if question.exam %}{{ question.exam.name }} · {{ question.exam.organization }} · {{ question.exam.year }}{% endif %}
+      {% if question.exam and question.exam.role %} · {{ question.exam.role }}{% endif %}
+    </p>
+  </div>
+  <div class="actions">
+    <form action="/questoes/{{ question.id }}/refazer" method="post">
+      <button class="btn btn-primary" type="submit">{{ 'Refazer questão' if performance.total else 'Praticar questão' }}</button>
+    </form>
+    <a class="btn btn-ghost" href="/questoes">Voltar</a>
+  </div>
+</section>
+
+<div class="grid grid-3">
+  <article class="card stat-card">
+    <span class="stat-label">Tentativas</span>
+    <strong class="stat-value">{{ performance.total }}</strong>
+    <span class="stat-meta">{{ performance.correct }} acertos · {{ performance.incorrect }} erros{% if performance.blank %} · {{ performance.blank }} em branco{% endif %}</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Aproveitamento</span>
+    <strong class="stat-value">{% if performance.accuracy is not none %}{{ performance.accuracy|round|int }}%{% else %}—{% endif %}</strong>
+    <span class="stat-meta">média de {{ performance.avg_seconds|duration }} por tentativa</span>
+  </article>
+  <article class="card stat-card">
+    <span class="stat-label">Últimas 5 tentativas</span>
+    {% include "partials/performance_dots.html" with context %}
+    <span class="stat-meta">{% if performance.last_attempt_at %}Última em {{ performance.last_attempt_at|datetime }}{% else %}Ainda não praticada{% endif %}</span>
+  </article>
+</div>
+
+<section class="card">
+  <div class="question-top">
+    <div class="question-tags">
+      <span class="badge badge-primary">{{ question.topic.name }}</span>
+      {% if question.exam %}
+      <span class="badge">{{ question.exam.name }}</span>
+      <span class="badge badge-muted">Banca: {{ question.exam.organization }}</span>
+      {% if question.exam.year %}<span class="badge badge-muted">{{ question.exam.year }}</span>{% endif %}
+      {% if question.exam.role %}<span class="badge badge-muted">{{ question.exam.role }}</span>{% endif %}
+      {% endif %}
+      <span class="badge">{{ 'Certo/Errado' if question.type.value == 'true_false' else 'Múltipla escolha' }}</span>
+      {% if question.difficulty %}<span class="badge">{{ question.difficulty.value }}</span>{% endif %}
+      <span class="badge badge-muted">{{ question.origin.value }}</span>
+      {% if question.explanation_source.value == 'generated' %}<span class="badge badge-warning">Explicação gerada</span>{% endif %}
+    </div>
+  </div>
+
+  {% if question.context %}
+  <div class="context-panel">
+    <h3>Contexto</h3>
+    <div class="statement">{{ question.context }}</div>
+    {% if question.context_media_url %}<img class="question-media" src="{{ question.context_media_url }}" alt="Imagem de apoio do contexto">{% endif %}
+  </div>
+  {% endif %}
+
+  <div class="statement">{{ question.statement }}</div>
+  {% if question.media_url %}
+  <img class="question-media" src="{{ question.media_url }}" alt="Imagem de apoio da questão">
+  {% endif %}
+
+  <div class="question-tags">
+    <a class="tag-chip" href="/questoes?tag={{ question.tag.slug }}">{{ question.tag.area }} · {{ question.tag.name }}</a>
+  </div>
+
+  <details class="answer-details">
+    <summary>Ver gabarito comentado</summary>
+    <div class="feedback-list">
+      {% for alternative in alternatives %}
+      <div class="alt-card {% if alternative.is_correct %}alt-correct{% else %}alt-neutral{% endif %}">
+        <div class="alt-card-head">
+          <span class="alt-label">{{ alternative.label }}</span>
+          <span class="alt-text">{{ alternative.text }}</span>
+          <span class="badge {% if alternative.is_correct %}badge-success{% else %}badge-muted{% endif %}">{{ 'Correta' if alternative.is_correct else 'Incorreta' }}</span>
+        </div>
+        {% if alternative.explanation %}
+        <p class="alt-explanation">{{ alternative.explanation }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <div class="explanation-panel">
+      <h3>Resolução</h3>
+      <p>{{ question.general_explanation }}</p>
+      {% if question.source %}
+      <p class="source">
+        Fonte: {% if question.source_url %}<a href="{{ question.source_url }}" target="_blank" rel="noreferrer">{{ question.source }}</a>{% else %}{{ question.source }}{% endif %}
+        {% if question.source_question_number %} · item {{ question.source_question_number }}{% endif %}
+      </p>
+      {% endif %}
+    </div>
+  </details>
+</section>
+
+{% if materials %}
+<section class="card">
+  <div class="card-header">
+    <h2>Material relacionado</h2>
+  </div>
+  <div class="material-link-list">
+    {% for material in materials %}
+    <a class="material-link" href="/materiais/{{ material.slug }}">
+      <strong>{{ material.title }}</strong>
+      {% if material.summary %}<span class="muted">{{ material.summary|truncate(140) }}</span>{% endif %}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<section class="card">
+  <div class="card-header">
+    <h2>Histórico de tentativas</h2>
+  </div>
+  {% if attempts %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Resposta</th>
+          <th>Resultado</th>
+          <th class="num">Tempo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attempt in attempts %}
+        <tr>
+          <td>{{ attempt.answered_at|datetime }}</td>
+          <td>{% if attempt.selected_alternative %}{{ attempt.selected_alternative.label }} — {{ attempt.selected_alternative.text|truncate(60) }}{% else %}<span class="muted">Em branco</span>{% endif %}</td>
+          <td>
+            {% if attempt.is_correct %}
+            <span class="badge badge-success">Correta</span>
+            {% elif attempt.timed_out and attempt.selected_alternative_id is none %}
+            <span class="badge badge-warning">Tempo esgotado</span>
+            {% else %}
+            <span class="badge badge-danger">Incorreta</span>
+            {% endif %}
+          </td>
+          <td class="num">{{ attempt.time_spent_seconds|duration }}</td>
+          <td class="actions-cell">
+            <a class="btn btn-sm btn-ghost" href="/sessoes/{{ attempt.session_id }}">Sessão</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="muted">Esta questão ainda não foi respondida.</p>
+  {% endif %}
+</section>
+{% endblock %}
