@@ -6,6 +6,13 @@
 
 Aplicação funcional local, com banco SQLite, conteúdo do BACEN 2024 (Economia e Finanças e Tecnologia da Informação), 34 materiais e histórico de uso preservado.
 
+## Última sessão
+
+- Checkpoint completo em 2026-11-23: `make test` (42 passando) e `make audit` (sem inconsistências).
+- Contagens conferidas contra o SQLite; exames, materiais e tags sem alteração.
+- Histórico de uso preservado: 2 sessões e 14 tentativas (inclui simulado aleatório de 10 questões).
+- Sem mudança de schema (versão 2) ou de conteúdo editorial nesta sessão.
+
 ## Contagens atuais
 
 | Item | Total |
@@ -18,8 +25,8 @@ Aplicação funcional local, com banco SQLite, conteúdo do BACEN 2024 (Economia
 | Tags controladas | 49 |
 | Temas | 78 |
 | Exames | 3 |
-| Sessões | 1 |
-| Tentativas | 4 |
+| Sessões | 2 |
+| Tentativas | 14 |
 | Conjuntos | 0 |
 
 ## Exames importados
@@ -80,7 +87,5 @@ Itens anulados:
 ## Git
 
 - Remote: `https://github.com/JBregunci/study_app.git`
-- Branch: `main`
-- Commit de baseline local criado.
-- Push para `origin/main` pendente: o ambiente não tinha credenciais do GitHub configuradas.
-- Use `/checkpoint` ou configure `gh auth login` / um credential helper para enviar.
+- Branch: `main`, sincronizada com `origin/main`.
+- Histórico local e remoto alinhados; use `/checkpoint` para novos envios.

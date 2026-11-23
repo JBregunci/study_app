@@ -43,3 +43,10 @@
 - Filtro de concursos agrupado por órgão/edição, com divisões por cargo, logos e seleção avançada.
 - Corrigida a renderização de YAML/código preservando espaços e indentação.
 - Testes atualizados; 42 passando.
+
+## 2026-11-23 — Checkpoint
+
+- `make test`: 42 testes passando; `make audit`: sem duplicidades ou inconsistências.
+- Contagens conferidas: 192 questões, 34 materiais, 49 tags, 3 exames.
+- Histórico preservado: 2 sessões e 14 tentativas (simulado aleatório de 10 questões).
+- Sem mudanças de schema ou de conteúdo editorial.
